@@ -65,14 +65,14 @@
 				height: 40px;
 				border: 1px solid var(--baseColor);
 				border-radius: 50%;
+				transition: 0.3s;
+				svg {
+					transition: 0.3s;
+				}
 				&:hover {
-					li {
-						//background: var(--baseColor);
-						transform: scale(2);
-						svg {
-							color: #111;
-							background: #fff;
-						}
+					background: var(--baseColor);
+					svg {
+						color: var(--bgColor);
 					}
 				}
 			}

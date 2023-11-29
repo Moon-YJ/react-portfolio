@@ -1,8 +1,9 @@
-@import url('https://fonts.googleapis.com/css2?family=Nanum+Myeongjo:wght@400;700&family=Noto+Sans+KR:wght@300;400;500;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Cardo:ital@0;1&family=Nanum+Myeongjo:wght@400;700&family=Poppins:wght@300;400;500;600;700&display=swap');
 
 :root {
-	--baseFont: 'Noto Sans KR', 'arial', '돋움';
+	--baseFont: 'Poppins', 'arial', '돋움';
 	--pointFont: 'Nanum Myeongjo', 'arial';
+	--spcFont: 'Cardo', 'arial';
 	--baseColor: #fff;
 	--pointColor: rgb(250, 91, 91);
 	--bgColor: #111;
@@ -14,5 +15,6 @@
 	--lightWeight: 300;
 	--regWeight: 400;
 	--medWeight: 500;
+	--semiBoldWeight: 600;
 	--boldWeight: 700;
 }

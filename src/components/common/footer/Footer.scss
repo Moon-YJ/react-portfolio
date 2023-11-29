@@ -1,6 +1,7 @@
 .Footer {
-	width: 100%;
-	padding: 10px 5vw 40px;
+	width: 80vw;
+	margin: 0 auto;
+	padding: 10px 0 40px;
 	font-weight: var(--lightWeight);
 	font-family: var(--baseFont);
 	font-size: var(--smSize);
@@ -31,7 +32,7 @@
 		align-items: center;
 		&.txt-set {
 			margin: 0 auto 40px;
-			padding: 0 30vw;
+			padding: 0 25vw;
 		}
 	}
 	.btm {
@@ -63,11 +64,12 @@
 				align-items: center;
 				width: 40px;
 				height: 40px;
-				border: 1px solid var(--baseColor);
+				//border: 1px solid var(--baseColor);
 				border-radius: 50%;
 				transition: 0.3s;
 				svg {
 					transition: 0.3s;
+					color: var(--baseColor);
 				}
 				&:hover {
 					background: var(--baseColor);

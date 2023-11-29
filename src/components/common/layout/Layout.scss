@@ -1,0 +1,30 @@
+.Layout {
+	width: 80vw;
+	min-height: 60vh;
+	margin: 100px auto;
+	opacity: 0;
+	transform: translateY(200px);
+	transition: opacity 0.7s, transform 0.7s;
+	.tit-set {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		padding-bottom: 50px;
+		border-bottom: 1px solid var(--baseColor);
+		.num {
+			font-size: var(--titSize1);
+			font-family: var(--spcFont);
+			font-style: italic;
+		}
+		h1 {
+			margin-bottom: 10px;
+			font-weight: normal;
+			font-size: 6rem;
+			letter-spacing: 1px;
+		}
+	}
+	&.on {
+		opacity: 1;
+		transform: translateY(0px);
+	}
+}

@@ -1,18 +1,30 @@
+import { useSplitText } from '../../../hooks/useSplitText';
 import './Layout.scss';
 import { useEffect, useRef } from 'react';
 
 export default function Layout({ index, title, children }) {
 	const box = useRef(null);
+	const numBox = useRef(null);
+	const titBox = useRef(null);
+	const splitTitle = useSplitText();
 
 	useEffect(() => {
-		box.current.classList.add('on');
+		splitTitle(numBox.current, index);
+		splitTitle(titBox.current, title);
+		setTimeout(() => {
+			box.current.classList.add('on');
+		}, 300);
 	}, []);
 
 	return (
 		<main ref={box} className={`Layout ${title}`}>
 			<div className='tit-set'>
-				<span className='num'>{index}</span>
-				<h1 className='tit'>{title}</h1>
+				<div ref={numBox} className='num'>
+					{index}
+				</div>
+				<h1 ref={titBox} className='tit'>
+					{title}
+				</h1>
 			</div>
 			{children}
 		</main>

@@ -15,9 +15,11 @@
 			font-size: var(--titSize1);
 			font-family: var(--spcFont);
 			font-style: italic;
-			transform: scale(3);
-			opacity: 0;
-			transition-property: opacity, transform;
+			span {
+				transform: scale(3);
+				opacity: 0;
+				transition-property: opacity, transform;
+			}
 		}
 		h1 {
 			margin-bottom: 10px;
@@ -26,7 +28,8 @@
 			letter-spacing: 1px;
 			span {
 				opacity: 0;
-				transition-property: opacity;
+				transform: scale(2);
+				transition-property: opacity, transform;
 			}
 		}
 	}
@@ -35,12 +38,15 @@
 		transform: translateY(0px);
 		.tit-set {
 			.num {
-				opacity: 1;
-				transform: scale(1);
+				span {
+					opacity: 1;
+					transform: scale(1);
+				}
 			}
 			h1 {
 				span {
 					opacity: 1;
+					transform: scale(1);
 				}
 			}
 		}

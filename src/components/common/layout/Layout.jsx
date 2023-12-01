@@ -9,8 +9,8 @@ export default function Layout({ index, title, children }) {
 	const splitTitle = useSplitText();
 
 	useEffect(() => {
-		splitTitle(numBox.current, index);
-		splitTitle(titBox.current, title);
+		splitTitle(numBox.current, index, 1, 0.3);
+		splitTitle(titBox.current, title, 0.5, 0.1);
 		setTimeout(() => {
 			box.current.classList.add('on');
 		}, 300);
@@ -19,9 +19,9 @@ export default function Layout({ index, title, children }) {
 	return (
 		<main ref={box} className={`Layout ${title}`}>
 			<div className='tit-set'>
-				<div ref={numBox} className='num'>
+				<p ref={numBox} className='num'>
 					{index}
-				</div>
+				</p>
 				<h1 ref={titBox} className='tit'>
 					{title}
 				</h1>

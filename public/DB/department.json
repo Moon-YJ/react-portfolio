@@ -1,4 +1,11 @@
 {
+  "president": [
+    {
+      "name": "Dorian Derezic",
+      "position": "CDEK",
+      "pic": "members/member0.jpg"
+    }
+  ],
   "team": [
     {
       "name": "Stephanie Crespin",

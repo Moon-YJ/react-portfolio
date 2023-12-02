@@ -1,7 +1,7 @@
 .Layout {
 	width: 80vw;
 	min-height: 60vh;
-	margin: 100px auto;
+	margin: 100px auto 150px;
 	opacity: 0;
 	transform: translateY(200px);
 	transition: opacity 0.7s, transform 0.7s;
@@ -10,7 +10,7 @@
 		align-items: center;
 		justify-content: space-between;
 		padding-bottom: 50px;
-		margin-bottom: 120px;
+		margin-bottom: 150px;
 		border-bottom: 1px solid var(--baseColor);
 		.num {
 			font-size: var(--titSize2);

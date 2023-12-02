@@ -4,10 +4,10 @@
 	--baseFont: 'Poppins', 'arial', '돋움';
 	--pointFont: 'Nanum Myeongjo', 'arial';
 	--spcFont: 'Cardo', 'arial';
-	--baseColor: #fff;
-	--baseColor-code: 255, 255, 255;
+	--baseColor: #111;
+	--baseColor-code: 18, 18, 18;
 	--pointColor: rgb(250, 91, 91);
-	--bgColor: #111;
+	--bgColor: #f1f1f1;
 	--titSize0: 6rem;
 	--titSize1: 4rem;
 	--titSize2: 2.4rem;
@@ -22,4 +22,5 @@
 	--medWeight: 500;
 	--semiBoldWeight: 600;
 	--boldWeight: 700;
+	--filterNone: invert(0);
 }

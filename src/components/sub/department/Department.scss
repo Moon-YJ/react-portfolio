@@ -1,1 +1,56 @@
-
+.Department {
+	--gap: 50px;
+	--num: 3;
+	.team {
+		.tit {
+			margin-bottom: 50px;
+			font-size: var(--titSize1);
+			font-weight: var(--lightWeight);
+			border-bottom: 1px solid rgba(var(--baseColor-code), 0.6);
+		}
+		.stit {
+			padding-bottom: 15px;
+			margin-bottom: 50px;
+			font-size: var(--lgSize);
+			font-weight: var(--medWeight);
+			border-bottom: 1px solid rgba(var(--baseColor-code), 0.3);
+			letter-spacing: -0.8px;
+		}
+		&-box {
+			display: flex;
+			justify-content: space-between;
+			align-items: center;
+			article {
+				width: calc((100% - var(--gap) * (var(--num) - 1)) / var(--num));
+				.info {
+					margin-bottom: 40px;
+					padding-bottom: 15px;
+					border-bottom: 1px solid rgba(var(--baseColor-code), 0.3);
+					h3 {
+						font-family: var(--spcFont);
+						font-size: var(--lgSize);
+					}
+					p {
+						font-size: var(--xsmSize);
+						font-weight: var(--lightWeight);
+						line-height: 2;
+						letter-spacing: 1px;
+					}
+				}
+				.pic {
+					width: 100%;
+					height: 420px;
+					img {
+						width: 100%;
+						height: 100%;
+						object-fit: cover;
+						filter: grayscale(100%);
+					}
+				}
+			}
+		}
+		&-support {
+			margin-top: 100px;
+		}
+	}
+}

@@ -33,31 +33,39 @@ export default function Department() {
 		<div className='Department'>
 			<Layout index={'01'} title={'Department'}>
 				<section className='team'>
-					<h1>{customTit(Tit)}</h1>
-					{MemberData.map((data, idx) => {
-						return (
-							<article key={data + idx}>
-								<h3>{data.name}</h3>
-								<p>{data.position}</p>
-								<div className='pic'>
-									<img src={`${path.current}/img/${data.pic}`} alt={data.name} />
-								</div>
-							</article>
-						);
-					})}
-					<div className='support-box'>
-						<h2>{SubTit}</h2>
-						{SubMemberData.map((data, idx) => {
+					<h1 className='tit'>{customTit(Tit)}</h1>
+					<div className='team-box'>
+						{MemberData.map((data, idx) => {
 							return (
 								<article key={data + idx}>
-									<h3>{data.name}</h3>
-									<p>{data.position}</p>
+									<div className='info'>
+										<h3>{data.name}</h3>
+										<p>{data.position}</p>
+									</div>
 									<div className='pic'>
 										<img src={`${path.current}/img/${data.pic}`} alt={data.name} />
 									</div>
 								</article>
 							);
 						})}
+					</div>
+					<div className='team-support'>
+						<h2 className='stit'>{customTit(SubTit)}</h2>
+						<div className='team-box'>
+							{SubMemberData.map((data, idx) => {
+								return (
+									<article key={data + idx}>
+										<div className='info'>
+											<h3>{data.name}</h3>
+											<p>{data.position}</p>
+										</div>
+										<div className='pic'>
+											<img src={`${path.current}/img/${data.pic}`} alt={data.name} />
+										</div>
+									</article>
+								);
+							})}
+						</div>
 					</div>
 				</section>
 			</Layout>

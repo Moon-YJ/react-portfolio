@@ -13,7 +13,7 @@
 		margin-bottom: 120px;
 		border-bottom: 1px solid var(--baseColor);
 		.num {
-			font-size: var(--titSize1);
+			font-size: var(--titSize2);
 			font-family: var(--spcFont);
 			font-style: italic;
 			span {
@@ -25,7 +25,7 @@
 		h1 {
 			margin-bottom: 10px;
 			font-weight: normal;
-			font-size: 6rem;
+			font-size: var(--titSize0);
 			letter-spacing: 1px;
 			span {
 				opacity: 0;

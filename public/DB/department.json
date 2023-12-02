@@ -1,34 +1,36 @@
 {
-  "our-members": [
+  "team": [
     {
-      "name": "David",
-      "position": "President",
-      "pic": "member1.jpg"
+      "name": "Stephanie Crespin",
+      "position": "CEO, CO-FOUNDER",
+      "pic": "members/member1.jpg"
     },
     {
-      "name": "Julia",
-      "position": "Vice President",
-      "pic": "member2.jpg"
+      "name": "Philippe Benedetti",
+      "position": "CTO. CO-FOUNDER",
+      "pic": "members/member2.jpg"
     },
     {
-      "name": "Emily",
-      "position": "UI Designer",
-      "pic": "member3.jpg"
+      "name": "Felix Winckler",
+      "position": "CCO, CO-FOUNDER",
+      "pic": "members/member3.jpg"
+    }
+  ],
+  "supported by": [
+    {
+      "name": "Cedric Charbit",
+      "position": "CEO BALENCIAGA",
+      "pic": "members/member4.jpg"
     },
     {
-      "name": "Michael",
-      "position": "Front-end Developer",
-      "pic": "member4.jpg"
+      "name": "Jack Ostrowski",
+      "position": "CEO REGAIN & YELLOW OCTOPUS",
+      "pic": "members/member5.jpg"
     },
     {
-      "name": "Emma",
-      "position": "Back-end Developer",
-      "pic": "member5.jpg"
-    },
-    {
-      "name": "Peter",
-      "position": "Project Manager",
-      "pic": "member6.jpg"
+      "name": "Vanessa Cheung",
+      "position": "FOUNDER THE MILLS",
+      "pic": "members/member6.jpg"
     }
   ]
 }

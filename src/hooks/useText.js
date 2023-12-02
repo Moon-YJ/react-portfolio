@@ -11,3 +11,18 @@ export function useSplitText() {
 		ref.innerHTML = tags;
 	};
 }
+
+export function customText(type) {
+	const setUpperTxt = (txt) => {
+		return txt.charAt(0).toUpperCase() + txt.slice(1);
+	};
+
+	if (type === 'combineTit') {
+		return (txt, spc = ' ') => {
+			return txt
+				.split(/-|_|\+/)
+				.map((el) => setUpperTxt(el))
+				.join(spc);
+		};
+	}
+}

@@ -17,9 +17,10 @@ import { useState } from 'react';
 
 export default function App() {
 	const [MenuToggle, setMenuToggle] = useState(false);
+	const [Dark, setDark] = useState(false);
 
 	return (
-		<div className={`wrap ${useMedia()}`}>
+		<div className={`wrap ${Dark ? 'dark' : ''} ${useMedia()}`}>
 			<Header MenuToggle={MenuToggle} setMenuToggle={setMenuToggle} />
 			<Route exact path='/' component={MainWrap} />
 			<Route path='/department' component={Department} />
@@ -30,7 +31,7 @@ export default function App() {
 			<Route path='/youtube' component={Youtube} />
 			<Route path='/detail/:id' component={Detail} />
 			{MenuToggle && <Menu />}
-			<Footer />
+			<Footer Dark={Dark} setDark={setDark} />
 		</div>
 	);
 }

@@ -1,10 +1,21 @@
 import './Footer.scss';
 import { Link } from 'react-router-dom';
-import { useRef } from 'react';
+import { useRef, useState, useEffect } from 'react';
 import { FaFacebookF, FaTwitter, FaYoutube, FaGithub } from 'react-icons/fa';
 
-export default function Footer() {
+export default function Footer({ setDark }) {
 	const path = useRef(process.env.PUBLIC_URL);
+	const selectList = ['Light', 'Dark'];
+	const [Selected, setSelected] = useState('Light');
+
+	const handleSelect = (e) => {
+		setSelected(e.target.value);
+	};
+
+	useEffect(() => {
+		if (Selected === 'Dark') setDark(true);
+		if (Selected === 'Light') setDark(false);
+	}, [Selected]);
 
 	return (
 		<footer className='Footer'>
@@ -20,9 +31,16 @@ export default function Footer() {
 				<li>Sitemap</li>
 			</ul>
 			<div className='btm'>
-				<select className='txt' name='mode'>
-					<option value='dark'>Dark</option>
+				{/* <select className='txt' name='mode'>
 					<option value='light'>Light</option>
+					<option value='dark'>Dark</option>
+				</select> */}
+				<select onChange={handleSelect} value={Selected}>
+					{selectList.map((list) => (
+						<option value={list} key={list}>
+							{list}
+						</option>
+					))}
 				</select>
 				<ul className='icon-set'>
 					<li>

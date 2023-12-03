@@ -13,7 +13,6 @@ export default function Detail() {
 		const data = await fetch(baseURL);
 		const json = await data.json();
 		setYoutubeData(json.items[0].snippet);
-		console.log(json.items[0].snippet);
 	};
 	const customTxt = customText('shorten');
 	useEffect(() => {

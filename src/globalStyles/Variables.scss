@@ -22,5 +22,13 @@
 	--medWeight: 500;
 	--semiBoldWeight: 600;
 	--boldWeight: 700;
-	--filterNone: invert(0);
+	--filterInv: invert(0);
+}
+
+// 다크모드
+.dark {
+	--baseColor: #fff;
+	--baseColor-code: 255, 255, 255;
+	--bgColor: #111;
+	--filterInv: invert(1);
 }

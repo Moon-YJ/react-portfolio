@@ -15,7 +15,7 @@
 				width: 100%;
 				height: 100%;
 				object-fit: contain;
-				filter: var(--filterNone);
+				filter: var(--filterInv);
 				transition: 0.3s;
 			}
 		}
@@ -94,7 +94,6 @@
 .mobile {
 	.Footer {
 		width: 85vw;
-		padding-bottom: 30px;
 		font-size: var(--xsmSize);
 		h1 {
 			margin-bottom: 0;
@@ -106,6 +105,7 @@
 			}
 		}
 		.btm {
+			height: 30px;
 			.txt {
 				top: 5px;
 			}

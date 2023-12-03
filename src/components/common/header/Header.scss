@@ -32,9 +32,10 @@
 				font-size: var(--smSize);
 				letter-spacing: 1px;
 				opacity: 0.7;
-				transition: 0.3s;
+				transition: 0.5s;
 				&:hover {
 					opacity: 0.9;
+					font-weight: var(--boldWeight);
 				}
 				&.on {
 					font-weight: var(--boldWeight);

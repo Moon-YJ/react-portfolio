@@ -10,10 +10,11 @@ import Youtube from './components/sub/youtube/Youtube';
 import { Route } from 'react-router-dom';
 import './globalStyles/Variables.scss';
 import './globalStyles/Reset.scss';
+import { useMedia } from './hooks/useMedia';
 
 export default function App() {
 	return (
-		<>
+		<div className={`wrap ${useMedia()}`}>
 			<Header />
 			<Route exact path='/' component={MainWrap} />
 			<Route path='/department' component={Department} />
@@ -23,6 +24,6 @@ export default function App() {
 			<Route path='/members' component={Members} />
 			<Route path='/contact' component={Contact} />
 			<Footer />
-		</>
+		</div>
 	);
 }

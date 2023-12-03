@@ -30,7 +30,7 @@ export default function App() {
 			<Route path='/contact' component={Contact} />
 			<Route path='/youtube' component={Youtube} />
 			<Route path='/detail/:id' component={Detail} />
-			{MenuToggle && <Menu />}
+			{MenuToggle && <Menu setMenuToggle={setMenuToggle} />}
 			<Footer setDark={setDark} />
 		</div>
 	);

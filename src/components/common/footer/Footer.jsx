@@ -13,8 +13,8 @@ export default function Footer({ setDark }) {
 	};
 
 	useEffect(() => {
-		if (Selected === 'Dark') setDark(true);
-		if (Selected === 'Light') setDark(false);
+		Selected === 'Dark' && setDark(true);
+		Selected === 'Light' && setDark(false);
 	}, [Selected, setDark]);
 
 	return (

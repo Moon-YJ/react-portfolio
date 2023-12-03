@@ -15,7 +15,7 @@ export default function Footer({ setDark }) {
 	useEffect(() => {
 		if (Selected === 'Dark') setDark(true);
 		if (Selected === 'Light') setDark(false);
-	}, [Selected]);
+	}, [Selected, setDark]);
 
 	return (
 		<footer className='Footer'>
@@ -31,10 +31,6 @@ export default function Footer({ setDark }) {
 				<li>Sitemap</li>
 			</ul>
 			<div className='btm'>
-				{/* <select className='txt' name='mode'>
-					<option value='light'>Light</option>
-					<option value='dark'>Dark</option>
-				</select> */}
 				<select onChange={handleSelect} value={Selected}>
 					{selectList.map((list) => (
 						<option value={list} key={list}>

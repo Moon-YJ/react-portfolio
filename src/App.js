@@ -31,7 +31,7 @@ export default function App() {
 			<Route path='/youtube' component={Youtube} />
 			<Route path='/detail/:id' component={Detail} />
 			{MenuToggle && <Menu />}
-			<Footer Dark={Dark} setDark={setDark} />
+			<Footer setDark={setDark} />
 		</div>
 	);
 }

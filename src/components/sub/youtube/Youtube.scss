@@ -53,6 +53,7 @@
 		}
 		.detail {
 			font-size: var(--lgSize);
+			opacity: 0.9;
 			svg {
 				cursor: pointer;
 				transition: opacity, transform 0.3s;

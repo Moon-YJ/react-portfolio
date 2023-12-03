@@ -8,8 +8,8 @@ import { Link } from 'react-router-dom';
 export default function Youtube() {
 	const [Vids, setVids] = useState([]);
 	const fetchYoutube = async () => {
-		const api_key = 'AIzaSyB81cXmxoWdzbYs8QZUlN_LQskZFT_Xqoo';
-		const pId = 'PLMaY0ixOiylhwpATMD-PQjeVREn5MOfSp';
+		const api_key = process.env.REACT_APP_YOUTUBE_API;
+		const pId = process.env.REACT_APP_YOUTUBE_pID;
 		const num = 7;
 		const baseURL = `https://www.googleapis.com/youtube/v3/playlistItems?key=${api_key}&part=snippet&playlistId=${pId}&maxResults=${num}`;
 		const data = await fetch(baseURL);

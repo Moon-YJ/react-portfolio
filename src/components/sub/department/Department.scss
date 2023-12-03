@@ -5,6 +5,7 @@
 	.president {
 		display: flex;
 		justify-content: space-between;
+		flex-wrap: wrap;
 		.pic {
 			width: 40%;
 			height: 450px;
@@ -86,6 +87,7 @@
 			display: flex;
 			justify-content: space-between;
 			align-items: center;
+			flex-wrap: wrap;
 			article {
 				width: calc((100% - var(--gap) * (var(--num) - 1)) / var(--num));
 				.info {
@@ -125,6 +127,54 @@
 		}
 		&-support {
 			margin-top: 100px;
+		}
+	}
+}
+
+// tablet
+.tablet,
+.mobile {
+	.Department {
+		--num: 2;
+		.president {
+			.pic {
+				width: 100%;
+			}
+			.quotes {
+				display: none;
+			}
+			.con {
+				width: 100%;
+				margin-top: 30px;
+				.con-btm {
+					margin-top: 5px;
+				}
+			}
+		}
+		.team {
+			&-box {
+				article {
+					&:nth-child(3) {
+						margin-top: 50px;
+					}
+				}
+			}
+		}
+	}
+}
+// mobile
+.mobile {
+	.Department {
+		--num: 1;
+		.team {
+			&-box {
+				article {
+					margin-top: 50px;
+					.pic {
+						height: 500px;
+					}
+				}
+			}
 		}
 	}
 }

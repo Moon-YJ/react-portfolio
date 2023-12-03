@@ -7,8 +7,8 @@
 	transition: opacity 0.7s, transform 0.7s;
 	.tit-set {
 		display: flex;
-		align-items: center;
 		justify-content: space-between;
+		flex-wrap: wrap;
 		padding-bottom: 50px;
 		margin-bottom: 150px;
 		border-bottom: 1px solid var(--baseColor);
@@ -27,6 +27,7 @@
 			font-weight: normal;
 			font-size: var(--titSize0);
 			letter-spacing: 1px;
+			line-height: 1;
 			span {
 				opacity: 0;
 				transform: scale(2);
@@ -55,6 +56,22 @@
 	&.detail {
 		.tit-set {
 			display: none;
+		}
+	}
+}
+
+// tablet
+.tablet,
+.mobile {
+	.Layout {
+		.tit-set {
+			margin-bottom: 100px;
+			.num {
+				font-size: var(--lgSize);
+			}
+			h1 {
+				font-size: var(--titSize1);
+			}
 		}
 	}
 }

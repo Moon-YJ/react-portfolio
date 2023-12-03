@@ -16,7 +16,6 @@ export default function Detail() {
 		console.log(json.items[0].snippet);
 	};
 	const customTxt = customText('shorten');
-	const customDate = customText('combine');
 	useEffect(() => {
 		fetchYoutube();
 	}, []);
@@ -37,15 +36,13 @@ export default function Detail() {
 								<span>. {YoutubeData.publishedAt.split('T')[0].split('-')[0]}</span>
 							</div>
 							<div className='con'>
-								<h2 className='tit'>{YoutubeData.title}</h2>
-								<p className='detail'>
-									{YoutubeData.description === ''
-										? 'Description is not existed.'
-										: customTxt(YoutubeData.description, 100)}
-								</p>
+								<h2 className='tit'>
+									{YoutubeData.description === '' ? YoutubeData.title : customTxt(YoutubeData.description, 80)}
+								</h2>
 								<div className='info'>
+									<p>{YoutubeData.title}</p>
 									<p>{YoutubeData.videoOwnerChannelTitle}</p>
-									<p>{YoutubeData.publishedAt.split('T')[1].split('Z')[0]}</p>
+									{/* <p>{YoutubeData.publishedAt.split('T')[1].split('Z')[0]}</p> */}
 								</div>
 							</div>
 						</div>

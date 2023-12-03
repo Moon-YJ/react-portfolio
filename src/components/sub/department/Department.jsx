@@ -11,15 +11,13 @@ export default function Department() {
 	const [SubMemberData, setSubMemberData] = useState([]);
 	const [SubTit, setSubTit] = useState('');
 
-	//console.log(TopData);
-
 	const customTit = customText('combine');
 
 	const fetchMember = async () => {
 		try {
 			const data = await fetch(`${path.current}/DB/department.json`);
 			const json = await data.json();
-			setTopData(json.president);
+			setTopData(json.president[0]);
 			setMemberData(Object.values(json)[1]);
 			setTit(Object.keys(json)[1]);
 			setSubMemberData(Object.values(json)[2]);
@@ -39,7 +37,7 @@ export default function Department() {
 				{TopData && (
 					<section className='president'>
 						<div className='pic'>
-							<img src={`${path.current}/img/${TopData[0].pic}`} alt={TopData[0].name} />
+							<img src={`${path.current}/img/${TopData.pic}`} alt={TopData.name} />
 						</div>
 						<div className='quotes'>"</div>
 						<div className='con'>
@@ -48,8 +46,8 @@ export default function Department() {
 									The Uprock team actively participates in our company development and ideas that we want to implement.
 									In some segments of our business, they think two or three steps ahead of us.
 								</h2>
-								<p className='name'>{TopData[0].name}</p>
-								<p className='position'>{TopData[0].position}</p>
+								<p className='name'>{TopData.name}</p>
+								<p className='position'>{TopData.position}</p>
 							</div>
 							<div className='con-btm'>
 								<p>PAST</p>

@@ -3,6 +3,7 @@ import Layout from '../../common/layout/Layout';
 import { FaArrowRight } from 'react-icons/fa';
 import './Youtube.scss';
 import { customText } from '../../../hooks/useText';
+import { Link } from 'react-router-dom';
 
 export default function Youtube() {
 	const [Vids, setVids] = useState([]);
@@ -30,7 +31,9 @@ export default function Youtube() {
 					return (
 						<article key={vid.snippet.playlistId + idx}>
 							<div className='pic'>
-								<img src={vid.snippet.thumbnails.maxres.url} alt='' />
+								<Link to={`/detail/${vid.id}`}>
+									<img src={vid.snippet.thumbnails.maxres.url} alt='' />
+								</Link>
 							</div>
 							<div className='con'>
 								<h2 className='tit'>
@@ -42,7 +45,9 @@ export default function Youtube() {
 								</div>
 							</div>
 							<span className='detail'>
-								<FaArrowRight />
+								<Link to={`/detail/${vid.id}`}>
+									<FaArrowRight />
+								</Link>
 							</span>
 						</article>
 					);

@@ -29,7 +29,7 @@ export function customText(type) {
 	if (type === 'shorten') {
 		return (txt, num = 50) => {
 			if (txt.length > num) {
-				return txt.slice(0, num);
+				return txt.slice(0, num) + '..';
 			} else {
 				return txt;
 			}

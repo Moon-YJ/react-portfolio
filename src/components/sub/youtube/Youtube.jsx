@@ -32,9 +32,16 @@ export default function Youtube() {
 							<div className='pic'>
 								<img src={vid.snippet.thumbnails.maxres.url} alt='' />
 							</div>
-							<h2 className='tit'>{shortenTit(vid.snippet.title)}</h2>
-							<div className='date'>{customDate(date, '.')}</div>
-							<span>
+							<div className='con'>
+								<h2 className='tit'>
+									{vid.snippet.description === '' ? vid.snippet.title : shortenTit(vid.snippet.description, 80)}
+								</h2>
+								<div className='date'>
+									<span>DATE</span>
+									<span>{customDate(date, '.')}</span>
+								</div>
+							</div>
+							<span className='detail'>
 								<FaArrowRight />
 							</span>
 						</article>

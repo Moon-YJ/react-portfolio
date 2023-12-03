@@ -13,7 +13,7 @@ export default function Department() {
 
 	//console.log(TopData);
 
-	const customTit = customText('combineTit');
+	const customTit = customText('combine');
 
 	const fetchMember = async () => {
 		try {

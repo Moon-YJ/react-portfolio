@@ -75,3 +75,18 @@
 		}
 	}
 }
+// mobile {
+.mobile {
+	.Layout {
+		margin-top: 70px;
+		.tit-set {
+			margin-bottom: 70px;
+			.num {
+				font-size: var(--medSize);
+			}
+			h1 {
+				font-size: var(--xlgSize);
+			}
+		}
+	}
+}

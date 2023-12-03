@@ -38,6 +38,7 @@
 				line-height: 1.1;
 			}
 			.date {
+				margin-top: 10px;
 				line-height: 1;
 				span {
 					&:first-child {
@@ -59,6 +60,61 @@
 					opacity: 0.3;
 					transform: scale(1.2);
 				}
+			}
+		}
+	}
+}
+
+// tablet
+.tablet,
+.mobile {
+	.Youtube {
+		.tit-set {
+			margin-bottom: 20px;
+		}
+		article {
+			gap: 20px;
+			padding-bottom: 50px;
+			.pic {
+				width: 40%;
+			}
+			.con {
+				width: 60%;
+				.tit {
+					font-size: var(--medSize);
+				}
+				.date {
+					font-size: var(--smSize);
+				}
+			}
+			.detail {
+				font-size: var(--medSize);
+			}
+		}
+	}
+}
+
+// mobile
+.mobile {
+	.Youtube {
+		article {
+			flex-wrap: wrap;
+			padding-bottom: 40px;
+			.pic {
+				width: 100%;
+			}
+			.con {
+				width: 100%;
+				.tit {
+					width: 100%;
+					font-size: var(--medSize);
+				}
+				.date {
+					font-size: var(--smSize);
+				}
+			}
+			.detail {
+				font-size: var(--bodySize);
 			}
 		}
 	}

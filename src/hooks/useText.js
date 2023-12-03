@@ -17,12 +17,22 @@ export function customText(type) {
 		return txt.charAt(0).toUpperCase() + txt.slice(1);
 	};
 
-	if (type === 'combineTit') {
+	if (type === 'combine') {
 		return (txt, spc = ' ') => {
 			return txt
 				.split(/-|_|\+/)
 				.map((el) => setUpperTxt(el))
 				.join(spc);
+		};
+	}
+
+	if (type === 'shorten') {
+		return (txt, num = 50) => {
+			if (txt.length > num) {
+				return txt.slice(0, num);
+			} else {
+				return txt;
+			}
 		};
 	}
 }

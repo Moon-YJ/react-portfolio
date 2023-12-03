@@ -2,6 +2,7 @@ import './Detail.scss';
 import { useParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { customText } from '../../../hooks/useText';
+import Layout from '../../common/layout/Layout';
 
 export default function Detail() {
 	const { id } = useParams();
@@ -22,24 +23,41 @@ export default function Detail() {
 
 	return (
 		<div className='Detail'>
-			{YoutubeData && (
-				<article>
-					<div className='info'>
-						<span className='date'>{customDate(YoutubeData.publishedAt.split('T')[0], '.')}</span>
-					</div>
-					<h2 className='tit'>{YoutubeData.title}</h2>
-					<p className='detail'>{customTxt(YoutubeData.description, 200)}</p>
-					<div className='info'>
-						<span>{YoutubeData.videoOwnerChannelTitle}</span>
-						<span>{YoutubeData.publishedAt.split('T')[1].split('Z')[0]}</span>
-					</div>
-					<div className='video'>
-						<iframe
-							title={YoutubeData.title}
-							src={`https://www.youtube.com/embed/${YoutubeData.resourceId.videoId}`}></iframe>
-					</div>
-				</article>
-			)}
+			<Layout index={'00'} title={'Detail'} detail={'detail'}>
+				{YoutubeData && (
+					<article>
+						<div className='top-info'>
+							<div className='date'>
+								<span>
+									{new Date(YoutubeData.publishedAt.split('T')[0].split('-')[1]).toLocaleString('en-US', {
+										month: 'short',
+									})}
+								</span>
+								<span>{YoutubeData.publishedAt.split('T')[0].split('-')[2]}</span>
+								<span>. {YoutubeData.publishedAt.split('T')[0].split('-')[0]}</span>
+							</div>
+							<div className='con'>
+								<h2 className='tit'>{YoutubeData.title}</h2>
+								<p className='detail'>
+									{YoutubeData.description === ''
+										? 'Description is not existed.'
+										: customTxt(YoutubeData.description, 100)}
+								</p>
+								<div className='info'>
+									<p>{YoutubeData.videoOwnerChannelTitle}</p>
+									<p>{YoutubeData.publishedAt.split('T')[1].split('Z')[0]}</p>
+								</div>
+							</div>
+						</div>
+						<div className='video'>
+							<iframe
+								title={YoutubeData.title}
+								src={`https://www.youtube.com/embed/${YoutubeData.resourceId.videoId}`}
+								frameBorder={0}></iframe>
+						</div>
+					</article>
+				)}
+			</Layout>
 		</div>
 	);
 }

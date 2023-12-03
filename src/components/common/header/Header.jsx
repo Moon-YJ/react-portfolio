@@ -2,7 +2,9 @@ import './Header.scss';
 import { Link, NavLink } from 'react-router-dom';
 import { useRef } from 'react';
 
-export default function Header() {
+import { CgMenuRight, CgClose } from 'react-icons/cg';
+
+export default function Header({ MenuToggle, setMenuToggle }) {
 	const path = useRef(process.env.PUBLIC_URL);
 
 	return (
@@ -44,6 +46,15 @@ export default function Header() {
 					</NavLink>
 				</li>
 			</ul>
+			{MenuToggle ? (
+				<button className='menu' onClick={() => setMenuToggle(!MenuToggle)}>
+					<CgClose />
+				</button>
+			) : (
+				<button className='menu' onClick={() => setMenuToggle(!MenuToggle)}>
+					<CgMenuRight />
+				</button>
+			)}
 		</header>
 	);
 }

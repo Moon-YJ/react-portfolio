@@ -64,6 +64,7 @@
 .tablet,
 .mobile {
 	.Layout {
+		width: 85vw;
 		.tit-set {
 			margin-bottom: 100px;
 			.num {
@@ -75,10 +76,10 @@
 		}
 	}
 }
-// mobile {
+// mobile
 .mobile {
 	.Layout {
-		margin-top: 70px;
+		margin: 70px auto 100px;
 		.tit-set {
 			margin-bottom: 70px;
 			.num {

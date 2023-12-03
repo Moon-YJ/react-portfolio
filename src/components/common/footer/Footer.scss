@@ -11,7 +11,6 @@
 		height: 100%;
 		margin: 0 auto 10px;
 		a {
-			width: 120px;
 			img {
 				width: 100%;
 				height: 100%;
@@ -32,7 +31,7 @@
 		align-items: center;
 		&.txt-set {
 			margin: 0 auto 40px;
-			padding: 0 25vw;
+			padding: 0 23vw;
 		}
 	}
 	.btm {
@@ -41,48 +40,112 @@
 		justify-content: space-between;
 		align-items: center;
 		height: 40px;
-		select {
+		.txt {
 			position: absolute;
 			top: 10px;
+		}
+		select {
 			left: 0;
 			color: var(--baseColor);
 			background-color: transparent;
 			border: none;
 			font: inherit;
 		}
-		ul.icon-set {
-			position: absolute;
-			top: 0;
-			left: 50%;
-			transform: translateX(-50%);
-			gap: 35px;
-			cursor: pointer;
-			li {
-				display: flex;
-				justify-content: center;
-				flex-direction: column;
-				align-items: center;
-				width: 40px;
-				height: 40px;
-				//border: 1px solid var(--baseColor);
-				border-radius: 50%;
-				transition: 0.3s;
-				svg {
+		ul {
+			&.icon-set {
+				position: absolute;
+				top: 0;
+				left: 50%;
+				transform: translateX(-50%);
+				gap: 35px;
+				cursor: pointer;
+				li {
+					display: flex;
+					justify-content: center;
+					flex-direction: column;
+					align-items: center;
+					width: 40px;
+					height: 40px;
+					//border: 1px solid var(--baseColor);
+					font-size: var(--bodySize);
+					border-radius: 50%;
 					transition: 0.3s;
-					color: var(--baseColor);
-				}
-				&:hover {
-					background: var(--baseColor);
 					svg {
-						color: var(--bgColor);
+						transition: 0.3s;
+						color: var(--baseColor);
+					}
+					&:hover {
+						background: var(--baseColor);
+						svg {
+							color: var(--bgColor);
+						}
 					}
 				}
 			}
 		}
 		p {
-			position: absolute;
-			top: 10px;
 			right: 0;
+		}
+	}
+}
+
+// tablet
+.tablet,
+.mobile {
+	.Footer {
+		width: 85vw;
+		padding-bottom: 30px;
+		font-size: var(--xsmSize);
+		h1 {
+			margin-bottom: 0;
+		}
+		ul {
+			&.txt-set {
+				padding: 0 13vw;
+				margin-bottom: 30px;
+			}
+		}
+		.btm {
+			.txt {
+				top: 5px;
+			}
+			ul {
+				&.icon-set {
+					gap: 2.5vw;
+					li {
+						width: 30px;
+						height: 30px;
+						svg {
+							font-size: var(--bodySize);
+						}
+					}
+				}
+			}
+		}
+	}
+}
+// mobile
+.mobile {
+	.Footer {
+		h1 {
+			width: 100px;
+		}
+		ul {
+			&.txt-set {
+				padding: 0;
+				margin-bottom: 10px;
+			}
+		}
+		.btm {
+			height: 100%;
+			.txt {
+				position: relative;
+			}
+			ul {
+				&.icon-set {
+					display: none;
+				}
+			}
 		}
 	}
 }

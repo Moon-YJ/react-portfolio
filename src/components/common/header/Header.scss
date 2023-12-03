@@ -23,7 +23,7 @@
 			}
 		}
 	}
-	ul.gnb {
+	ul {
 		display: flex;
 		justify-content: space-between;
 		gap: 35px;
@@ -31,7 +31,7 @@
 			a {
 				font-size: var(--smSize);
 				letter-spacing: 1px;
-				opacity: 0.7;
+				opacity: 0.8;
 				transition: 0.5s;
 				&:hover {
 					opacity: 0.9;
@@ -49,6 +49,28 @@
 					}
 				}
 			}
+		}
+	}
+	.menu {
+		display: none;
+		font-size: var(--medSize);
+		transition: opacity 0.3s;
+		&:hover {
+			opacity: 0.5;
+		}
+	}
+}
+
+// tablet
+.tablet,
+.mobile {
+	.Header {
+		width: 85vw;
+		ul {
+			display: none;
+		}
+		.menu {
+			display: block;
 		}
 	}
 }

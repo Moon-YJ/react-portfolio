@@ -48,3 +48,32 @@
 		}
 	}
 }
+
+// tablet
+.tablet,
+.mobile {
+	.Detail {
+		article {
+			.top-info {
+				flex-wrap: wrap;
+				.date {
+					width: 100%;
+				}
+				.con {
+					width: 100%;
+					.tit {
+						margin-top: 15px;
+						font-size: var(--xlgSize);
+					}
+					.info {
+						width: 100%;
+						margin-top: 50px;
+					}
+				}
+				.video {
+					margin-top: 35px;
+				}
+			}
+		}
+	}
+}

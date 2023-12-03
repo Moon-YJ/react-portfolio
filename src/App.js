@@ -12,11 +12,15 @@ import './globalStyles/Variables.scss';
 import './globalStyles/Reset.scss';
 import { useMedia } from './hooks/useMedia';
 import Detail from './components/sub/youtube/Detail';
+import Menu from './components/common/menu/Menu';
+import { useState } from 'react';
 
 export default function App() {
+	const [MenuToggle, setMenuToggle] = useState(false);
+
 	return (
 		<div className={`wrap ${useMedia()}`}>
-			<Header />
+			<Header MenuToggle={MenuToggle} setMenuToggle={setMenuToggle} />
 			<Route exact path='/' component={MainWrap} />
 			<Route path='/department' component={Department} />
 			<Route path='/gallery' component={Gallery} />
@@ -25,6 +29,7 @@ export default function App() {
 			<Route path='/contact' component={Contact} />
 			<Route path='/youtube' component={Youtube} />
 			<Route path='/detail/:id' component={Detail} />
+			{MenuToggle && <Menu />}
 			<Footer />
 		</div>
 	);

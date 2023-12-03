@@ -20,25 +20,25 @@ export default function Footer() {
 				<li>Sitemap</li>
 			</ul>
 			<div className='btm'>
-				<select name='mode'>
+				<select className='txt' name='mode'>
 					<option value='dark'>Dark</option>
 					<option value='light'>Light</option>
 				</select>
 				<ul className='icon-set'>
 					<li>
-						<FaTwitter size={17} />
+						<FaTwitter />
 					</li>
 					<li>
-						<FaGithub size={17} />
+						<FaGithub />
 					</li>
 					<li>
-						<FaFacebookF size={17} />
+						<FaFacebookF />
 					</li>
 					<li>
-						<FaYoutube size={17} />
+						<FaYoutube />
 					</li>
 				</ul>
-				<p>&copy; 2023 henge All rights reserved.</p>
+				<p className='txt'>&copy; 2023 henge All rights reserved.</p>
 			</div>
 		</footer>
 	);

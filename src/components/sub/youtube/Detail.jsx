@@ -21,7 +21,7 @@ export default function Detail() {
 
 	return (
 		<div className='Detail'>
-			<Layout index={'00'} title={'Detail'} detail={'detail'}>
+			<Layout index={'00'} title={'Detail'}>
 				{YoutubeData && (
 					<article>
 						<div className='top-info'>
@@ -35,13 +35,10 @@ export default function Detail() {
 								<span>. {YoutubeData.publishedAt.split('T')[0].split('-')[0]}</span>
 							</div>
 							<div className='con'>
-								<h2 className='tit'>
-									{YoutubeData.description === '' ? YoutubeData.title : customTxt(YoutubeData.description, 80)}
-								</h2>
+								<h2 className='tit'>{YoutubeData.title}</h2>
 								<div className='info'>
-									<p>{YoutubeData.title}</p>
 									<p>{YoutubeData.videoOwnerChannelTitle}</p>
-									{/* <p>{YoutubeData.publishedAt.split('T')[1].split('Z')[0]}</p> */}
+									<p>{YoutubeData.publishedAt.split('T')[1].split('Z')[0]}</p>
 								</div>
 							</div>
 						</div>
@@ -51,6 +48,9 @@ export default function Detail() {
 								src={`https://www.youtube.com/embed/${YoutubeData.resourceId.videoId}`}
 								frameBorder={0}></iframe>
 						</div>
+						<p className='txt'>
+							{YoutubeData.description === '' ? YoutubeData.title : customTxt(YoutubeData.description, 350)}
+						</p>
 					</article>
 				)}
 			</Layout>

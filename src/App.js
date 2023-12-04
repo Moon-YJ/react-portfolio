@@ -21,7 +21,7 @@ export default function App() {
 
 	return (
 		<div className={`wrap ${Dark ? 'dark' : ''} ${useMedia()}`}>
-			<Header MenuToggle={MenuToggle} setMenuToggle={setMenuToggle} />
+			<Header MenuToggle={MenuToggle} setMenuToggle={setMenuToggle} Dark={Dark} setDark={setDark} />
 			<Route exact path='/' component={MainWrap} />
 			<Route path='/department' component={Department} />
 			<Route path='/gallery' component={Gallery} />

@@ -2,7 +2,7 @@ import { useSplitText } from '../../../hooks/useText';
 import './Layout.scss';
 import { useEffect, useRef } from 'react';
 
-export default function Layout({ index, title, detail = '', children }) {
+export default function Layout({ index, title, children }) {
 	const box = useRef(null);
 	const numBox = useRef(null);
 	const titBox = useRef(null);
@@ -17,7 +17,7 @@ export default function Layout({ index, title, detail = '', children }) {
 	}, []);
 
 	return (
-		<main ref={box} className={`Layout ${title} ${detail}`}>
+		<main ref={box} className={`Layout ${title}`}>
 			<div className='tit-set'>
 				<p ref={numBox} className='num'>
 					{index}

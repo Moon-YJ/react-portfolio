@@ -26,6 +26,7 @@
 	ul {
 		display: flex;
 		justify-content: space-between;
+		width: 65%;
 		gap: 35px;
 		li {
 			a {
@@ -59,6 +60,32 @@
 			opacity: 0.5;
 		}
 	}
+	// 테마 변경 버튼
+	.theme {
+		position: relative;
+		width: 85px;
+		height: 40px;
+		background-color: var(--invertColor);
+		border-radius: 25px;
+		cursor: pointer;
+		transform: scale(0.7);
+		.ball {
+			position: absolute;
+			top: 5px;
+			left: 5px;
+			width: 30px;
+			height: 30px;
+			border-radius: 100%;
+			background-color: rgba(var(--baseColor-code), 0.1);
+			transition: 0.7s;
+		}
+		&.dark {
+			.ball {
+				left: 50px;
+				background-color: var(--bgColor);
+			}
+		}
+	}
 }
 
 // tablet
@@ -67,6 +94,9 @@
 	.Header {
 		width: 85vw;
 		ul {
+			display: none;
+		}
+		.theme {
 			display: none;
 		}
 		.menu {

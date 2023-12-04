@@ -1,11 +1,15 @@
 import './Header.scss';
 import { Link, NavLink } from 'react-router-dom';
-import { useRef } from 'react';
+import { useRef, useState } from 'react';
 
 import { CgMenuRight, CgClose } from 'react-icons/cg';
 
-export default function Header({ MenuToggle, setMenuToggle }) {
+export default function Header({ MenuToggle, setMenuToggle, Dark, setDark }) {
 	const path = useRef(process.env.PUBLIC_URL);
+	const [Toggle, setToggle] = useState(true);
+	const handleChk = (status) => {
+		setToggle(!status);
+	};
 
 	return (
 		<header className='Header'>
@@ -46,6 +50,13 @@ export default function Header({ MenuToggle, setMenuToggle }) {
 					</NavLink>
 				</li>
 			</ul>
+			<div
+				className={`theme ${Dark ? 'dark' : ''}`}
+				onClick={() => {
+					setDark(!Dark);
+				}}>
+				<div className='ball'></div>
+			</div>
 			{MenuToggle ? (
 				<button className='menu' onClick={() => setMenuToggle(!MenuToggle)}>
 					<CgClose />

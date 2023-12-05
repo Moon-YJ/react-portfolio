@@ -29,7 +29,6 @@
 			padding: 12px 0;
 			font-size: var(--xlgSize);
 			font-weight: var(--lightWeight);
-			transition: opacity 0.5s;
 			&:first-child {
 				&::before {
 					content: '';
@@ -40,33 +39,41 @@
 					background-color: var(--invertColor);
 				}
 			}
-			&:hover {
-				opacity: 0.6;
+			a {
+				transition: opacity 0.5s;
+				&.on {
+					padding-bottom: 5px;
+					font-weight: var(--semiBoldWeight);
+					border-bottom: 2px solid var(--invertColor);
+					opacity: 1;
+				}
+				&:hover {
+					opacity: 0.6;
+				}
 			}
 		}
 		// 테마 변경 버튼
 		.theme {
 			position: relative;
-			width: 80px;
-			height: 40px;
+			width: 60px;
+			height: 30px;
 			margin: 20px auto 0;
 			background-color: var(--invertColor);
 			border-radius: 25px;
 			cursor: pointer;
-			transform: scale(0.7);
 			.ball {
 				position: absolute;
-				top: 5px;
+				top: 4px;
 				left: 6px;
-				width: 30px;
-				height: 30px;
+				width: 22px;
+				height: 22px;
 				border-radius: 100%;
 				background-color: rgba(var(--baseColor-code), 0.2);
 				transition: 0.7s;
 			}
 			&.dark {
 				.ball {
-					left: 42px;
+					left: 32px;
 					background-color: var(--baseColor);
 				}
 			}

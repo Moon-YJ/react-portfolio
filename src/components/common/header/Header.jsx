@@ -33,11 +33,11 @@ export default function Header({ MenuToggle, setMenuToggle, Dark, setDark }) {
 				<div className='ball'></div>
 			</div>
 			{MenuToggle ? (
-				<button className='menu' onClick={() => setMenuToggle(!MenuToggle)}>
+				<button className='menu' onClick={() => setMenuToggle(false)}>
 					<CgClose />
 				</button>
 			) : (
-				<button className='menu' onClick={() => setMenuToggle(!MenuToggle)}>
+				<button className='menu' onClick={() => setMenuToggle(true)}>
 					<CgMenuRight />
 				</button>
 			)}

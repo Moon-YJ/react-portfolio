@@ -1,15 +1,11 @@
 import './Header.scss';
 import { Link, NavLink } from 'react-router-dom';
-import { useRef, useState } from 'react';
-
+import { useRef } from 'react';
 import { CgMenuRight, CgClose } from 'react-icons/cg';
 
 export default function Header({ MenuToggle, setMenuToggle, Dark, setDark }) {
 	const path = useRef(process.env.PUBLIC_URL);
-	const [Toggle, setToggle] = useState(true);
-	const handleChk = (status) => {
-		setToggle(!status);
-	};
+	const menuEl = ['department', 'youtube', 'gallery', 'community', 'members', 'contact'];
 
 	return (
 		<header className='Header'>
@@ -19,36 +15,15 @@ export default function Header({ MenuToggle, setMenuToggle, Dark, setDark }) {
 				</Link>
 			</h1>
 			<ul className='gnb'>
-				<li>
-					<NavLink to='/department' activeClassName={'on'}>
-						Department
-					</NavLink>
-				</li>
-				<li>
-					<NavLink to='/youtube' activeClassName={'on'}>
-						Youtube
-					</NavLink>
-				</li>
-				<li>
-					<NavLink to='/gallery' activeClassName={'on'}>
-						Gallery
-					</NavLink>
-				</li>
-				<li>
-					<NavLink to='/community' activeClassName={'on'}>
-						Community
-					</NavLink>
-				</li>
-				<li>
-					<NavLink to='/members' activeClassName={'on'}>
-						Members
-					</NavLink>
-				</li>
-				<li>
-					<NavLink to='/contact' activeClassName={'on'}>
-						Contact
-					</NavLink>
-				</li>
+				{menuEl.map((el, idx) => {
+					return (
+						<li key={el + idx}>
+							<NavLink to={`/${el}`} activeClassName={'on'}>
+								{el.charAt(0).toUpperCase() + el.slice(1)}
+							</NavLink>
+						</li>
+					);
+				})}
 			</ul>
 			<div
 				className={`theme ${Dark ? 'dark' : ''}`}

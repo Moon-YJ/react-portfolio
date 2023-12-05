@@ -54,6 +54,7 @@
 	}
 	.menu {
 		display: none;
+		color: var(--baseColor);
 		font-size: var(--medSize);
 		transition: opacity 0.3s;
 		&:hover {
@@ -63,26 +64,26 @@
 	// 테마 변경 버튼
 	.theme {
 		position: relative;
-		width: 85px;
+		width: 80px;
 		height: 40px;
-		background-color: var(--invertColor);
+		background-color: #fff;
 		border-radius: 25px;
 		cursor: pointer;
 		transform: scale(0.7);
 		.ball {
 			position: absolute;
 			top: 5px;
-			left: 5px;
+			left: 7px;
 			width: 30px;
 			height: 30px;
 			border-radius: 100%;
-			background-color: rgba(var(--baseColor-code), 0.1);
+			background-color: rgba(var(--baseColor-code), 0.15);
 			transition: 0.7s;
 		}
 		&.dark {
 			.ball {
-				left: 50px;
-				background-color: var(--bgColor);
+				left: 42px;
+				background-color: var(--invertColor);
 			}
 		}
 	}

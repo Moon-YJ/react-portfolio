@@ -24,6 +24,7 @@
 	--semiBoldWeight: 600;
 	--boldWeight: 700;
 	--filterInv: invert(0);
+	--filterInvMob: invert(1);
 }
 
 // 다크모드
@@ -31,5 +32,7 @@
 	--baseColor: #fff;
 	--baseColor-code: 255, 255, 255;
 	--bgColor: #111;
+	--invertColor: #111;
 	--filterInv: invert(1);
+	--filterInvMob: invert(0);
 }

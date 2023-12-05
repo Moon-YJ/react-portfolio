@@ -6,5 +6,103 @@
 	width: 280px;
 	height: 100vh;
 	background: var(--baseColor);
-	color: var(--bgColor);
+	color: var(--invertColor);
+	h1 {
+		width: 100px;
+		margin: 40px auto 0;
+		img {
+			width: 100%;
+			height: 100%;
+			object-fit: contain;
+			filter: var(--filterInvMob);
+			transition: 0.3s;
+		}
+		&:hover {
+			img {
+				filter: invert(60%);
+			}
+		}
+	}
+	.gnb {
+		text-align: center;
+		li {
+			padding: 12px 0;
+			font-size: var(--xlgSize);
+			font-weight: var(--lightWeight);
+			transition: opacity 0.5s;
+			&:first-child {
+				&::before {
+					content: '';
+					display: block;
+					width: 35px;
+					height: 1px;
+					margin: 0 auto 35px;
+					background-color: var(--invertColor);
+				}
+			}
+			&:hover {
+				opacity: 0.6;
+			}
+		}
+		// 테마 변경 버튼
+		.theme {
+			position: relative;
+			width: 80px;
+			height: 40px;
+			margin: 20px auto 0;
+			background-color: var(--invertColor);
+			border-radius: 25px;
+			cursor: pointer;
+			transform: scale(0.7);
+			.ball {
+				position: absolute;
+				top: 5px;
+				left: 6px;
+				width: 30px;
+				height: 30px;
+				border-radius: 100%;
+				background-color: rgba(var(--baseColor-code), 0.2);
+				transition: 0.7s;
+			}
+			&.dark {
+				.ball {
+					left: 42px;
+					background-color: var(--baseColor);
+				}
+			}
+		}
+	}
+	.btm {
+		.icon-set {
+			position: absolute;
+			left: 50%;
+			bottom: 10px;
+			transform: translateX(-50%);
+			display: flex;
+			align-items: center;
+			justify-content: space-between;
+			gap: 20px;
+			cursor: pointer;
+			li {
+				display: flex;
+				justify-content: center;
+				flex-direction: column;
+				align-items: center;
+				width: 40px;
+				height: 40px;
+				font-size: var(--bodySize);
+				border-radius: 50%;
+				transition: 0.3s;
+				svg {
+					transition: 0.3s;
+				}
+				&:hover {
+					background: var(--invertColor);
+					svg {
+						color: var(--baseColor);
+					}
+				}
+			}
+		}
+	}
 }

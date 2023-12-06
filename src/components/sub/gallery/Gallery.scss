@@ -1,5 +1,6 @@
 .Gallery {
 	--num: 3;
+	position: relative;
 	.top-area {
 		display: flex;
 		align-items: center;
@@ -59,7 +60,9 @@
 	}
 	.container-wrap {
 		--gap: 20px;
-
+		opacity: 0;
+		transform: translateY(100px);
+		transition: opacity, transform 0.5s;
 		.container {
 			width: 100%;
 			display: flex;
@@ -120,8 +123,20 @@
 				}
 			}
 		}
+		&.on {
+			opacity: 1;
+			transform: translateY(0px);
+		}
+	}
+	.loading-bar {
+		position: fixed;
+		top: 30%;
+		left: 50%;
+		transform: translateX(-50%);
+		width: 400px;
 	}
 }
+
 // laptop
 .laptop {
 	.Gallery {

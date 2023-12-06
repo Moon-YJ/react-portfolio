@@ -12,7 +12,16 @@ export default function Gallery() {
 	const gap = useRef(20);
 	const refNav = useRef(null);
 	const isUser = useRef('');
+	const path = useRef(process.env.PUBLIC_URL);
 	const [Pics, setPics] = useState([]);
+	const [Loaded, setLoaded] = useState(false);
+
+	const endLoading = () => {
+		setTimeout(() => {
+			setLoaded(true);
+			conWrap.current.classList.add('on');
+		}, 1200);
+	};
 
 	const activeBtn = (e) => {
 		const btns = refNav.current.querySelectorAll('button');
@@ -24,18 +33,22 @@ export default function Gallery() {
 
 	const handleRandom = (e) => {
 		if (e.target.classList.contains('on')) return;
+		setLoaded(false);
 		activeBtn(e);
 		id.current = '';
 		isUser.current = '';
 		fetchFlickr({ type: 'random' });
+		endLoading();
 	};
 
 	const handleUser = (e) => {
 		if (e.target.classList.contains('on')) return;
+		setLoaded(false);
 		activeBtn(e);
 		id.current = myId;
 		isUser.current = 'myId';
 		fetchFlickr({ type: 'user', id: id.current });
+		endLoading();
 	};
 
 	const handleImg = (e) => {
@@ -43,16 +56,20 @@ export default function Gallery() {
 		if (ownerId === myId) return;
 		activeBtn();
 		if (isUser.current) return;
+		setLoaded(false);
 		isUser.current = ownerId;
 		fetchFlickr({ type: 'user', id: ownerId });
+		endLoading();
 	};
 
 	const handleOwner = (e) => {
 		if (isUser.current) return;
 		isUser.current = e.target.innerText;
 		if (e.target.innerText === myId) return;
+		setLoaded(false);
 		activeBtn();
 		fetchFlickr({ type: 'user', id: e.target.innerText });
+		endLoading();
 	};
 
 	const fetchFlickr = async (opt) => {
@@ -76,7 +93,8 @@ export default function Gallery() {
 	};
 
 	useEffect(() => {
-		conWrap.current.style.setProperty('--gap', gap.current + 'px');
+		if (conWrap.current) conWrap.current.style.setProperty('--gap', gap.current + 'px');
+		endLoading();
 		fetchFlickr({ type: 'user', id: id.current });
 	}, []);
 
@@ -100,8 +118,9 @@ export default function Gallery() {
 					</button>
 				</form>
 			</div>
+			{!Loaded ? <img src={`${path.current}/img/load.gif`} className='loading-bar' alt='loading img' /> : null}
 			<section ref={conWrap} className='container-wrap'>
-				<Masonry className={'container'} options={{ transitionDuration: '0.5s', gutter: gap.current }}>
+				<Masonry className={'container'} options={{ gutter: gap.current }}>
 					{Pics.map((pic, idx) => {
 						return (
 							<article key={pic.id}>

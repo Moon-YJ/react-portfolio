@@ -2,6 +2,8 @@ import { useEffect, useRef } from 'react';
 import './Menu.scss';
 import { Link, NavLink } from 'react-router-dom';
 import { FaFacebookF, FaTwitter, FaYoutube, FaGithub } from 'react-icons/fa';
+import { MdWbSunny } from 'react-icons/md';
+import { BiSolidMoon } from 'react-icons/bi';
 import { customText } from '../../../hooks/useText';
 import { AnimatePresence, motion } from 'framer-motion';
 
@@ -52,6 +54,10 @@ export default function Menu({ setMenuToggle, MenuToggle, setDark, Dark }) {
 								setDark(!Dark);
 							}}>
 							<div className='ball'></div>
+							<span className='icon'>
+								<MdWbSunny className='sun' />
+								<BiSolidMoon className='moon' />
+							</span>
 						</div>
 					</ul>
 					<div className='btm'>

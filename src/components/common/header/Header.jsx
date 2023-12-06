@@ -2,6 +2,8 @@ import './Header.scss';
 import { Link, NavLink } from 'react-router-dom';
 import { useRef } from 'react';
 import { CgMenuRight, CgClose } from 'react-icons/cg';
+import { MdWbSunny } from 'react-icons/md';
+import { BiSolidMoon } from 'react-icons/bi';
 
 export default function Header({ MenuToggle, setMenuToggle, Dark, setDark }) {
 	const path = useRef(process.env.PUBLIC_URL);
@@ -31,6 +33,10 @@ export default function Header({ MenuToggle, setMenuToggle, Dark, setDark }) {
 					setDark(!Dark);
 				}}>
 				<div className='ball'></div>
+				<span className='icon'>
+					<MdWbSunny className='sun' />
+					<BiSolidMoon className='moon' />
+				</span>
 			</div>
 			{MenuToggle ? (
 				<button className='menu' onClick={() => setMenuToggle(false)}>

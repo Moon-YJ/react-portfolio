@@ -1,5 +1,4 @@
 .Gallery {
-	--gap: 20px;
 	--num: 3;
 	.top-area {
 		display: flex;
@@ -58,61 +57,65 @@
 			}
 		}
 	}
-	.container {
-		width: 100%;
-		display: flex;
-		flex-wrap: wrap;
-		justify-content: flex-start;
-		gap: var(--gap);
-		article {
-			width: calc((100% - var(--gap) * (var(--num) - 1)) / var(--num));
-			margin-bottom: 120px;
-			.pic {
-				width: 100%;
-				margin-bottom: 10px;
-				img {
+	.container-wrap {
+		--gap: 20px;
+
+		.container {
+			width: 100%;
+			display: flex;
+			flex-wrap: wrap;
+			justify-content: flex-start;
+			gap: var(--gap);
+			article {
+				width: calc((100% - var(--gap) * (var(--num) - 1)) / var(--num));
+				margin-bottom: 120px;
+				.pic {
 					width: 100%;
-				}
-			}
-			h2 {
-				margin-bottom: 10px;
-				font-weight: var(--medWeight);
-				font-size: var(--medSize);
-				line-height: 1.2;
-				.num {
-					margin-right: 10px;
-					font-style: italic;
-					font-family: var(--pointFont);
-					font-weight: var(--boldWeight);
-				}
-			}
-			.profile {
-				width: 100%;
-				&::after {
-					content: '';
-					display: block;
-					width: calc((100% - var(--gap) * (var(--num) - 1)) / var(--num));
-					border-bottom: 1px solid rgba(var(--baseColor-code), 0.3);
-				}
-				p {
 					margin-bottom: 10px;
-					font-size: var(--smSize);
-					opacity: 0.6;
-					cursor: pointer;
-					transition: opacity 0.3s;
-					&:hover {
-						opacity: 1;
+					img {
+						width: 100%;
 					}
 				}
-				img {
-					width: 40px;
+				h2 {
 					margin-bottom: 10px;
-					border-radius: 50%;
-					filter: grayscale(0.7);
-					cursor: pointer;
-					transition: opacity, filter 0.3s;
-					&:hover {
-						filter: grayscale(0) brightness(1.2);
+					font-weight: var(--medWeight);
+					font-size: var(--medSize);
+					line-height: 1.2;
+					.num {
+						margin-right: 10px;
+						font-style: italic;
+						font-family: var(--pointFont);
+						font-weight: var(--boldWeight);
+					}
+				}
+				.profile {
+					width: 100%;
+					&::after {
+						content: '';
+						display: block;
+						width: calc((100% - var(--gap) * (var(--num) - 1)) / var(--num));
+						border-bottom: 1px solid rgba(var(--baseColor-code), 0.3);
+					}
+					p {
+						margin-bottom: 10px;
+						font-size: var(--smSize);
+						opacity: 0.6;
+						cursor: pointer;
+						transition: opacity 0.3s;
+						&:hover {
+							opacity: 1;
+						}
+					}
+					img {
+						width: 40px;
+						margin-bottom: 10px;
+						border-radius: 50%;
+						filter: grayscale(0.7);
+						cursor: pointer;
+						transition: opacity, filter 0.3s;
+						&:hover {
+							filter: grayscale(0) brightness(1.2);
+						}
 					}
 				}
 			}

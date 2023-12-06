@@ -8,6 +8,8 @@ import { AiOutlineClose } from 'react-icons/ai';
 export default function Gallery() {
 	const myId = '195472166@N07';
 	const id = useRef(myId);
+	const conWrap = useRef(null);
+	const gap = useRef(20);
 	const refNav = useRef(null);
 	const isUser = useRef('');
 	const [Pics, setPics] = useState([]);
@@ -74,6 +76,7 @@ export default function Gallery() {
 	};
 
 	useEffect(() => {
+		conWrap.current.style.setProperty('--gap', gap.current + 'px');
 		fetchFlickr({ type: 'user', id: id.current });
 	}, []);
 
@@ -97,33 +100,35 @@ export default function Gallery() {
 					</button>
 				</form>
 			</div>
-			<Masonry className={'container'} options={{ transitionDuration: '0.5s', gutter: 20 }}>
-				{Pics.map((pic, idx) => {
-					return (
-						<article key={pic.id}>
-							<div className='pic'>
-								<img
-									src={`https://live.staticflickr.com/${pic.server}/${pic.id}_${pic.secret}_b.jpg`}
-									alt={pic.title}
-								/>
-							</div>
-							<h2>
-								<span className='num'>{idx < 10 ? '0' + idx : idx}</span>
-								{pic.title}
-							</h2>
-							<div className='profile'>
-								<p onClick={handleOwner}>{pic.owner}</p>
-								<img
-									src={`http://farm${pic.farm}.staticflickr.com/${pic.server}/buddyicons/${pic.owner}.jpg`}
-									alt={pic.owner}
-									onClick={handleImg}
-									onError={(e) => e.target.setAttribute('src', 'https://www.flickr.com/images/buddyicon.gif')}
-								/>
-							</div>
-						</article>
-					);
-				})}
-			</Masonry>
+			<section ref={conWrap} className='container-wrap'>
+				<Masonry className={'container'} options={{ transitionDuration: '0.5s', gutter: gap.current }}>
+					{Pics.map((pic, idx) => {
+						return (
+							<article key={pic.id}>
+								<div className='pic'>
+									<img
+										src={`https://live.staticflickr.com/${pic.server}/${pic.id}_${pic.secret}_b.jpg`}
+										alt={pic.title}
+									/>
+								</div>
+								<h2>
+									<span className='num'>{idx < 10 ? '0' + idx : idx}</span>
+									{pic.title}
+								</h2>
+								<div className='profile'>
+									<p onClick={handleOwner}>{pic.owner}</p>
+									<img
+										src={`http://farm${pic.farm}.staticflickr.com/${pic.server}/buddyicons/${pic.owner}.jpg`}
+										alt={pic.owner}
+										onClick={handleImg}
+										onError={(e) => e.target.setAttribute('src', 'https://www.flickr.com/images/buddyicon.gif')}
+									/>
+								</div>
+							</article>
+						);
+					})}
+				</Masonry>
+			</section>
 		</Layout>
 	);
 }

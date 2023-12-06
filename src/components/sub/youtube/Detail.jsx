@@ -20,40 +20,38 @@ export default function Detail() {
 	}, []);
 
 	return (
-		<div className='Detail'>
-			<Layout index={'00'} title={'Detail'}>
-				{YoutubeData && (
-					<article>
-						<div className='top-info'>
-							<div className='date'>
-								<span>
-									{new Date(YoutubeData.publishedAt.split('T')[0].split('-')[1]).toLocaleString('en-US', {
-										month: 'short',
-									})}
-								</span>
-								<span>{YoutubeData.publishedAt.split('T')[0].split('-')[2]}</span>
-								<span>. {YoutubeData.publishedAt.split('T')[0].split('-')[0]}</span>
-							</div>
-							<div className='con'>
-								<h2 className='tit'>{YoutubeData.title}</h2>
-								<div className='info'>
-									<p>{YoutubeData.videoOwnerChannelTitle}</p>
-									<p>{YoutubeData.publishedAt.split('T')[1].split('Z')[0]}</p>
-								</div>
+		<Layout index={'00'} title={'Detail'}>
+			{YoutubeData && (
+				<article>
+					<div className='top-info'>
+						<div className='date'>
+							<span>
+								{new Date(YoutubeData.publishedAt.split('T')[0].split('-')[1]).toLocaleString('en-US', {
+									month: 'short',
+								})}
+							</span>
+							<span>{YoutubeData.publishedAt.split('T')[0].split('-')[2]}</span>
+							<span>. {YoutubeData.publishedAt.split('T')[0].split('-')[0]}</span>
+						</div>
+						<div className='con'>
+							<h2 className='tit'>{YoutubeData.title}</h2>
+							<div className='info'>
+								<p>{YoutubeData.videoOwnerChannelTitle}</p>
+								<p>{YoutubeData.publishedAt.split('T')[1].split('Z')[0]}</p>
 							</div>
 						</div>
-						<div className='video'>
-							<iframe
-								title={YoutubeData.title}
-								src={`https://www.youtube.com/embed/${YoutubeData.resourceId.videoId}`}
-								frameBorder={0}></iframe>
-						</div>
-						<p className='txt'>
-							{YoutubeData.description === '' ? YoutubeData.title : customTxt(YoutubeData.description, 350)}
-						</p>
-					</article>
-				)}
-			</Layout>
-		</div>
+					</div>
+					<div className='video'>
+						<iframe
+							title={YoutubeData.title}
+							src={`https://www.youtube.com/embed/${YoutubeData.resourceId.videoId}`}
+							frameBorder={0}></iframe>
+					</div>
+					<p className='txt'>
+						{YoutubeData.description === '' ? YoutubeData.title : customTxt(YoutubeData.description, 450)}
+					</p>
+				</article>
+			)}
+		</Layout>
 	);
 }

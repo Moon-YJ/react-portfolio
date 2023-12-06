@@ -1,0 +1,139 @@
+.Gallery {
+	--gap: 20px;
+	--num: 3;
+	.top-area {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		margin-bottom: 50px;
+		button {
+			background: transparent;
+			cursor: pointer;
+			border: none;
+		}
+		.btn-set {
+			font-weight: var(--lightWeight);
+			font-size: var(--bodySize);
+			.txt {
+				margin-right: 12px;
+			}
+			button {
+				padding: 5px 20px;
+				margin-left: 10px;
+				color: var(--baseColor);
+				font-weight: var(--medWeight);
+				font-size: inherit;
+				background-color: var(--bgColor);
+				border: 1px solid var(--baseColor);
+				border-radius: 10px;
+				transition: 0.3s;
+				&:hover {
+					color: var(--invertColor);
+					background-color: var(--baseColor);
+					border: 1px solid var(--baseColor);
+				}
+				&.on {
+					color: var(--invertColor);
+					background-color: var(--baseColor);
+					border: 1px solid var(--baseColor);
+				}
+			}
+		}
+		form {
+			display: flex;
+			align-items: center;
+			padding-bottom: 3px;
+			border-bottom: 1px solid rgba(var(--baseColor-code), 0.8);
+			button {
+				margin-top: 5px;
+				font-size: var(--medSize);
+			}
+			input {
+				width: 120px;
+				padding: 6px 10px;
+				background-color: transparent;
+				border: none;
+				outline: 0;
+				opacity: 0.6;
+			}
+		}
+	}
+	.container {
+		width: 100%;
+		display: flex;
+		flex-wrap: wrap;
+		justify-content: flex-start;
+		gap: var(--gap);
+		article {
+			width: calc((100% - var(--gap) * (var(--num) - 1)) / var(--num));
+			margin-bottom: 120px;
+			.pic {
+				width: 100%;
+				margin-bottom: 10px;
+				img {
+					width: 100%;
+				}
+			}
+			h2 {
+				margin-bottom: 10px;
+				font-weight: var(--medWeight);
+				font-size: var(--medSize);
+				line-height: 1.2;
+				.num {
+					margin-right: 10px;
+					font-style: italic;
+					font-family: var(--pointFont);
+					font-weight: var(--boldWeight);
+				}
+			}
+			.profile {
+				width: 100%;
+				&::after {
+					content: '';
+					display: block;
+					width: calc((100% - var(--gap) * (var(--num) - 1)) / var(--num));
+					border-bottom: 1px solid rgba(var(--baseColor-code), 0.3);
+				}
+				p {
+					margin-bottom: 10px;
+					font-size: var(--smSize);
+					opacity: 0.6;
+					cursor: pointer;
+					transition: opacity 0.3s;
+					&:hover {
+						opacity: 1;
+					}
+				}
+				img {
+					width: 40px;
+					margin-bottom: 10px;
+					border-radius: 50%;
+					filter: grayscale(0.7);
+					cursor: pointer;
+					transition: opacity, filter 0.3s;
+					&:hover {
+						filter: grayscale(0) brightness(1.2);
+					}
+				}
+			}
+		}
+	}
+}
+// laptop
+.laptop {
+	.Gallery {
+		--num: 3;
+	}
+}
+// tablet
+.tablet {
+	.Gallery {
+		--num: 2;
+	}
+}
+// mobile
+.mobile {
+	.Gallery {
+		--num: 1;
+	}
+}

@@ -35,7 +35,7 @@ button {
 	color: var(--baseColor);
 	font-family: var(--baseFont);
 	background-color: var(--bgColor);
-	transition: color 1s, background-color 1s;
+	transition: color 0.7s, background-color 0.7s;
 	&::-webkit-scrollbar {
 		width: 8px;
 		background: transparent;

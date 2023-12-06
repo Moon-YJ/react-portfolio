@@ -3,10 +3,8 @@ import './Members.scss';
 
 export default function Members() {
 	return (
-		<div className='Members'>
-			<Layout index={'05'} title={'Members'}>
-				Members
-			</Layout>
-		</div>
+		<Layout index={'05'} title={'Members'}>
+			Members
+		</Layout>
 	);
 }

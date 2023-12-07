@@ -4,6 +4,7 @@ import './Gallery.scss';
 import Masonry from 'react-masonry-component';
 import { CgSearch } from 'react-icons/cg';
 import { AiOutlineClose } from 'react-icons/ai';
+import { RiArrowRightDownLine } from 'react-icons/ri';
 import Modal from '../../common/modal/Modal';
 
 export default function Gallery() {
@@ -130,55 +131,74 @@ export default function Gallery() {
 	return (
 		<>
 			<Layout index={'03'} title={'Gallery'}>
-				{!Loaded ? <img src={`${path.current}/img/load.gif`} className='loading-bar' alt='loading img' /> : null}
-				<div className='top-area'>
-					<nav ref={refNav} className='btn-set'>
-						<span className='txt'>Sort by tags:</span>
-						<button onClick={handleRandom}>Random</button>
-						<button className='on' onClick={handleUser}>
-							My Gallery
-						</button>
-					</nav>
-					<form onSubmit={handleSearch}>
-						<button>
-							<CgSearch />
-						</button>
-						<input ref={refInput} type='text' placeholder='Search' />
-						<button onClick={() => refInput.current.value && (refInput.current.value = '')}>
-							<AiOutlineClose />
-						</button>
-					</form>
-				</div>
-				<section ref={conWrap} className='container-wrap'>
-					<Masonry className={'container'} options={{ gutter: gap.current }}>
-						{Pics.length === 0 && isSearch.current && <h3>No matching images found</h3>}
-						{Pics.map((pic, idx) => {
-							return (
-								<article key={pic.id}>
-									<div className='pic'>
-										<img
-											src={`https://live.staticflickr.com/${pic.server}/${pic.id}_${pic.secret}_b.jpg`}
-											alt={pic.title}
-											onClick={() => handleModal(idx)}
-										/>
-									</div>
-									<h2>
-										<span className='num'>{idx < 10 ? '0' + (idx + 1) : idx + 1}</span>
-										{pic.title}
-									</h2>
-									<div className='profile'>
-										<p onClick={handleOwner}>{pic.owner}</p>
-										<img
-											src={`http://farm${pic.farm}.staticflickr.com/${pic.server}/buddyicons/${pic.owner}.jpg`}
-											alt={pic.owner}
-											onClick={handleImg}
-											onError={(e) => e.target.setAttribute('src', 'https://www.flickr.com/images/buddyicon.gif')}
-										/>
-									</div>
-								</article>
-							);
-						})}
-					</Masonry>
+				<section className='intro'>
+					<h2>
+						<span>N</span>aive
+						<br />
+						<span>C</span>ollection
+					</h2>
+					<div className='btm'>
+						<span className='arrow'>
+							<RiArrowRightDownLine />
+						</span>
+						<div className='pic'>
+							<img src={`${path.current}/img/gallery/pic-g.jpg`} alt='led lamp' />
+						</div>
+					</div>
+				</section>
+				<section className='collection'>
+					{!Loaded ? <img src={`${path.current}/img/load.gif`} className='loading-bar' alt='loading img' /> : null}
+					<div className='top-area'>
+						<nav ref={refNav} className='tag'>
+							<span className='txt'>Sort by tags:</span>
+							<div className='btn-set'>
+								<button onClick={handleRandom}>Random</button>
+								<button className='on' onClick={handleUser}>
+									My Gallery
+								</button>
+							</div>
+						</nav>
+						<form onSubmit={handleSearch}>
+							<button>
+								<CgSearch />
+							</button>
+							<input ref={refInput} type='text' placeholder='Search' />
+							<button onClick={() => refInput.current.value && (refInput.current.value = '')}>
+								<AiOutlineClose />
+							</button>
+						</form>
+					</div>
+					<div ref={conWrap} className='container-wrap'>
+						<Masonry className={'container'} options={{ gutter: gap.current }}>
+							{Pics.length === 0 && isSearch.current && <h3>No matching images found</h3>}
+							{Pics.map((pic, idx) => {
+								return (
+									<article key={pic.id}>
+										<div className='pic'>
+											<img
+												src={`https://live.staticflickr.com/${pic.server}/${pic.id}_${pic.secret}_b.jpg`}
+												alt={pic.title}
+												onClick={() => handleModal(idx)}
+											/>
+										</div>
+										<h2>
+											<span className='num'>{idx < 10 ? '0' + (idx + 1) : idx + 1}</span>
+											{pic.title}
+										</h2>
+										<div className='profile'>
+											<p onClick={handleOwner}>{pic.owner}</p>
+											<img
+												src={`http://farm${pic.farm}.staticflickr.com/${pic.server}/buddyicons/${pic.owner}.jpg`}
+												alt={pic.owner}
+												onClick={handleImg}
+												onError={(e) => e.target.setAttribute('src', 'https://www.flickr.com/images/buddyicon.gif')}
+											/>
+										</div>
+									</article>
+								);
+							})}
+						</Masonry>
+					</div>
 				</section>
 			</Layout>
 

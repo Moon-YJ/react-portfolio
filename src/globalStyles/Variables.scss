@@ -1,14 +1,17 @@
-@import url('https://fonts.googleapis.com/css2?family=Cardo:ital@0;1&family=Nanum+Myeongjo:wght@400;700&family=Poppins:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Arimo&family=Cardo:ital@0;1&family=Nanum+Myeongjo:wght@400;700&family=Poppins:wght@300;400;500;600;700&display=swap');
 
 :root {
 	--baseFont: 'Poppins', 'arial', '돋움';
 	--pointFont: 'Nanum Myeongjo', 'arial';
 	--spcFont: 'Cardo', 'arial';
+	--gFont: 'Arimo', 'arial';
 	--baseColor: #111;
 	--baseColor-code: 18, 18, 18;
 	--pointColor: rgb(250, 91, 91);
 	--bgColor: #f1f1f1;
 	--invertColor: #fff;
+	--titSizeXB: 10rem;
+	--titSizeB: 8.5rem;
 	--titSize0: 6rem;
 	--titSize1: 4rem;
 	--titSize2: 2.4rem;

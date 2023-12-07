@@ -35,9 +35,11 @@ export default function Youtube() {
 							</Link>
 						</div>
 						<div className='con'>
-							<h2 className='tit'>
-								{vid.snippet.description === '' ? vid.snippet.title : shortenTit(vid.snippet.description, 80)}
-							</h2>
+							<Link to={`/detail/${vid.id}`}>
+								<h2 className='tit'>
+									{vid.snippet.description === '' ? vid.snippet.title : shortenTit(vid.snippet.description, 80)}
+								</h2>
+							</Link>
 							<div className='date'>
 								<span>DATE</span>
 								<span>{customDate(date, '.')}</span>

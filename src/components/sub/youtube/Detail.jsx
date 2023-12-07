@@ -3,6 +3,8 @@ import { useParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { customText } from '../../../hooks/useText';
 import Layout from '../../common/layout/Layout';
+import { FaArrowLeft } from 'react-icons/fa';
+import { Link } from 'react-router-dom';
 
 export default function Detail() {
 	const { id } = useParams();
@@ -23,6 +25,9 @@ export default function Detail() {
 		<Layout index={'00'} title={'Detail'}>
 			{YoutubeData && (
 				<article>
+					<Link to='/youtube'>
+						<FaArrowLeft className='arrow' />
+					</Link>
 					<div className='top-info'>
 						<div className='date'>
 							<span>

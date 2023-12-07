@@ -36,6 +36,10 @@
 				font-weight: var(--regWeight);
 				letter-spacing: -1.1px;
 				line-height: 1.1;
+				transition: opacity 0.3s;
+				&:hover {
+					opacity: 0.6;
+				}
 			}
 			.date {
 				margin-top: 10px;

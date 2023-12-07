@@ -3,8 +3,22 @@
 	article {
 		padding-top: 60px;
 		border-top: 1px solid var(--baseColor);
+		> a {
+			margin-bottom: 50px;
+			font-size: var(--lgSize);
+			opacity: 0.9;
+			.arrow {
+				cursor: pointer;
+				transition: opacity, transform 0.3s;
+				&:hover {
+					opacity: 0.3;
+					transform: scale(1.2);
+				}
+			}
+		}
 		.top-info {
 			display: flex;
+			margin-top: 15px;
 			.date {
 				width: 45%;
 				font-size: var(--medSize);

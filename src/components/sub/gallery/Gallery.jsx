@@ -17,6 +17,7 @@ export default function Gallery() {
 	const [Pics, setPics] = useState([]);
 	const [Loaded, setLoaded] = useState(false);
 	const [Index, setIndex] = useState(0);
+	const [Open, setOpen] = useState(false);
 
 	const endLoading = () => {
 		setTimeout(() => {
@@ -80,6 +81,11 @@ export default function Gallery() {
 		endLoading();
 	};
 
+	const handleModal = (idx) => {
+		setIndex(idx);
+		setOpen(true);
+	};
+
 	const fetchFlickr = async (opt) => {
 		const num = 20;
 		const flickr_api = process.env.REACT_APP_FLICKR_KEY;
@@ -137,7 +143,7 @@ export default function Gallery() {
 										<img
 											src={`https://live.staticflickr.com/${pic.server}/${pic.id}_${pic.secret}_b.jpg`}
 											alt={pic.title}
-											onClick={(idx) => setIndex(idx)}
+											onClick={handleModal}
 										/>
 									</div>
 									<h2>
@@ -160,7 +166,7 @@ export default function Gallery() {
 				</section>
 			</Layout>
 
-			<Modal>
+			<Modal Open={Open} setOpen={setOpen}>
 				{Pics.length > 0 && (
 					<img
 						src={`https://live.staticflickr.com/${Pics[Index].server}/${Pics[Index].id}_${Pics[Index].secret}_b.jpg`}

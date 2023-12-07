@@ -9,8 +9,6 @@
 		margin-bottom: 50px;
 		button {
 			background: transparent;
-			cursor: pointer;
-			border: none;
 		}
 		.btn-set {
 			font-weight: var(--lightWeight);
@@ -81,8 +79,16 @@
 				.pic {
 					width: 100%;
 					margin-bottom: 10px;
+					overflow: hidden;
 					img {
 						width: 100%;
+						filter: grayscale(0.5);
+						transition: filter, transform 0.5s;
+						cursor: pointer;
+						&:hover {
+							filter: grayscale(0) brightness(1.2);
+							transform: scale(1.2);
+						}
 					}
 				}
 				h2 {
@@ -152,9 +158,53 @@
 	}
 }
 
+// tablet
+.tablet,
+.mobile {
+	.Gallery {
+		.top-area {
+			.btn-set {
+				.txt {
+					margin-right: 10px;
+				}
+				button {
+					padding: 5px 15px;
+					margin-left: 5px;
+				}
+			}
+			form {
+				input {
+					width: 100px;
+					padding: 6px 10px;
+				}
+			}
+		}
+	}
+}
+
 // mobile
 .mobile {
 	.Gallery {
 		--num: 1;
+		margin-bottom: 50px;
+		.top-area {
+			margin-bottom: 40px;
+			.btn-set {
+				width: 100%;
+				.txt {
+					display: none;
+				}
+			}
+			form {
+				margin-top: 20px;
+			}
+		}
+		.container-wrap {
+			.container {
+				article {
+					margin-bottom: 70px;
+				}
+			}
+		}
 	}
 }

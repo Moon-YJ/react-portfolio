@@ -15,7 +15,6 @@ export default function Gallery() {
 	const isUser = useRef('');
 	const refInput = useRef(null);
 	const isSearch = useRef(false);
-	const isTyping = useRef(false);
 	const path = useRef(process.env.PUBLIC_URL);
 	const [Pics, setPics] = useState([]);
 	const [Loaded, setLoaded] = useState(false);
@@ -125,7 +124,6 @@ export default function Gallery() {
 	useEffect(() => {
 		if (conWrap.current) conWrap.current.style.setProperty('--gap', gap.current + 'px');
 		endLoading();
-		isTyping.current = false;
 		fetchFlickr({ type: 'user', id: id.current });
 	}, []);
 

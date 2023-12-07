@@ -26,7 +26,7 @@ export default function Gallery() {
 		setTimeout(() => {
 			setLoaded(true);
 			conWrap.current.classList.add('on');
-		}, 1200);
+		}, 1500);
 	};
 
 	const setLoading = () => {

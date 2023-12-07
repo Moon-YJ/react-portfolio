@@ -43,8 +43,8 @@
 	.collection {
 		position: relative;
 		.loading-bar {
-			position: fixed;
-			top: 20%;
+			position: absolute;
+			top: 0;
 			left: 50%;
 			transform: translateX(-50%);
 			width: 400px;
@@ -216,7 +216,7 @@
 		.intro {
 			margin-top: -125px;
 			h2 {
-				display: block;
+				//display: block;
 				font-size: var(--titSize0);
 				span {
 					font-size: var(--titSizeB);

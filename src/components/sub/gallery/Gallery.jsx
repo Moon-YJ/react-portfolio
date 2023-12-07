@@ -4,6 +4,7 @@ import './Gallery.scss';
 import Masonry from 'react-masonry-component';
 import { CgSearch } from 'react-icons/cg';
 import { AiOutlineClose } from 'react-icons/ai';
+import Modal from '../../common/modal/Modal';
 
 export default function Gallery() {
 	const myId = '195472166@N07';
@@ -15,6 +16,7 @@ export default function Gallery() {
 	const path = useRef(process.env.PUBLIC_URL);
 	const [Pics, setPics] = useState([]);
 	const [Loaded, setLoaded] = useState(false);
+	const [Index, setIndex] = useState(0);
 
 	const endLoading = () => {
 		setTimeout(() => {
@@ -105,55 +107,67 @@ export default function Gallery() {
 	}, []);
 
 	return (
-		<Layout index={'03'} title={'Gallery'}>
-			{!Loaded ? <img src={`${path.current}/img/load.gif`} className='loading-bar' alt='loading img' /> : null}
-			<div className='top-area'>
-				<nav ref={refNav} className='btn-set'>
-					<span className='txt'>Sort by tags:</span>
-					<button onClick={handleRandom}>Random</button>
-					<button className='on' onClick={handleUser}>
-						My Gallery
-					</button>
-				</nav>
-				<form>
-					<button>
-						<CgSearch />
-					</button>
-					<input type='text' placeholder='Search' />
-					<button>
-						<AiOutlineClose />
-					</button>
-				</form>
-			</div>
-			<section ref={conWrap} className='container-wrap'>
-				<Masonry className={'container'} options={{ gutter: gap.current }}>
-					{Pics.map((pic, idx) => {
-						return (
-							<article key={pic.id}>
-								<div className='pic'>
-									<img
-										src={`https://live.staticflickr.com/${pic.server}/${pic.id}_${pic.secret}_b.jpg`}
-										alt={pic.title}
-									/>
-								</div>
-								<h2>
-									<span className='num'>{idx < 10 ? '0' + idx : idx}</span>
-									{pic.title}
-								</h2>
-								<div className='profile'>
-									<p onClick={handleOwner}>{pic.owner}</p>
-									<img
-										src={`http://farm${pic.farm}.staticflickr.com/${pic.server}/buddyicons/${pic.owner}.jpg`}
-										alt={pic.owner}
-										onClick={handleImg}
-										onError={(e) => e.target.setAttribute('src', 'https://www.flickr.com/images/buddyicon.gif')}
-									/>
-								</div>
-							</article>
-						);
-					})}
-				</Masonry>
-			</section>
-		</Layout>
+		<>
+			<Layout index={'03'} title={'Gallery'}>
+				{!Loaded ? <img src={`${path.current}/img/load.gif`} className='loading-bar' alt='loading img' /> : null}
+				<div className='top-area'>
+					<nav ref={refNav} className='btn-set'>
+						<span className='txt'>Sort by tags:</span>
+						<button onClick={handleRandom}>Random</button>
+						<button className='on' onClick={handleUser}>
+							My Gallery
+						</button>
+					</nav>
+					<form>
+						<button>
+							<CgSearch />
+						</button>
+						<input type='text' placeholder='Search' />
+						<button>
+							<AiOutlineClose />
+						</button>
+					</form>
+				</div>
+				<section ref={conWrap} className='container-wrap'>
+					<Masonry className={'container'} options={{ gutter: gap.current }}>
+						{Pics.map((pic, idx) => {
+							return (
+								<article key={pic.id}>
+									<div className='pic'>
+										<img
+											src={`https://live.staticflickr.com/${pic.server}/${pic.id}_${pic.secret}_b.jpg`}
+											alt={pic.title}
+											onClick={(idx) => setIndex(idx)}
+										/>
+									</div>
+									<h2>
+										<span className='num'>{idx < 10 ? '0' + idx : idx}</span>
+										{pic.title}
+									</h2>
+									<div className='profile'>
+										<p onClick={handleOwner}>{pic.owner}</p>
+										<img
+											src={`http://farm${pic.farm}.staticflickr.com/${pic.server}/buddyicons/${pic.owner}.jpg`}
+											alt={pic.owner}
+											onClick={handleImg}
+											onError={(e) => e.target.setAttribute('src', 'https://www.flickr.com/images/buddyicon.gif')}
+										/>
+									</div>
+								</article>
+							);
+						})}
+					</Masonry>
+				</section>
+			</Layout>
+
+			<Modal>
+				{Pics.length > 0 && (
+					<img
+						src={`https://live.staticflickr.com/${Pics[Index].server}/${Pics[Index].id}_${Pics[Index].secret}_b.jpg`}
+						alt={Pics[Index].id}
+					/>
+				)}
+			</Modal>
+		</>
 	);
 }

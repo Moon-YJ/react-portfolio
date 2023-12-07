@@ -10,9 +10,12 @@ export default function Gallery() {
 	const myId = '195472166@N07';
 	const id = useRef(myId);
 	const conWrap = useRef(null);
-	const gap = useRef(20);
+	const gap = useRef(40);
 	const refNav = useRef(null);
 	const isUser = useRef('');
+	const refInput = useRef(null);
+	const isSearch = useRef(false);
+	const isTyping = useRef(false);
 	const path = useRef(process.env.PUBLIC_URL);
 	const [Pics, setPics] = useState([]);
 	const [Loaded, setLoaded] = useState(false);
@@ -81,9 +84,22 @@ export default function Gallery() {
 		endLoading();
 	};
 
+	const handleSearch = (e) => {
+		e.preventDefault();
+		isUser.current = '';
+		isSearch.current = true;
+		let searchVal = refInput.current.value.trim();
+		if (!searchVal) return;
+		setLoading();
+		activeBtn();
+		fetchFlickr({ type: 'search', keyword: refInput.current.value });
+		endLoading();
+		refInput.current.value = '';
+	};
+
 	const handleModal = (idx) => {
-		setIndex(idx);
 		setOpen(true);
+		setIndex(idx);
 	};
 
 	const fetchFlickr = async (opt) => {
@@ -109,6 +125,7 @@ export default function Gallery() {
 	useEffect(() => {
 		if (conWrap.current) conWrap.current.style.setProperty('--gap', gap.current + 'px');
 		endLoading();
+		isTyping.current = false;
 		fetchFlickr({ type: 'user', id: id.current });
 	}, []);
 
@@ -124,18 +141,19 @@ export default function Gallery() {
 							My Gallery
 						</button>
 					</nav>
-					<form>
+					<form onSubmit={handleSearch}>
 						<button>
 							<CgSearch />
 						</button>
-						<input type='text' placeholder='Search' />
-						<button>
+						<input ref={refInput} type='text' placeholder='Search' />
+						<button onClick={() => refInput.current.value && (refInput.current.value = '')}>
 							<AiOutlineClose />
 						</button>
 					</form>
 				</div>
 				<section ref={conWrap} className='container-wrap'>
 					<Masonry className={'container'} options={{ gutter: gap.current }}>
+						{Pics.length === 0 && isSearch.current && <h3>No matching images found</h3>}
 						{Pics.map((pic, idx) => {
 							return (
 								<article key={pic.id}>
@@ -143,11 +161,11 @@ export default function Gallery() {
 										<img
 											src={`https://live.staticflickr.com/${pic.server}/${pic.id}_${pic.secret}_b.jpg`}
 											alt={pic.title}
-											onClick={handleModal}
+											onClick={() => handleModal(idx)}
 										/>
 									</div>
 									<h2>
-										<span className='num'>{idx < 10 ? '0' + idx : idx}</span>
+										<span className='num'>{idx < 10 ? '0' + (idx + 1) : idx + 1}</span>
 										{pic.title}
 									</h2>
 									<div className='profile'>
@@ -167,7 +185,7 @@ export default function Gallery() {
 			</Layout>
 
 			<Modal Open={Open} setOpen={setOpen}>
-				{Pics.length > 0 && (
+				{Pics.length !== 0 && (
 					<img
 						src={`https://live.staticflickr.com/${Pics[Index].server}/${Pics[Index].id}_${Pics[Index].secret}_b.jpg`}
 						alt={Pics[Index].id}

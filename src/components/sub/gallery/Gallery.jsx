@@ -23,6 +23,12 @@ export default function Gallery() {
 		}, 1200);
 	};
 
+	const setLoading = () => {
+		setLoaded(false);
+		conWrap.current.classList.remove('on');
+		endLoading();
+	};
+
 	const activeBtn = (e) => {
 		const btns = refNav.current.querySelectorAll('button');
 		btns.forEach((btn) => {
@@ -33,7 +39,7 @@ export default function Gallery() {
 
 	const handleRandom = (e) => {
 		if (e.target.classList.contains('on')) return;
-		setLoaded(false);
+		setLoading();
 		activeBtn(e);
 		id.current = '';
 		isUser.current = '';
@@ -43,7 +49,7 @@ export default function Gallery() {
 
 	const handleUser = (e) => {
 		if (e.target.classList.contains('on')) return;
-		setLoaded(false);
+		setLoading();
 		activeBtn(e);
 		id.current = myId;
 		isUser.current = 'myId';
@@ -56,7 +62,7 @@ export default function Gallery() {
 		if (ownerId === myId) return;
 		activeBtn();
 		if (isUser.current) return;
-		setLoaded(false);
+		setLoading();
 		isUser.current = ownerId;
 		fetchFlickr({ type: 'user', id: ownerId });
 		endLoading();
@@ -66,7 +72,7 @@ export default function Gallery() {
 		if (isUser.current) return;
 		isUser.current = e.target.innerText;
 		if (e.target.innerText === myId) return;
-		setLoaded(false);
+		setLoading();
 		activeBtn();
 		fetchFlickr({ type: 'user', id: e.target.innerText });
 		endLoading();
@@ -100,6 +106,7 @@ export default function Gallery() {
 
 	return (
 		<Layout index={'03'} title={'Gallery'}>
+			{!Loaded ? <img src={`${path.current}/img/load.gif`} className='loading-bar' alt='loading img' /> : null}
 			<div className='top-area'>
 				<nav ref={refNav} className='btn-set'>
 					<span className='txt'>Sort by tags:</span>
@@ -118,7 +125,6 @@ export default function Gallery() {
 					</button>
 				</form>
 			</div>
-			{!Loaded ? <img src={`${path.current}/img/load.gif`} className='loading-bar' alt='loading img' /> : null}
 			<section ref={conWrap} className='container-wrap'>
 				<Masonry className={'container'} options={{ gutter: gap.current }}>
 					{Pics.map((pic, idx) => {

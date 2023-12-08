@@ -1,13 +1,26 @@
 import Layout from '../../common/layout/Layout';
 import './Community.scss';
-import { useRef } from 'react';
 
 export default function Community() {
-	const path = useRef(process.env.PUBLIC_URL);
-
 	return (
 		<Layout index={'04'} title={'Community'}>
-			<img src={`${path.current}/img/community/pic-con1.png`} alt='led lamp' />
+			<section className='txt-area'>
+				<figure>
+					<span></span>
+					<span></span>
+					<span></span>
+					<span></span>
+					<span></span>
+					<span></span>
+				</figure>
+				<div className='txt'>
+					<span className='stit'>WHAT WE DO</span>
+					<span className='con'>
+						We believe that we can live in a world where <span className='border-txt'>every product</span> or service
+						has a good quality like us.
+					</span>
+				</div>
+			</section>
 		</Layout>
 	);
 }

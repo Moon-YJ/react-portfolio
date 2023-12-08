@@ -27,7 +27,7 @@
 		text-align: center;
 		li {
 			padding: 12px 0;
-			font-size: var(--xlgSize);
+			font-size: var(--lgSize);
 			font-weight: var(--lightWeight);
 			&:first-child {
 				&::before {
@@ -42,10 +42,13 @@
 			a {
 				transition: opacity 0.3s;
 				&.on {
-					padding-bottom: 5px;
-					font-weight: var(--semiBoldWeight);
-					border-bottom: 2px solid var(--invertColor);
-					opacity: 1;
+					display: inline-block;
+					width: 225px;
+					padding: 5px 0;
+					color: var(--baseColor);
+					font-weight: var(--regWeight);
+					background-color: var(--invertColor);
+					border-radius: 30px;
 				}
 				&:hover {
 					opacity: 0.6;
@@ -57,7 +60,7 @@
 			position: relative;
 			width: 75px;
 			height: 36px;
-			margin: 20px auto 0;
+			margin: 30px auto 0;
 			background-color: var(--invertColor);
 			border-radius: 18px;
 			cursor: pointer;

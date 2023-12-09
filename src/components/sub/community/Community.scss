@@ -86,9 +86,10 @@
 		.wrap-box {
 			display: flex;
 			justify-content: space-between;
-			gap: 7vw;
+			gap: 5vw;
 			.input-box {
 				width: 40%;
+				height: fit-content;
 				padding: 30px;
 				background-color: rgba(18, 18, 18, 0.9);
 				box-shadow: 3px 1px 5px 3px rgba(var(--baseColor-code), 0.2);
@@ -133,15 +134,19 @@
 			.show-box {
 				width: 60%;
 				article {
+					position: relative;
 					display: flex;
 					align-items: flex-start;
 					justify-content: space-between;
-					gap: 50px;
-					padding: 35px 0 35px 10px;
-					border-top: 1px solid var(--baseColor);
+					height: 200px;
+					padding: 30px 0 50px 5px;
+					border-top: 1px solid rgba(var(--baseColor-code), 0.4);
+					&:last-child {
+						border-bottom: 1px solid rgba(var(--baseColor-code), 0.4);
+					}
 					.num {
 						position: relative;
-						width: 10%;
+						width: 7%;
 						padding-left: 5px;
 						font-style: italic;
 						font-family: var(--spcFont);
@@ -160,25 +165,55 @@
 						}
 					}
 					h2 {
-						width: 65%;
+						width: 47%;
+						height: 100%;
 						font-size: var(--xlgSize);
 						font-weight: var(--regWeight);
+						line-height: 1.2;
+						word-break: break-all;
+						overflow: hidden;
 					}
-					.con {
-						width: 30%;
-						&-btm {
+					.txt {
+						width: 42%;
+						height: 100%;
+						overflow: hidden;
+						word-break: break-all;
+					}
+					.con-btm {
+						position: absolute;
+						left: 10%;
+						bottom: 6px;
+						display: flex;
+						align-items: center;
+						justify-content: space-between;
+						width: 90%;
+						.date {
 							display: flex;
-							justify-content: center;
 							align-items: center;
+							margin-top: -3px;
 							p {
 								line-height: 1;
 							}
 							.line {
 								display: inline-block;
-								width: 50px;
+								width: 35px;
 								height: 1px;
 								margin: 0 10px;
 								background-color: var(--baseColor);
+							}
+						}
+					}
+					.btn-set {
+						button {
+							color: var(--baseColor);
+							font-size: var(--medSize);
+							transition: opacity 0.3s;
+							&.delete {
+								margin-right: 20px;
+								color: rgba(var(--baseColor-code), 0.6);
+							}
+							&:hover {
+								opacity: 0.6;
 							}
 						}
 					}

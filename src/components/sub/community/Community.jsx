@@ -1,6 +1,8 @@
 import { useEffect, useRef, useState } from 'react';
 import Layout from '../../common/layout/Layout';
 import './Community.scss';
+import { FaRegTrashAlt } from 'react-icons/fa';
+import { FaRegEdit } from 'react-icons/fa';
 
 export default function Community() {
 	const getData = () => {
@@ -25,6 +27,10 @@ export default function Community() {
 		(!refInput.current.value.trim() || !refText.current.value.trim()) && alert('Please write both subject and content');
 		setPost([{ subject: refInput.current.value, content: refText.current.value, date: new Date().getDate() }, ...Post]);
 		resetPost();
+	};
+
+	const deletePost = (delIdx) => {
+		setPost(Post.filter((_, idx) => idx !== delIdx));
 	};
 
 	useEffect(() => {
@@ -66,23 +72,30 @@ export default function Community() {
 						</div>
 					</div>
 					<div className='show-box'>
-						{Post &&
-							Post.map((list, idx) => {
-								return (
-									<article key={list + idx}>
-										<span className='num'>{idx < 10 ? '0' + (idx + 1) : idx + 1}</span>
-										<h2>{list.subject}</h2>
-										<div className='con'>
-											<p>{list.content}</p>
-											<div className='con-btm'>
-												<p>{list.date}</p>
-												<span className='line'></span>
-												<p>{list.time}</p>
-											</div>
+						{Post.map((list, idx) => {
+							return (
+								<article key={list + idx}>
+									<span className='num'>{idx < 10 ? '0' + (idx + 1) : idx + 1}</span>
+									<h2>{list.subject}</h2>
+									<p className='txt'>{list.content}</p>
+									<div className='con-btm'>
+										<div className='date'>
+											<p>{list.date}</p>
+											<span className='line'></span>
+											<p>{list.time}</p>
 										</div>
-									</article>
-								);
-							})}
+										<div className='btn-set'>
+											<button className='delete' onClick={() => deletePost(idx)}>
+												<FaRegTrashAlt />
+											</button>
+											<button className='edit'>
+												<FaRegEdit />
+											</button>
+										</div>
+									</div>
+								</article>
+							);
+						})}
 					</div>
 				</div>
 			</section>

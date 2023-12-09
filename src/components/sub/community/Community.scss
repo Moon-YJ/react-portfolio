@@ -75,6 +75,103 @@
 			}
 		}
 	}
+	.comment {
+		margin-top: 100px;
+		.tit {
+			margin-bottom: 50px;
+			font-size: var(--titSize1);
+			font-weight: var(--lightWeight);
+			border-bottom: 1px solid rgba(var(--baseColor-code), 0.6);
+		}
+		.wrap-box {
+			display: flex;
+			justify-content: space-between;
+			gap: 7vw;
+			.input-box {
+				width: 40%;
+				padding: 30px;
+				background-color: rgba(var(--baseColor-code), 0.8);
+				box-shadow: 5px 5px 5px rgba(var(--baseColor-code), 0.4);
+				input,
+				textarea {
+					width: 100%;
+					padding: 5px 0 15px;
+					margin-bottom: 20px;
+					color: var(--invertColor);
+					font-weight: var(--lightWeight);
+					border: none;
+					border-bottom: 1px solid rgba(var(--invertColor-code), 0.7);
+					background-color: transparent;
+					resize: none;
+					&::placeholder {
+						color: rgba(var(--invertColor-code), 0.6);
+					}
+				}
+				.btn-set {
+					text-align: center;
+					button {
+						width: 120px;
+						padding: 8px 0;
+						color: var(--baseColor);
+						background-color: rgba(var(--invertColor-code), 0.7);
+						font-size: var(--smSize);
+						font-weight: var(--lightWeight);
+						border-radius: 25px;
+						transition: 0.3s;
+						&:nth-child(2) {
+							margin-left: 20px;
+							color: var(--baseColor);
+							background-color: rgba(var(--invertColor-code), 1);
+						}
+						&:hover {
+							color: var(--invertColor);
+							background-color: rgba(var(--invertColor-code), 0.8);
+						}
+					}
+				}
+			}
+			.show-box {
+				width: 60%;
+				article {
+					display: flex;
+					justify-content: space-between;
+					h2 {
+						position: relative;
+						padding-left: 10px;
+						&::before {
+							content: '';
+							position: absolute;
+							left: 0;
+							top: 5px;
+							display: inline-block;
+							width: 1px;
+							height: 25px;
+							margin-right: 20px;
+							background-color: var(--baseColor);
+							transform: rotate(25deg);
+						}
+					}
+					.con {
+						&-btm {
+							display: flex;
+							justify-content: center;
+							align-items: center;
+							p {
+								line-height: 1;
+							}
+							.line {
+								display: inline-block;
+								width: 50px;
+								height: 1px;
+								margin: 0 10px;
+								background-color: var(--baseColor);
+							}
+						}
+					}
+				}
+			}
+		}
+	}
 }
 
 // laptop

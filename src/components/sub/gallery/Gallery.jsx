@@ -25,13 +25,13 @@ export default function Gallery() {
 	const endLoading = () => {
 		setTimeout(() => {
 			setLoaded(true);
-			conWrap.current.classList.add('on');
+			conWrap.current && conWrap.current.classList.add('on');
 		}, 1500);
 	};
 
 	const setLoading = () => {
 		setLoaded(false);
-		conWrap.current.classList.remove('on');
+		conWrap.current && conWrap.current.classList.remove('on');
 		endLoading();
 	};
 
@@ -123,7 +123,7 @@ export default function Gallery() {
 	};
 
 	useEffect(() => {
-		if (conWrap.current) conWrap.current.style.setProperty('--gap', gap.current + 'px');
+		conWrap.current && conWrap.current.style.setProperty('--gap', gap.current + 'px');
 		endLoading();
 		fetchFlickr({ type: 'user', id: id.current });
 	}, []);

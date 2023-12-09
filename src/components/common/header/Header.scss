@@ -33,7 +33,15 @@
 				font-size: var(--smSize);
 				letter-spacing: 1px;
 				opacity: 0.8;
-				transition: 0.5s;
+				transition: 0.3s;
+				&::after {
+					content: '';
+					display: block;
+					width: 0px;
+					border-bottom: 1px solid rgba(var(--baseColor-code), 0.5);
+					margin: 5px auto 0;
+					transition: width 0.5s;
+				}
 				&:hover {
 					opacity: 0.9;
 					font-weight: var(--boldWeight);
@@ -42,11 +50,7 @@
 					font-weight: var(--boldWeight);
 					opacity: 1;
 					&::after {
-						content: '';
-						display: block;
-						width: 8px;
-						border-bottom: 1px solid rgba(var(--baseColor-code), 0.5);
-						margin: 5px auto 0;
+						width: 10px;
 					}
 				}
 			}

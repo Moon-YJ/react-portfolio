@@ -1,10 +1,15 @@
 import { useEffect, useRef, useState } from 'react';
 import Layout from '../../common/layout/Layout';
 import './Community.scss';
-import { FaRegTrashAlt } from 'react-icons/fa';
+import { AiOutlineDelete } from 'react-icons/ai';
 import { FaRegEdit } from 'react-icons/fa';
+import { CgCheckR } from 'react-icons/cg';
+import { CgCloseR } from 'react-icons/cg';
+import { customText } from '../../../hooks/useText';
 
 export default function Community() {
+	const customDate = customText('combine');
+	const korTime = new Date().getTime() + 1000 * 60 * 60 * 9;
 	const getData = () => {
 		const data = localStorage.getItem('post');
 		if (data) return JSON.parse(data);
@@ -15,7 +20,8 @@ export default function Community() {
 
 	const refInput = useRef(null);
 	const refText = useRef(null);
-	//const korTime = new Date().getTime() * 1000 * 60 * 60 * 9;
+	const refEditInput = useRef(null);
+	const refEditText = useRef(null);
 
 	const resetPost = () => {
 		if (!refInput.current.value.trim() || !refText.current.value.trim()) return;
@@ -24,16 +30,59 @@ export default function Community() {
 	};
 
 	const submitPost = () => {
-		(!refInput.current.value.trim() || !refText.current.value.trim()) && alert('Please write both subject and content');
-		setPost([{ subject: refInput.current.value, content: refText.current.value, date: new Date().getDate() }, ...Post]);
+		if (!refInput.current.value.trim() || !refText.current.value.trim())
+			return alert('Please fill out all required fields');
+		setPost([{ subject: refInput.current.value, content: refText.current.value, date: new Date(korTime) }, ...Post]);
 		resetPost();
 	};
 
 	const deletePost = (delIdx) => {
+		if (!window.confirm('Are you sure to delete this post?')) return;
 		setPost(Post.filter((_, idx) => idx !== delIdx));
 	};
 
+	const editPost = (editIdx) => {
+		setPost(
+			Post.map((list, idx) => {
+				list.editMode = false;
+				if (idx === editIdx) list.editMode = true;
+				return list;
+			})
+		);
+	};
+
+	const noUpdatePost = (editIdx) => {
+		setPost(
+			Post.map((list, idx) => {
+				if (idx === editIdx) list.editMode = false;
+				return list;
+			})
+		);
+	};
+
+	const confirmUpdatePost = (editIdx) => {
+		if (!refEditInput.current.value.trim() || !refEditText.current.value.trim())
+			return alert('Please fill out all required fields');
+		setPost(
+			Post.map((list, idx) => {
+				if (idx === editIdx) {
+					list.editMode = false;
+					if (list.subject === refEditInput.current.value || list.content === refEditText.current.value) return list;
+					else {
+						list.subject = refEditInput.current.value;
+						list.content = refEditText.current.value;
+						list.date = new Date(korTime);
+						list.enableUpdate = false;
+						return list;
+					}
+				}
+				return list;
+			})
+		);
+	};
+
 	useEffect(() => {
+		Post.map((list) => (list.editMode = false));
 		localStorage.setItem('post', JSON.stringify(Post));
 	}, [Post]);
 
@@ -73,26 +122,70 @@ export default function Community() {
 					</div>
 					<div className='show-box'>
 						{Post.map((list, idx) => {
+							const getDate = () => {
+								const date = JSON.stringify(list.date);
+								if (date) {
+									const strDate = customDate(date.split('T')[0].slice(1), '.');
+									const strTime = date.split('T')[1].split('Z')[0].split('.')[0];
+									return { strDate, strTime };
+								} else return;
+							};
 							return (
 								<article key={list + idx}>
-									<span className='num'>{idx < 10 ? '0' + (idx + 1) : idx + 1}</span>
-									<h2>{list.subject}</h2>
-									<p className='txt'>{list.content}</p>
-									<div className='con-btm'>
-										<div className='date'>
-											<p>{list.date}</p>
-											<span className='line'></span>
-											<p>{list.time}</p>
-										</div>
-										<div className='btn-set'>
-											<button className='delete' onClick={() => deletePost(idx)}>
-												<FaRegTrashAlt />
-											</button>
-											<button className='edit'>
-												<FaRegEdit />
-											</button>
-										</div>
-									</div>
+									{list.editMode ? (
+										// 수정
+										<>
+											<span className='num'>{idx < 10 ? '0' + (idx + 1) : idx + 1}</span>
+											<h2>
+												<input ref={refEditInput} type='text' defaultValue={list.subject} className='edit' />
+											</h2>
+											<p className='txt'>
+												<textarea
+													ref={refEditText}
+													cols='30'
+													rows='5'
+													defaultValue={list.content}
+													className='edit'></textarea>
+											</p>
+											<div className='con-btm'>
+												<div className='date'>
+													<p>{getDate().strDate}</p>
+													<span className='line'></span>
+													<p>{getDate().strTime}</p>
+												</div>
+												<div className='btn-set'>
+													<button className='delete' onClick={() => noUpdatePost(idx)}>
+														<CgCloseR />
+													</button>
+													<button className='edit' onClick={() => confirmUpdatePost(idx)}>
+														<CgCheckR />
+													</button>
+												</div>
+											</div>
+										</>
+									) : (
+										// 출력
+										<>
+											<span className='num'>{idx < 10 ? '0' + (idx + 1) : idx + 1}</span>
+											<h2>{list.subject}</h2>
+											<p className='txt'>{list.content}</p>
+											<div className='con-btm'>
+												<div className='date'>
+													<p>{getDate().strDate}</p>
+													<span className='line'></span>
+													<p>{getDate().strTime}</p>
+												</div>
+												<div className='btn-set'>
+													<button className='delete' onClick={() => deletePost(idx)}>
+														<AiOutlineDelete />
+													</button>
+													<button className='edit' onClick={() => editPost(idx)}>
+														<FaRegEdit />
+													</button>
+												</div>
+											</div>
+										</>
+									)}
 								</article>
 							);
 						})}

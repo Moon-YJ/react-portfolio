@@ -19,11 +19,16 @@ export default function Community() {
 	};
 
 	const [Post, setPost] = useState(getData());
+	const [CurNum, setCurNum] = useState(0);
+	const [PageNum, setPageNum] = useState(0);
 
 	const refInput = useRef(null);
 	const refText = useRef(null);
 	const refEditInput = useRef(null);
 	const refEditText = useRef(null);
+	const len = useRef(0);
+	const totalPageNum = useRef(0);
+	const perNum = useRef(6);
 
 	const resetPost = () => {
 		if (!refInput.current.value.trim() || !refText.current.value.trim()) return;
@@ -86,6 +91,11 @@ export default function Community() {
 	useEffect(() => {
 		Post.map((list) => (list.editMode = false));
 		localStorage.setItem('post', JSON.stringify(Post));
+		// 페이징 버튼
+		len.current = Post.length;
+		totalPageNum.current =
+			len.current % perNum.current !== 0 ? parseInt(len.current / perNum.current) + 1 : len.current / perNum.current;
+		setPageNum(totalPageNum.current);
 	}, [Post]);
 
 	return (
@@ -132,75 +142,84 @@ export default function Community() {
 									return { strDate, strTime };
 								} else return;
 							};
-							return (
-								<article key={list + idx}>
-									{list.editMode ? (
-										// 수정
-										<>
-											<span className='num'>{idx < 10 ? '0' + (idx + 1) : idx + 1}</span>
-											<h2>
-												<input ref={refEditInput} type='text' defaultValue={list.subject} className='edit' />
-											</h2>
-											<p className='txt'>
-												<textarea
-													ref={refEditText}
-													cols='30'
-													rows='5'
-													defaultValue={list.content}
-													className='edit'></textarea>
-											</p>
-											<div className='con-btm'>
-												<div className='date'>
-													<p>{getDate().strDate}</p>
-													<span className='line'></span>
-													<p>{getDate().strTime}</p>
+							if (idx >= perNum.current * CurNum && idx < perNum.current * (CurNum + 1)) {
+								return (
+									<article key={list + idx}>
+										{list.editMode ? (
+											// 수정
+											<>
+												<span className='num'>{idx < 10 ? '0' + (idx + 1) : idx + 1}</span>
+												<h2>
+													<input ref={refEditInput} type='text' defaultValue={list.subject} className='edit' />
+												</h2>
+												<p className='txt'>
+													<textarea
+														ref={refEditText}
+														cols='30'
+														rows='5'
+														defaultValue={list.content}
+														className='edit'></textarea>
+												</p>
+												<div className='con-btm'>
+													<div className='date'>
+														<p>{getDate().strDate}</p>
+														<span className='line'></span>
+														<p>{getDate().strTime}</p>
+													</div>
+													<div className='btn-set'>
+														<button className='delete' onClick={() => noUpdatePost(idx)}>
+															<CgCloseR />
+														</button>
+														<button className='edit' onClick={() => confirmUpdatePost(idx)}>
+															<CgCheckR />
+														</button>
+													</div>
 												</div>
-												<div className='btn-set'>
-													<button className='delete' onClick={() => noUpdatePost(idx)}>
-														<CgCloseR />
-													</button>
-													<button className='edit' onClick={() => confirmUpdatePost(idx)}>
-														<CgCheckR />
-													</button>
+											</>
+										) : (
+											// 출력
+											<>
+												<span className='num'>{idx < 10 ? '0' + (idx + 1) : idx + 1}</span>
+												<h2>{list.subject}</h2>
+												<p className='txt'>{list.content}</p>
+												<div className='con-btm'>
+													<div className='date'>
+														<p>{getDate().strDate}</p>
+														<span className='line'></span>
+														<p>{getDate().strTime}</p>
+													</div>
+													<div className='btn-set'>
+														<button className='delete' onClick={() => deletePost(idx)}>
+															<AiOutlineDelete />
+														</button>
+														<button className='edit' onClick={() => editPost(idx)}>
+															<FaRegEdit />
+														</button>
+													</div>
 												</div>
-											</div>
-										</>
-									) : (
-										// 출력
-										<>
-											<span className='num'>{idx < 10 ? '0' + (idx + 1) : idx + 1}</span>
-											<h2>{list.subject}</h2>
-											<p className='txt'>{list.content}</p>
-											<div className='con-btm'>
-												<div className='date'>
-													<p>{getDate().strDate}</p>
-													<span className='line'></span>
-													<p>{getDate().strTime}</p>
-												</div>
-												<div className='btn-set'>
-													<button className='delete' onClick={() => deletePost(idx)}>
-														<AiOutlineDelete />
-													</button>
-													<button className='edit' onClick={() => editPost(idx)}>
-														<FaRegEdit />
-													</button>
-												</div>
-											</div>
-										</>
-									)}
-								</article>
-							);
+											</>
+										)}
+									</article>
+								);
+							} else return null;
 						})}
 						<div className='pagination'>
 							<button className='prev'>
 								<MdKeyboardDoubleArrowLeft />
 							</button>
 							<span className='numbers'>
-								<button className='on'>1</button>
-								<button>2</button>
-								<button>3</button>
-								<button>4</button>
-								<button>5</button>
+								{Array(PageNum)
+									.fill()
+									.map((_, idx) => {
+										return (
+											<button
+												key={idx}
+												onClick={() => (idx !== CurNum ? setCurNum(idx) : '')}
+												className={idx === CurNum ? 'on' : ''}>
+												{idx + 1}
+											</button>
+										);
+									})}
 							</span>
 							<button className='next'>
 								<MdKeyboardDoubleArrowRight />

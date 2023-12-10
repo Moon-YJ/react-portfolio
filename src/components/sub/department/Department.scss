@@ -178,6 +178,9 @@
 		}
 		.team {
 			margin-top: 80px;
+			.tit {
+				font-size: var(--titSize2);
+			}
 			&-box {
 				article {
 					margin-top: 50px;

@@ -282,6 +282,20 @@
 				}
 			}
 		}
+		.comment {
+			.wrap-box {
+				.input-box {
+					.btn-set {
+						button {
+							width: 110px;
+							&:nth-child(2) {
+								margin-left: 15px;
+							}
+						}
+					}
+				}
+			}
+		}
 	}
 }
 // tablet
@@ -302,6 +316,19 @@
 				}
 			}
 		}
+		.comment {
+			.wrap-box {
+				flex-wrap: wrap;
+				gap: 0;
+				.input-box {
+					width: 350px;
+					margin-bottom: 50px;
+				}
+				.show-box {
+					width: 100%;
+				}
+			}
+		}
 	}
 }
 // mobile
@@ -316,6 +343,59 @@
 			.txt {
 				width: 100%;
 				margin-top: 100px;
+			}
+		}
+		.comment {
+			margin-top: 70px;
+			.tit {
+				font-size: var(--titSize2);
+			}
+			.wrap-box {
+				.input-box {
+					width: 100%;
+				}
+				.show-box {
+					width: 100%;
+					article {
+						.num {
+							font-size: var(--bodySize);
+							line-height: 1.5;
+							&::before {
+								top: 4px;
+								height: 15px;
+							}
+						}
+						h2 {
+							font-size: var(--medSize);
+							font-weight: var(--regWeight);
+							line-height: 1.2;
+						}
+						.con-btm {
+							font-size: var(--xsmSize);
+							.line {
+								width: 20px;
+								margin: 0 5px;
+							}
+							.btn-set {
+								button {
+									&.delete {
+										margin-right: 12px;
+									}
+								}
+							}
+						}
+					}
+					.pagination {
+						> button {
+							&.prev {
+								margin-right: 10px;
+							}
+							&.next {
+								margin-left: 10px;
+							}
+						}
+					}
+				}
 			}
 		}
 	}

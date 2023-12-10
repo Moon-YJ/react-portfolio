@@ -29,6 +29,7 @@ export default function Community() {
 	const len = useRef(0);
 	const totalPageNum = useRef(0);
 	const perNum = useRef(6);
+	//const perPageNum = useRef(5);
 
 	const resetPost = () => {
 		if (!refInput.current.value.trim() || !refText.current.value.trim()) return;

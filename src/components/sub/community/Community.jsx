@@ -45,6 +45,7 @@ export default function Community() {
 	const deletePost = (delIdx) => {
 		if (!window.confirm('Are you sure to delete this post?')) return;
 		setPost(Post.filter((_, idx) => idx !== delIdx));
+		if (delIdx % postPerPage.current === 0) setCurNum((delIdx % (postPerPage.current - 1)) - 1);
 	};
 
 	const editPost = (editIdx) => {
@@ -200,7 +201,7 @@ export default function Community() {
 								);
 							} else return null;
 						})}
-						{/* <div className='pagination'>
+						<div className='pagination'>
 							<button className='prev' disabled={CurNum === 0}>
 								<MdKeyboardDoubleArrowLeft />
 							</button>
@@ -221,7 +222,7 @@ export default function Community() {
 							<button className='next' disabled={CurNum + 1 === totalPageNum.current}>
 								<MdKeyboardDoubleArrowRight />
 							</button>
-						</div> */}
+						</div>
 					</div>
 				</div>
 			</section>

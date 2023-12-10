@@ -26,10 +26,8 @@ export default function Community() {
 	const refText = useRef(null);
 	const refEditInput = useRef(null);
 	const refEditText = useRef(null);
-	const len = useRef(0);
 	const totalPageNum = useRef(0);
-	const perNum = useRef(6);
-	//const perPageNum = useRef(5);
+	const postPerPage = useRef(6);
 
 	const resetPost = () => {
 		if (!refInput.current.value.trim() || !refText.current.value.trim()) return;
@@ -93,8 +91,7 @@ export default function Community() {
 		Post.map((list) => (list.editMode = false));
 		localStorage.setItem('post', JSON.stringify(Post));
 		// 페이징 버튼
-		len.current = Post.length;
-		totalPageNum.current = Math.ceil(Post.length / perNum.current);
+		totalPageNum.current = Math.ceil(Post.length / postPerPage.current);
 		setPageNum(totalPageNum.current);
 	}, [Post]);
 
@@ -142,7 +139,7 @@ export default function Community() {
 									return { strDate, strTime };
 								} else return;
 							};
-							if (idx >= perNum.current * CurNum && idx < perNum.current * (CurNum + 1)) {
+							if (idx >= postPerPage.current * CurNum && idx < postPerPage.current * (CurNum + 1)) {
 								return (
 									<article key={list + idx}>
 										{list.editMode ? (
@@ -203,9 +200,9 @@ export default function Community() {
 								);
 							} else return null;
 						})}
-						{Post.length > 0 && (
+						{Post.length > 6 && (
 							<div className='pagination'>
-								<button className='prev'>
+								<button className='prev' disabled={CurNum === 0}>
 									<MdKeyboardDoubleArrowLeft />
 								</button>
 								<span className='numbers'>
@@ -222,7 +219,7 @@ export default function Community() {
 											);
 										})}
 								</span>
-								<button className='next'>
+								<button className='next' disabled={CurNum + 1 === totalPageNum.current}>
 									<MdKeyboardDoubleArrowRight />
 								</button>
 							</div>

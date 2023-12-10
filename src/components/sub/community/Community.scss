@@ -242,6 +242,13 @@
 						&:hover {
 							opacity: 0.4;
 						}
+						&:disabled {
+							opacity: 0.2;
+							cursor: auto;
+							&:hover {
+								opacity: 0.2;
+							}
+						}
 						&.prev {
 							margin-right: 15px;
 						}

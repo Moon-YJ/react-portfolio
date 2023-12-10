@@ -5,6 +5,8 @@ import { AiOutlineDelete } from 'react-icons/ai';
 import { FaRegEdit } from 'react-icons/fa';
 import { CgCheckR } from 'react-icons/cg';
 import { CgCloseR } from 'react-icons/cg';
+import { MdKeyboardDoubleArrowLeft } from 'react-icons/md';
+import { MdKeyboardDoubleArrowRight } from 'react-icons/md';
 import { customText } from '../../../hooks/useText';
 
 export default function Community() {
@@ -189,6 +191,21 @@ export default function Community() {
 								</article>
 							);
 						})}
+						<div className='pagination'>
+							<button className='prev'>
+								<MdKeyboardDoubleArrowLeft />
+							</button>
+							<span className='numbers'>
+								<button className='on'>1</button>
+								<button>2</button>
+								<button>3</button>
+								<button>4</button>
+								<button>5</button>
+							</span>
+							<button className='next'>
+								<MdKeyboardDoubleArrowRight />
+							</button>
+						</div>
 					</div>
 				</div>
 			</section>

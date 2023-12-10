@@ -131,6 +131,7 @@
 				}
 			}
 			.show-box {
+				position: relative;
 				width: 60%;
 				article {
 					position: relative;
@@ -144,9 +145,6 @@
 					textarea {
 						width: 100%;
 						border: none;
-					}
-					&:last-child {
-						border-bottom: 1px solid rgba(var(--baseColor-code), 0.4);
 					}
 					.num {
 						position: relative;
@@ -219,6 +217,50 @@
 							}
 							&:hover {
 								opacity: 0.6;
+							}
+						}
+					}
+				}
+				.pagination {
+					position: absolute;
+					left: 0;
+					display: flex;
+					justify-content: center;
+					align-items: center;
+					width: 100%;
+					padding-top: 50px;
+					font-size: var(--smSize);
+					border-top: 1px solid rgba(var(--baseColor-code), 0.4);
+					text-align: center;
+					> button {
+						margin-top: 5px;
+						color: var(--baseColor);
+						font-size: var(--medSize);
+						text-align: center;
+						transition: opacity 0.3s;
+						cursor: pointer;
+						&:hover {
+							opacity: 0.4;
+						}
+						&.prev {
+							margin-right: 15px;
+						}
+						&.next {
+							margin-left: 15px;
+						}
+					}
+					.numbers {
+						button {
+							width: 30px;
+							height: 30px;
+							color: var(--baseColor);
+							border: 1px solid var(--baseColor);
+							margin: 0 5px;
+							transition: 0.5s;
+							&:hover,
+							&.on {
+								color: var(--invertColor);
+								background-color: var(--baseColor);
 							}
 						}
 					}

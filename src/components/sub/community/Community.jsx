@@ -29,7 +29,7 @@ export default function Community() {
 	const len = useRef(0);
 	const totalPageNum = useRef(0);
 	const perNum = useRef(6);
-	//const perPageNum = useRef(5);
+	const perPageNum = useRef(5);
 
 	const resetPost = () => {
 		if (!refInput.current.value.trim() || !refText.current.value.trim()) return;
@@ -204,28 +204,30 @@ export default function Community() {
 								);
 							} else return null;
 						})}
-						<div className='pagination'>
-							<button className='prev'>
-								<MdKeyboardDoubleArrowLeft />
-							</button>
-							<span className='numbers'>
-								{Array(PageNum)
-									.fill()
-									.map((_, idx) => {
-										return (
-											<button
-												key={idx}
-												onClick={() => (idx !== CurNum ? setCurNum(idx) : '')}
-												className={idx === CurNum ? 'on' : ''}>
-												{idx + 1}
-											</button>
-										);
-									})}
-							</span>
-							<button className='next'>
-								<MdKeyboardDoubleArrowRight />
-							</button>
-						</div>
+						{Post.length > 0 && (
+							<div className='pagination'>
+								<button className='prev'>
+									<MdKeyboardDoubleArrowLeft />
+								</button>
+								<span className='numbers'>
+									{Array(PageNum)
+										.fill()
+										.map((_, idx) => {
+											return (
+												<button
+													key={idx}
+													onClick={() => (idx !== CurNum ? setCurNum(idx) : '')}
+													className={idx === CurNum ? 'on' : ''}>
+													{idx + 1}
+												</button>
+											);
+										})}
+								</span>
+								<button className='next'>
+									<MdKeyboardDoubleArrowRight />
+								</button>
+							</div>
+						)}
 					</div>
 				</div>
 			</section>

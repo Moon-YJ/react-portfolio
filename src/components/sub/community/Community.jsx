@@ -29,7 +29,7 @@ export default function Community() {
 	const len = useRef(0);
 	const totalPageNum = useRef(0);
 	const perNum = useRef(6);
-	const perPageNum = useRef(5);
+	//const perPageNum = useRef(5);
 
 	const resetPost = () => {
 		if (!refInput.current.value.trim() || !refText.current.value.trim()) return;
@@ -94,8 +94,7 @@ export default function Community() {
 		localStorage.setItem('post', JSON.stringify(Post));
 		// 페이징 버튼
 		len.current = Post.length;
-		totalPageNum.current =
-			len.current % perNum.current !== 0 ? parseInt(len.current / perNum.current) + 1 : len.current / perNum.current;
+		totalPageNum.current = Math.ceil(Post.length / perNum.current);
 		setPageNum(totalPageNum.current);
 	}, [Post]);
 

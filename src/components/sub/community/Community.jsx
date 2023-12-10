@@ -45,7 +45,7 @@ export default function Community() {
 	const deletePost = (delIdx) => {
 		if (!window.confirm('Are you sure to delete this post?')) return;
 		setPost(Post.filter((_, idx) => idx !== delIdx));
-		if (delIdx % postPerPage.current === 0) setCurNum((delIdx % (postPerPage.current - 1)) - 1);
+		if (delIdx !== 0 && delIdx % postPerPage.current === 0) setCurNum((delIdx % (postPerPage.current - 1)) - 1);
 	};
 
 	const editPost = (editIdx) => {

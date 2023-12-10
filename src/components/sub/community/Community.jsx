@@ -18,21 +18,20 @@ export default function Community() {
 		else return [];
 	};
 
-	const [Post, setPost] = useState(getData());
-	const [CurNum, setCurNum] = useState(0);
+	//const [Post, setPost] = useState(getData());
+	const [CurNum, setCurNum] = useState(1);
 	const [PageNum, setPageNum] = useState(0);
+	const postPerPage = useRef(6);
+	const indexOfLastItem = CurNum * postPerPage.current;
+	const indexOfFirstItem = indexOfLastItem - postPerPage.current;
 	const [PostList, setPostList] = useState(getData());
+	const [CurrentPostList, setCurrentPostList] = useState(PostList.slice(indexOfFirstItem, indexOfLastItem));
 
 	const refInput = useRef(null);
 	const refText = useRef(null);
 	const refEditInput = useRef(null);
 	const refEditText = useRef(null);
 	const totalPageNum = useRef(0);
-	const postPerPage = useRef(6);
-
-	const indexOfLastItem = CurNum * postPerPage.current;
-	const indexOfFirstItem = indexOfLastItem - postPerPage.current;
-	const currentPostList = PostList.slice(indexOfFirstItem, indexOfLastItem);
 
 	const resetPost = () => {
 		if (!refInput.current.value.trim() || !refText.current.value.trim()) return;
@@ -43,18 +42,21 @@ export default function Community() {
 	const submitPost = () => {
 		if (!refInput.current.value.trim() || !refText.current.value.trim())
 			return alert('Please fill out all required fields');
-		setPost([{ subject: refInput.current.value, content: refText.current.value, date: new Date(korTime) }, ...Post]);
+		setPostList([
+			{ subject: refInput.current.value, content: refText.current.value, date: new Date(korTime) },
+			...PostList,
+		]);
 		resetPost();
 	};
 
 	const deletePost = (delIdx) => {
 		if (!window.confirm('Are you sure to delete this post?')) return;
-		setPost(Post.filter((_, idx) => idx !== delIdx));
+		setPostList(PostList.filter((_, idx) => idx !== delIdx));
 	};
 
 	const editPost = (editIdx) => {
-		setPost(
-			Post.map((list, idx) => {
+		setPostList(
+			CurrentPostList.map((list, idx) => {
 				list.editMode = false;
 				if (idx === editIdx) list.editMode = true;
 				return list;
@@ -63,8 +65,8 @@ export default function Community() {
 	};
 
 	const noUpdatePost = (editIdx) => {
-		setPost(
-			Post.map((list, idx) => {
+		setPostList(
+			PostList.map((list, idx) => {
 				if (idx === editIdx) list.editMode = false;
 				return list;
 			})
@@ -74,8 +76,8 @@ export default function Community() {
 	const confirmUpdatePost = (editIdx) => {
 		if (!refEditInput.current.value.trim() || !refEditText.current.value.trim())
 			return alert('Please fill out all required fields');
-		setPost(
-			Post.map((list, idx) => {
+		setPostList(
+			PostList.map((list, idx) => {
 				if (idx === editIdx) {
 					list.editMode = false;
 					if (list.subject === refEditInput.current.value || list.content === refEditText.current.value) return list;
@@ -135,7 +137,7 @@ export default function Community() {
 						</div>
 					</div>
 					<div className='show-box'>
-						{currentPostList.map((list, idx) => {
+						{CurrentPostList.map((list, idx) => {
 							const getDate = () => {
 								const date = JSON.stringify(list.date);
 								if (date) {
@@ -205,7 +207,7 @@ export default function Community() {
 						})}
 						{PostList.length > 6 && (
 							<div className='pagination'>
-								<button className='prev' disabled={CurNum === 0}>
+								<button className='prev' disabled={CurNum === 1}>
 									<MdKeyboardDoubleArrowLeft />
 								</button>
 								<span className='numbers'>
@@ -215,14 +217,14 @@ export default function Community() {
 											return (
 												<button
 													key={idx}
-													onClick={() => (idx !== CurNum ? setCurNum(idx) : '')}
-													className={idx === CurNum ? 'on' : ''}>
+													onClick={() => (idx + 1 !== CurNum ? setCurNum(idx + 1) : '')}
+													className={idx + 1 === CurNum ? 'on' : ''}>
 													{idx + 1}
 												</button>
 											);
 										})}
 								</span>
-								<button className='next' disabled={CurNum + 1 === totalPageNum.current}>
+								<button className='next' disabled={CurNum === totalPageNum.current}>
 									<MdKeyboardDoubleArrowRight />
 								</button>
 							</div>

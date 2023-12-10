@@ -201,28 +201,30 @@ export default function Community() {
 								);
 							} else return null;
 						})}
-						<div className='pagination'>
-							<button className='prev' disabled={CurNum === 0}>
-								<MdKeyboardDoubleArrowLeft />
-							</button>
-							<span className='numbers'>
-								{Array(PageNum)
-									.fill()
-									.map((_, idx) => {
-										return (
-											<button
-												key={idx}
-												onClick={() => (idx !== CurNum ? setCurNum(idx) : '')}
-												className={idx === CurNum ? 'on' : ''}>
-												{idx + 1}
-											</button>
-										);
-									})}
-							</span>
-							<button className='next' disabled={CurNum + 1 === totalPageNum.current}>
-								<MdKeyboardDoubleArrowRight />
-							</button>
-						</div>
+						{Post.length > 0 && (
+							<div className='pagination'>
+								<button className='prev' disabled={CurNum === 0}>
+									<MdKeyboardDoubleArrowLeft />
+								</button>
+								<span className='numbers'>
+									{Array(PageNum)
+										.fill()
+										.map((_, idx) => {
+											return (
+												<button
+													key={idx}
+													onClick={() => (idx !== CurNum ? setCurNum(idx) : '')}
+													className={idx === CurNum ? 'on' : ''}>
+													{idx + 1}
+												</button>
+											);
+										})}
+								</span>
+								<button className='next' disabled={CurNum + 1 === totalPageNum.current}>
+									<MdKeyboardDoubleArrowRight />
+								</button>
+							</div>
+						)}
 					</div>
 				</div>
 			</section>

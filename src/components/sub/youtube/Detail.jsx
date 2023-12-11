@@ -26,7 +26,7 @@ export default function Detail() {
 			{YoutubeData && (
 				<article>
 					<Link to='/youtube'>
-						<FaArrowLeft className='arrow' />
+						<span className='arrow'></span>
 					</Link>
 					<div className='top-info'>
 						<div className='date'>

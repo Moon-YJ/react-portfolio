@@ -55,21 +55,40 @@
 				}
 			}
 		}
-		.detail {
-			font-size: var(--lgSize);
-			opacity: 0.9;
-			svg {
-				cursor: pointer;
-				transition: opacity, transform 0.3s;
-				&:hover {
-					opacity: 0.3;
-					transform: scale(1.2);
-				}
+		.arrow {
+			position: relative;
+			width: 20px;
+			height: 20px;
+			display: inline-block;
+			margin-top: 5px;
+			transform: rotate(90deg);
+			transition: transform 0.5s;
+			cursor: pointer;
+			&::before,
+			&::after {
+				content: '';
+				position: absolute;
+			}
+			&::before {
+				width: 100%;
+				height: 100%;
+				border: 2px solid var(--baseColor);
+				border-right: 0;
+				border-bottom: 0;
+			}
+			&::after {
+				width: 30px;
+				height: 2px;
+				background-color: var(--baseColor);
+				transform-origin: 0 100%;
+				transform: rotate(45deg);
+			}
+			&:hover {
+				transform: rotate(135deg);
 			}
 		}
 	}
 }
-
 // tablet
 .tablet,
 .mobile {
@@ -92,8 +111,8 @@
 					font-size: var(--smSize);
 				}
 			}
-			.detail {
-				font-size: var(--medSize);
+			.arrow {
+				scale: 0.7;
 			}
 		}
 	}
@@ -118,8 +137,8 @@
 					font-size: var(--smSize);
 				}
 			}
-			.detail {
-				font-size: var(--bodySize);
+			.arrow {
+				scale: 0.6;
 			}
 		}
 	}

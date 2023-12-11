@@ -1,6 +1,5 @@
 import { useState, useEffect } from 'react';
 import Layout from '../../common/layout/Layout';
-import { FaArrowRight } from 'react-icons/fa';
 import './Youtube.scss';
 import { customText } from '../../../hooks/useText';
 import { Link } from 'react-router-dom';
@@ -45,11 +44,9 @@ export default function Youtube() {
 								<span>{customDate(date, '.')}</span>
 							</div>
 						</div>
-						<span className='detail'>
-							<Link to={`/detail/${vid.id}`}>
-								<FaArrowRight />
-							</Link>
-						</span>
+						<Link to={`/detail/${vid.id}`}>
+							<span className='arrow'></span>
+						</Link>
 					</article>
 				);
 			})}

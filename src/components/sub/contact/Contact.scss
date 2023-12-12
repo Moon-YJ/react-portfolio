@@ -6,12 +6,19 @@
 		display: flex;
 		justify-content: space-between;
 		flex-wrap: wrap;
-		> h2 {
+		.txt {
 			width: 45%;
-			font-size: var(--titSize1s);
-			font-weight: var(--medWeight);
-			letter-spacing: 1px;
-			line-height: 1.2;
+			h2 {
+				font-size: var(--titSize1s);
+				font-weight: var(--medWeight);
+				letter-spacing: 1px;
+				line-height: 1.2;
+			}
+			.arrow {
+				display: inline-block;
+				font-size: var(--titSize1);
+				transform: rotate(270deg);
+			}
 		}
 		form {
 			width: 55%;

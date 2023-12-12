@@ -1,6 +1,7 @@
 import { useEffect, useRef } from 'react';
 import Layout from '../../common/layout/Layout';
 import './Contact.scss';
+import { RiArrowRightDownLine } from 'react-icons/ri';
 
 export default function Contact() {
 	const mapFrame = useRef(null);
@@ -32,13 +33,18 @@ export default function Contact() {
 			index={'06'}
 			title={'Contact'}>
 			<section className='email'>
-				<h2>
-					Email us,
-					<br />
-					we would love to
-					<br />
-					hear from you.
-				</h2>
+				<div className='txt'>
+					<h2>
+						Email us,
+						<br />
+						we would love to
+						<br />
+						hear from you.
+					</h2>
+					<span className='arrow'>
+						<RiArrowRightDownLine />
+					</span>
+				</div>
 				<form className='touch'>
 					<fieldset>
 						<legend className='h'>Get in touch 등록 양식</legend>

@@ -59,6 +59,10 @@ a {
 			font-family: var(--baseFont);
 		}
 	}
+	select {
+		color: rgba(var(--baseColor-code), 0.5);
+		font-size: inherit;
+	}
 	button {
 		font-family: var(--baseFont);
 		background: inherit;

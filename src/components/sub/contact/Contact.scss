@@ -1,7 +1,119 @@
 .Contact {
-	.map-box {
-		width: 100%;
-		height: 50vh;
-		background-color: var(--baseColor);
+	.tit-set {
+		margin-bottom: 50px;
+	}
+	.email {
+		display: flex;
+		justify-content: space-between;
+		flex-wrap: wrap;
+		> h2 {
+			width: 45%;
+			font-size: var(--titSize1s);
+			font-weight: var(--medWeight);
+			letter-spacing: 1px;
+			line-height: 1.2;
+		}
+		form {
+			width: 55%;
+			table {
+				border-collapse: collapse;
+				tr {
+					border-top: 1px solid rgba(var(--baseColor-code), 0.3);
+					th {
+						font-weight: var(--regWeight);
+						text-align: left;
+						padding: 21px 0px 21px 0;
+						&:nth-of-type(2) {
+							border-left: 1px solid rgba(var(--baseColor-code), 0.3);
+							padding-left: 20px;
+						}
+						&:last-child {
+							border-right: none;
+						}
+						// label {
+						// }
+						&:last-child {
+							text-align: center;
+						}
+						input[type='submit'] {
+							padding: 10px 45px;
+							margin-top: 20px;
+							border-radius: 50px;
+							border: 1px solid var(--baseColor);
+							font-size: var(--smSize);
+							text-align: center;
+							cursor: pointer;
+							transition: background-color 0.3s;
+							&:hover {
+								color: var(--invertColor);
+								background-color: var(--baseColor);
+							}
+						}
+					}
+					td {
+						input[type='text'] {
+							position: relative;
+							width: 100%;
+							padding-bottom: 0;
+							font-weight: var(--lightWeight);
+							box-sizing: border-box;
+							border: none;
+							background: transparent;
+							opacity: 0.8;
+							&#lastname {
+								padding-left: 50px;
+							}
+						}
+						#comments {
+							width: 100%;
+							height: 200px;
+							padding: 20px 20px 20px 0;
+							font-weight: var(--lightWeight);
+							background: none;
+							border: none;
+							opacity: 0.8;
+						}
+						p {
+							font-size: var(--smSize);
+							color: var(--pointColor);
+							padding: 0;
+							text-align: left;
+						}
+						.two {
+							margin-left: 50px;
+						}
+						.four {
+							position: absolute;
+							top: 187px;
+						}
+					}
+				}
+			}
+		}
+	}
+	.map {
+		margin-top: 60px;
+		.tit {
+			margin-bottom: 50px;
+			font-size: var(--titSize1);
+			font-weight: var(--lightWeight);
+			border-bottom: 1px solid rgba(var(--baseColor-code), 0.6);
+		}
+		.map-box {
+			width: 100%;
+			height: 50vh;
+			background-color: var(--baseColor);
+		}
+	}
+}
+
+// mobile
+.mobile {
+	.Contact {
+		.map {
+			.tit {
+				font-size: var(--titSize2);
+			}
+		}
 	}
 }

@@ -33,16 +33,24 @@ export default function Menu({ setMenuToggle, MenuToggle, setDark, Dark }) {
 					animate={{ opacity: 1, x: 0 }}
 					exit={{ opacity: 0, x: -150 }}
 					transition={{ duration: 0.4 }}>
-					<h1 className='logo' onClick={() => setMenuToggle(false)}>
+					<h1
+						className='logo'
+						onClick={() => setMenuToggle(false)}>
 						<Link to='/'>
-							<img src={`${path.current}/img/logo/logo.png`} alt='henge_logo' />
+							<img
+								src={`${path.current}/img/logo/logo.png`}
+								alt='henge_logo'
+							/>
 						</Link>
 					</h1>
 					<ul className='gnb'>
 						{menuEl.map((el, idx) => {
 							return (
 								<li key={el + idx}>
-									<NavLink to={`/${el}`} activeClassName={'on'} onClick={() => setMenuToggle(false)}>
+									<NavLink
+										to={`/${el}`}
+										activeClassName={'on'}
+										onClick={() => setMenuToggle(false)}>
 										{customMenu(el)}
 									</NavLink>
 								</li>

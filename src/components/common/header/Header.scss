@@ -56,13 +56,62 @@
 			}
 		}
 	}
+	// .menu {
+	// 	display: none;
+	// 	color: var(--baseColor);
+	// 	font-size: var(--medSize);
+	// 	transition: 0.5s;
+	// 	&:hover {
+	// 		opacity: 0.5;
+	// 	}
 	.menu {
 		display: none;
-		color: var(--baseColor);
-		font-size: var(--medSize);
-		transition: 0.3s;
+		position: relative;
+		width: 18px;
+		height: 13px;
+		opacity: 0.8;
+		cursor: pointer;
+		transition: opacity 0.3s;
 		&:hover {
 			opacity: 0.5;
+		}
+		span {
+			position: absolute;
+			right: 0;
+			display: block;
+			height: 2px;
+			background-color: var(--baseColor);
+			transition: all 0.5s;
+			&.line1 {
+				top: 0;
+				width: 13px;
+			}
+			&.line2 {
+				top: 50%;
+				width: 18px;
+				transform: translateY(-50%);
+			}
+			&.line3 {
+				bottom: 0;
+				width: 9px;
+			}
+		}
+		&.on {
+			span {
+				&.line1 {
+					top: 50%;
+					width: 18px;
+					transform: rotate(45deg);
+				}
+				&.line2 {
+					opacity: 0;
+				}
+				&.line3 {
+					top: 50%;
+					width: 18px;
+					transform: rotate(-45deg);
+				}
+			}
 		}
 	}
 	// 테마 변경 버튼

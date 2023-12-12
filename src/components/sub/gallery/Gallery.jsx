@@ -35,15 +35,15 @@ export default function Gallery() {
 		endLoading();
 	};
 
-	const activeBtn = (e) => {
+	const activeBtn = e => {
 		const btns = refNav.current.querySelectorAll('button');
-		btns.forEach((btn) => {
+		btns.forEach(btn => {
 			btn.classList.remove('on');
 		});
 		e && e.target.classList.add('on');
 	};
 
-	const handleRandom = (e) => {
+	const handleRandom = e => {
 		if (e.target.classList.contains('on')) return;
 		setLoading();
 		activeBtn(e);
@@ -53,7 +53,7 @@ export default function Gallery() {
 		endLoading();
 	};
 
-	const handleUser = (e) => {
+	const handleUser = e => {
 		if (e.target.classList.contains('on')) return;
 		setLoading();
 		activeBtn(e);
@@ -63,7 +63,7 @@ export default function Gallery() {
 		endLoading();
 	};
 
-	const handleImg = (e) => {
+	const handleImg = e => {
 		const ownerId = e.target.getAttribute('alt');
 		if (ownerId === myId) return;
 		activeBtn();
@@ -74,7 +74,7 @@ export default function Gallery() {
 		endLoading();
 	};
 
-	const handleOwner = (e) => {
+	const handleOwner = e => {
 		if (isUser.current) return;
 		isUser.current = e.target.innerText;
 		if (e.target.innerText === myId) return;
@@ -84,7 +84,7 @@ export default function Gallery() {
 		endLoading();
 	};
 
-	const handleSearch = (e) => {
+	const handleSearch = e => {
 		e.preventDefault();
 		isUser.current = '';
 		isSearch.current = true;
@@ -97,12 +97,12 @@ export default function Gallery() {
 		refInput.current.value = '';
 	};
 
-	const handleModal = (idx) => {
+	const handleModal = idx => {
 		setOpen(true);
 		setIndex(idx);
 	};
 
-	const fetchFlickr = async (opt) => {
+	const fetchFlickr = async opt => {
 		const num = 20;
 		const flickr_api = process.env.REACT_APP_FLICKR_KEY;
 		const baseURL = `https://www.flickr.com/services/rest/?&api_key=${flickr_api}&per_page=${num}&format=json&nojsoncallback=1&method=`;
@@ -130,7 +130,9 @@ export default function Gallery() {
 
 	return (
 		<>
-			<Layout index={'03'} title={'Gallery'}>
+			<Layout
+				index={'03'}
+				title={'Gallery'}>
 				<section className='intro'>
 					<h2>
 						<span>N</span>aive
@@ -142,18 +144,31 @@ export default function Gallery() {
 							<RiArrowRightDownLine />
 						</span>
 						<div className='pic'>
-							<img src={`${path.current}/img/gallery/pic-g.jpg`} alt='led lamp' />
+							<img
+								src={`${path.current}/img/gallery/pic-g.jpg`}
+								alt='led lamp'
+							/>
 						</div>
 					</div>
 				</section>
 				<section className='collection'>
-					{!Loaded ? <img src={`${path.current}/img/load.gif`} className='loading-bar' alt='loading img' /> : null}
+					{!Loaded ? (
+						<img
+							src={`${path.current}/img/load.gif`}
+							className='loading-bar'
+							alt='loading img'
+						/>
+					) : null}
 					<div className='top-area'>
-						<nav ref={refNav} className='tag'>
+						<nav
+							ref={refNav}
+							className='tag'>
 							<span className='txt'>Sort by tags:</span>
 							<div className='btn-set'>
 								<button onClick={handleRandom}>Random</button>
-								<button className='on' onClick={handleUser}>
+								<button
+									className='on'
+									onClick={handleUser}>
 									My Gallery
 								</button>
 							</div>
@@ -162,14 +177,22 @@ export default function Gallery() {
 							<button>
 								<CgSearch />
 							</button>
-							<input ref={refInput} type='text' placeholder='Search' />
+							<input
+								ref={refInput}
+								type='text'
+								placeholder='Search'
+							/>
 							<button onClick={() => refInput.current.value && (refInput.current.value = '')}>
 								<AiOutlineClose />
 							</button>
 						</form>
 					</div>
-					<div ref={conWrap} className='container-wrap'>
-						<Masonry className={'container'} options={{ gutter: gap.current }}>
+					<div
+						ref={conWrap}
+						className='container-wrap'>
+						<Masonry
+							className={'container'}
+							options={{ gutter: gap.current }}>
 							{Pics.length === 0 && isSearch.current && <h3>No matching images found</h3>}
 							{Pics.map((pic, idx) => {
 								return (
@@ -182,7 +205,7 @@ export default function Gallery() {
 											/>
 										</div>
 										<h2>
-											<span className='num'>{idx < 10 ? '0' + (idx + 1) : idx + 1}</span>
+											<span className='num'>{idx < 9 ? '0' + (idx + 1) : idx + 1}</span>
 											{pic.title}
 										</h2>
 										<div className='profile'>
@@ -191,7 +214,7 @@ export default function Gallery() {
 												src={`http://farm${pic.farm}.staticflickr.com/${pic.server}/buddyicons/${pic.owner}.jpg`}
 												alt={pic.owner}
 												onClick={handleImg}
-												onError={(e) => e.target.setAttribute('src', 'https://www.flickr.com/images/buddyicon.gif')}
+												onError={e => e.target.setAttribute('src', 'https://www.flickr.com/images/buddyicon.gif')}
 											/>
 										</div>
 									</article>
@@ -202,7 +225,9 @@ export default function Gallery() {
 				</section>
 			</Layout>
 
-			<Modal Open={Open} setOpen={setOpen}>
+			<Modal
+				Open={Open}
+				setOpen={setOpen}>
 				{Pics.length !== 0 && (
 					<img
 						src={`https://live.staticflickr.com/${Pics[Index].server}/${Pics[Index].id}_${Pics[Index].secret}_b.jpg`}

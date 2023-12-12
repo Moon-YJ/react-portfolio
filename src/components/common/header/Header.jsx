@@ -13,14 +13,19 @@ export default function Header({ MenuToggle, setMenuToggle, Dark, setDark }) {
 		<header className='Header'>
 			<h1 className='logo'>
 				<Link to='/'>
-					<img src={`${path.current}/img/logo/logo.png`} alt='henge_logo' />
+					<img
+						src={`${path.current}/img/logo/logo.png`}
+						alt='henge_logo'
+					/>
 				</Link>
 			</h1>
 			<ul className='gnb'>
 				{menuEl.map((el, idx) => {
 					return (
 						<li key={el + idx}>
-							<NavLink to={`/${el}`} activeClassName={'on'}>
+							<NavLink
+								to={`/${el}`}
+								activeClassName={'on'}>
 								{el.charAt(0).toUpperCase() + el.slice(1)}
 							</NavLink>
 						</li>
@@ -38,15 +43,28 @@ export default function Header({ MenuToggle, setMenuToggle, Dark, setDark }) {
 					<BiSolidMoon className='moon' />
 				</span>
 			</div>
-			{MenuToggle ? (
-				<button className='menu' onClick={() => setMenuToggle(false)}>
+			{/* {MenuToggle ? (
+				<button
+					className='menu'
+					onClick={() => setMenuToggle(false)}>
 					<CgClose />
 				</button>
 			) : (
-				<button className='menu' onClick={() => setMenuToggle(true)}>
+				<button
+					className='menu'
+					onClick={() => setMenuToggle(true)}>
 					<CgMenuRight />
 				</button>
-			)}
+			)} */}
+			<div
+				className={`menu ${MenuToggle ? 'on' : ''}`}
+				onClick={() => setMenuToggle(!MenuToggle)}>
+				<span className='line1'></span>
+				<span className='line2'></span>
+				<span
+					className='line3'
+					s></span>
+			</div>
 		</header>
 	);
 }

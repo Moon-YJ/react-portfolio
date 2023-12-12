@@ -72,7 +72,7 @@
 						padding: 5px 20px;
 						margin-left: 10px;
 						color: var(--baseColor);
-						font-weight: var(--medWeight);
+						font-weight: var(--regWeight);
 						font-size: inherit;
 						background-color: var(--bgColor);
 						border: 1px solid var(--baseColor);
@@ -88,6 +88,7 @@
 						}
 						&.on {
 							color: var(--invertColor);
+							font-weight: var(--medWeight);
 							background-color: var(--baseColor);
 							border: 1px solid var(--baseColor);
 						}

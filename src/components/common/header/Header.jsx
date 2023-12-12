@@ -1,7 +1,7 @@
 import './Header.scss';
 import { Link, NavLink } from 'react-router-dom';
 import { useRef } from 'react';
-import { CgMenuRight, CgClose } from 'react-icons/cg';
+//import { CgMenuRight, CgClose } from 'react-icons/cg';
 import { MdWbSunny } from 'react-icons/md';
 import { BiSolidMoon } from 'react-icons/bi';
 

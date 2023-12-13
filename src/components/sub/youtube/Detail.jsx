@@ -3,7 +3,6 @@ import { useParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { customText } from '../../../hooks/useText';
 import Layout from '../../common/layout/Layout';
-import { FaArrowLeft } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
 
 export default function Detail() {
@@ -22,7 +21,9 @@ export default function Detail() {
 	}, []);
 
 	return (
-		<Layout index={'00'} title={'Detail'}>
+		<Layout
+			index={'00'}
+			title={'Detail'}>
 			{YoutubeData && (
 				<article>
 					<Link to='/youtube'>
@@ -32,7 +33,7 @@ export default function Detail() {
 						<div className='date'>
 							<span>
 								{new Date(YoutubeData.publishedAt.split('T')[0].split('-')[1]).toLocaleString('en-US', {
-									month: 'short',
+									month: 'short'
 								})}
 							</span>
 							<span>{YoutubeData.publishedAt.split('T')[0].split('-')[2]}</span>

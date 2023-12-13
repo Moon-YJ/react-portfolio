@@ -12,7 +12,7 @@
 				width: 20px;
 				height: 20px;
 				display: inline-block;
-				transform: rotate(-45deg);
+				//transform: rotate(-45deg);
 				scale: 0.8;
 				transition: transform 0.5s;
 				cursor: pointer;
@@ -36,7 +36,7 @@
 					transform: rotate(45deg);
 				}
 				&:hover {
-					transform: rotate(0deg);
+					transform: rotate(-45deg);
 				}
 			}
 		}

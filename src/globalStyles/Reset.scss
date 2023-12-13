@@ -54,7 +54,7 @@ a {
 		resize: none;
 		&::placeholder {
 			background-color: transparent;
-			font-size: inherit;
+			font-size: var(--mSize);
 			color: rgba(var(--baseColor-code), 0.5);
 			font-family: var(--baseFont);
 		}

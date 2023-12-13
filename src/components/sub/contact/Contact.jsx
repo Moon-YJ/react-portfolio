@@ -21,14 +21,14 @@ export default function Contact() {
 	const mapInfo = useRef([
 		{
 			title: 'SHOWROOM',
-			address: 'Via della Spiga, 34 20121, Milano',
+			address: 'Via della Spiga, 34, Milano',
 			support: 'Open by appointment',
 			email: 'info1@arredodalpozzo.it',
 			tel: '+44 021-234-4567',
 			latlng: new kakao.current.maps.LatLng(37.51199745517824, 127.09855357200387),
 			imgSrc: `${path.current}/img/contact/pin.png`,
-			imgSize: new kakao.current.maps.Size(40, 64),
-			imgPos: { offset: new kakao.current.maps.Point(20, 64) }
+			imgSize: new kakao.current.maps.Size(40, 40),
+			imgPos: { offset: new kakao.current.maps.Point(20, 40) }
 		},
 		{
 			title: 'OFFICE AND FACTORY',
@@ -38,8 +38,8 @@ export default function Contact() {
 			tel: '+01 987-4134-29',
 			latlng: new kakao.current.maps.LatLng(37.56250041835499, 126.98516157408622),
 			imgSrc: `${path.current}/img/contact/pin.png`,
-			imgSize: new kakao.current.maps.Size(40, 64),
-			imgPos: { offset: new kakao.current.maps.Point(20, 64) }
+			imgSize: new kakao.current.maps.Size(40, 40),
+			imgPos: { offset: new kakao.current.maps.Point(20, 40) }
 		}
 	]);
 

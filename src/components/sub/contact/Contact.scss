@@ -136,11 +136,7 @@
 						min-width: 147px;
 					}
 					&:last-child {
-						background-color: rgba(var(--baseColor-code), 0.2);
-						&:hover {
-							color: var(--baseColor);
-							background-color: rgba(var(--baseColor-code), 0.2);
-						}
+						background-color: transparent;
 					}
 					&:hover {
 						color: var(--invertColor);
@@ -152,6 +148,14 @@
 						font-weight: var(--medWeight);
 						background-color: var(--baseColor);
 						border: 1px solid var(--baseColor);
+					}
+					&:disabled {
+						background-color: rgba(var(--baseColor-code), 0.2);
+						border: 1px solid transparent;
+						cursor: auto;
+						&:hover {
+							color: var(--baseColor);
+						}
 					}
 				}
 			}

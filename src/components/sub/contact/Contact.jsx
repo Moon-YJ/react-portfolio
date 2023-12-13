@@ -53,7 +53,7 @@ export default function Contact() {
 	});
 
 	const roadview = () => {
-		new kakao.current.maps.RoadviewClient().getNearestPanoId(mapInfo.current[Index].latlng, 50, panoId => {
+		new kakao.current.maps.RoadviewClient().getNearestPanoId(mapInfo.current[Index].latlng, 100, panoId => {
 			new kakao.current.maps.Roadview(roadFrame.current).setPanoId(panoId, mapInfo.current[Index].latlng);
 		});
 	};
@@ -191,7 +191,11 @@ export default function Contact() {
 					<div className='btn-set'>
 						<button
 							className={Traffic ? 'on' : ''}
-							onClick={() => setTraffic(!Traffic)}>
+							onClick={() => {
+								if (RoadView) return;
+								setTraffic(!Traffic);
+							}}
+							disabled={RoadView}>
 							{Traffic ? 'Traffic OFF' : 'Traffic ON'}
 						</button>
 						<button

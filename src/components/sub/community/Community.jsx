@@ -19,7 +19,7 @@ export default function Community() {
 		else return PostData.dummyPosts;
 	};
 
-	const [Post, setPost] = useState(getData());
+	const [Post, setPost] = useState(getData);
 	const [CurNum, setCurNum] = useState(0);
 	const [PageNum, setPageNum] = useState(0);
 

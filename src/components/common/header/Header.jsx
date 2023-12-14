@@ -61,9 +61,7 @@ export default function Header({ MenuToggle, setMenuToggle, Dark, setDark }) {
 				onClick={() => setMenuToggle(!MenuToggle)}>
 				<span className='line1'></span>
 				<span className='line2'></span>
-				<span
-					className='line3'
-					s></span>
+				<span className='line3'></span>
 			</div>
 		</header>
 	);

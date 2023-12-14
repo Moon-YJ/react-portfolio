@@ -6,8 +6,57 @@ import { RiArrowRightDownLine } from 'react-icons/ri';
 // import { BsTelephone } from 'react-icons/bs';
 import { IoIosMail } from 'react-icons/io';
 import { BsFillTelephoneFill } from 'react-icons/bs';
+import emailjs from '@emailjs/browser';
 
 export default function Contact() {
+	const form = useRef(null);
+	const inp_username = useRef(null);
+	const inp_lastname = useRef(null);
+	const inp_subject = useRef(null);
+	const inp_comments = useRef(null);
+	const initVal = useRef({
+		subject: '',
+		comments: ''
+	});
+	const [Val, setVal] = useState(initVal.current);
+	const [Errors, setErrors] = useState({});
+
+	const resetForm = () => {
+		inp_username.current.value = '';
+		inp_lastname.current.value = '';
+		inp_subject.current.value = '';
+		inp_comments.current.value = '';
+	};
+
+	const handleChange = e => {
+		const { name, value } = e.target;
+		setVal({ ...Val, [name]: value });
+	};
+
+	const chkInput = val => {
+		const errs = {};
+		if (val.subject.length < 5) errs.subject = 'Enter 5 or more characters.';
+		if (val.comments.length < 10) errs.comments = 'Enter 10 or more characters.';
+		return errs;
+	};
+
+	const sendEmail = e => {
+		e.preventDefault();
+
+		if (!inp_subject.current.value.trim() || !inp_comments.current.value.trim())
+			return alert('Please fill out all required fields.');
+
+		emailjs.sendForm('service_5tlzo4v', 'template_3xu33pc', form.current, '93d00hlz3pqQunJrz').then(
+			result => {
+				alert("Thanks! We've received your message successfully.");
+				resetForm();
+			},
+			error => {
+				alert('Sorry, we are unable to process your request. Please try again later.');
+			}
+		);
+	};
+
 	const [Index, setIndex] = useState(0);
 	const [RoadView, setRoadView] = useState(false);
 	const [Traffic, setTraffic] = useState(false);
@@ -88,6 +137,10 @@ export default function Contact() {
 			: mapInstance.current.removeOverlayMapTypeId(kakao.current.maps.MapTypeId.TRAFFIC);
 	}, [Traffic]);
 
+	useEffect(() => {
+		setErrors(chkInput(Val));
+	}, [Val]);
+
 	return (
 		<Layout
 			index={'06'}
@@ -105,7 +158,10 @@ export default function Contact() {
 						<RiArrowRightDownLine />
 					</span>
 				</div>
-				<form className='touch'>
+				<form
+					className='touch'
+					onSubmit={sendEmail}
+					ref={form}>
 					<fieldset>
 						<legend className='h'>Get in touch 등록 양식</legend>
 						<table>
@@ -121,14 +177,16 @@ export default function Contact() {
 											name='username'
 											id='username'
 											placeholder='Name'
+											onChange={handleChange}
+											ref={inp_username}
 										/>
-										{/* <span className='err'>name</span> */}
+										<span className='err'>{Errors.username && Errors.username}</span>
 									</td>
 									<th scope='row'>
 										<label
 											htmlFor='lastname'
 											className='lastname'>
-											Last name
+											Last Name
 										</label>
 									</th>
 									<td>
@@ -137,13 +195,15 @@ export default function Contact() {
 											name='lastname'
 											id='lastname'
 											placeholder='Last name'
+											onChange={handleChange}
+											ref={inp_lastname}
 										/>
-										{/* <span className='err two'>lastname</span> */}
+										<span className='err two'>{Errors.lastname && Errors.lastname}</span>
 									</td>
 								</tr>
 								<tr>
 									<th scope='row'>
-										<label htmlFor='subject'>Subject</label>
+										<label htmlFor='subject'>Title</label>
 									</th>
 									<td colSpan='3'>
 										<input
@@ -151,8 +211,10 @@ export default function Contact() {
 											name='subject'
 											id='subject'
 											placeholder='Questions'
+											ref={inp_subject}
+											onChange={handleChange}
 										/>
-										{/* <span className='err'>subject</span> */}
+										<span className='err'>{Errors.subject && Errors.subject}</span>
 									</td>
 								</tr>
 								<tr>
@@ -161,14 +223,18 @@ export default function Contact() {
 										valign='top'>
 										<label htmlFor='message'>Message</label>
 									</th>
-									<td colSpan='3'>
+									<td
+										colSpan='3'
+										className='txt-wrap'>
 										<textarea
 											name='comments'
 											id='comments'
 											cols='30'
 											rows='10'
-											placeholder='Write comments...'></textarea>
-										{/* <span className='err four'>comments</span> */}
+											placeholder='Write comments...'
+											ref={inp_comments}
+											onChange={handleChange}></textarea>
+										<span className='err four'>{Errors.comments && Errors.comments}</span>
 									</td>
 								</tr>
 								<tr>

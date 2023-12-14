@@ -8,6 +8,7 @@ import { CgCloseR } from 'react-icons/cg';
 import { MdKeyboardDoubleArrowLeft } from 'react-icons/md';
 import { MdKeyboardDoubleArrowRight } from 'react-icons/md';
 import { customText } from '../../../hooks/useText';
+import PostData from './postDummy.json';
 
 export default function Community() {
 	const customDate = customText('combine');
@@ -15,7 +16,7 @@ export default function Community() {
 	const getData = () => {
 		const data = localStorage.getItem('post');
 		if (data) return JSON.parse(data);
-		else return [];
+		else return PostData.dummyPosts;
 	};
 
 	const [Post, setPost] = useState(getData());
@@ -42,13 +43,13 @@ export default function Community() {
 		resetPost();
 	};
 
-	const deletePost = (delIdx) => {
+	const deletePost = delIdx => {
 		if (!window.confirm('Are you sure to delete this post?')) return;
 		setPost(Post.filter((_, idx) => idx !== delIdx));
 		if (delIdx !== 0 && delIdx % postPerPage.current === 0) setCurNum((delIdx % (postPerPage.current - 1)) - 1);
 	};
 
-	const editPost = (editIdx) => {
+	const editPost = editIdx => {
 		setPost(
 			Post.map((list, idx) => {
 				list.editMode = false;
@@ -58,7 +59,7 @@ export default function Community() {
 		);
 	};
 
-	const noUpdatePost = (editIdx) => {
+	const noUpdatePost = editIdx => {
 		setPost(
 			Post.map((list, idx) => {
 				if (idx === editIdx) list.editMode = false;
@@ -67,7 +68,7 @@ export default function Community() {
 		);
 	};
 
-	const confirmUpdatePost = (editIdx) => {
+	const confirmUpdatePost = editIdx => {
 		if (!refEditInput.current.value.trim() || !refEditText.current.value.trim())
 			return alert('Please fill out all required fields');
 		setPost(
@@ -89,7 +90,7 @@ export default function Community() {
 	};
 
 	useEffect(() => {
-		Post.map((list) => (list.editMode = false));
+		Post.map(list => (list.editMode = false));
 		localStorage.setItem('post', JSON.stringify(Post));
 		// 페이징 버튼
 		totalPageNum.current = Math.ceil(Post.length / postPerPage.current);
@@ -97,7 +98,9 @@ export default function Community() {
 	}, [Post]);
 
 	return (
-		<Layout index={'04'} title={'Community'}>
+		<Layout
+			index={'04'}
+			title={'Community'}>
 			<section className='txt-area'>
 				<figure>
 					<span></span>
@@ -119,13 +122,25 @@ export default function Community() {
 				<h1 className='tit'>Feedback</h1>
 				<div className='wrap-box'>
 					<div className='input-box'>
-						<input ref={refInput} type='text' placeholder='Subject' />
-						<textarea ref={refText} cols='30' rows='5' placeholder='Share your thoughts...'></textarea>
+						<input
+							ref={refInput}
+							type='text'
+							placeholder='Subject'
+						/>
+						<textarea
+							ref={refText}
+							cols='30'
+							rows='5'
+							placeholder='Share your thoughts...'></textarea>
 						<div className='btn-set'>
-							<button className='cancel' onClick={resetPost}>
+							<button
+								className='cancel'
+								onClick={resetPost}>
 								cancel
 							</button>
-							<button className='submit' onClick={submitPost}>
+							<button
+								className='submit'
+								onClick={submitPost}>
 								submit &nbsp; &nbsp;&rarr;
 							</button>
 						</div>
@@ -148,7 +163,12 @@ export default function Community() {
 											<>
 												<span className='num'>{idx < 10 ? '0' + (idx + 1) : idx + 1}</span>
 												<h2>
-													<input ref={refEditInput} type='text' defaultValue={list.subject} className='edit' />
+													<input
+														ref={refEditInput}
+														type='text'
+														defaultValue={list.subject}
+														className='edit'
+													/>
 												</h2>
 												<p className='txt'>
 													<textarea
@@ -165,10 +185,14 @@ export default function Community() {
 														<p>{getDate().strTime}</p>
 													</div>
 													<div className='btn-set'>
-														<button className='delete' onClick={() => noUpdatePost(idx)}>
+														<button
+															className='delete'
+															onClick={() => noUpdatePost(idx)}>
 															<CgCloseR />
 														</button>
-														<button className='edit' onClick={() => confirmUpdatePost(idx)}>
+														<button
+															className='edit'
+															onClick={() => confirmUpdatePost(idx)}>
 															<CgCheckR />
 														</button>
 													</div>
@@ -187,10 +211,14 @@ export default function Community() {
 														<p>{getDate().strTime}</p>
 													</div>
 													<div className='btn-set'>
-														<button className='delete' onClick={() => deletePost(idx)}>
+														<button
+															className='delete'
+															onClick={() => deletePost(idx)}>
 															<AiOutlineDelete />
 														</button>
-														<button className='edit' onClick={() => editPost(idx)}>
+														<button
+															className='edit'
+															onClick={() => editPost(idx)}>
 															<FaRegEdit />
 														</button>
 													</div>
@@ -203,7 +231,9 @@ export default function Community() {
 						})}
 						{Post.length > 0 && (
 							<div className='pagination'>
-								<button className='prev' disabled={CurNum === 0}>
+								<button
+									className='prev'
+									disabled={CurNum === 0}>
 									<MdKeyboardDoubleArrowLeft />
 								</button>
 								<span className='numbers'>
@@ -220,7 +250,9 @@ export default function Community() {
 											);
 										})}
 								</span>
-								<button className='next' disabled={CurNum + 1 === totalPageNum.current}>
+								<button
+									className='next'
+									disabled={CurNum + 1 === totalPageNum.current}>
 									<MdKeyboardDoubleArrowRight />
 								</button>
 							</div>

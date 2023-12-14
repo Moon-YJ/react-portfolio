@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState, useCallback } from 'react';
 import Layout from '../../common/layout/Layout';
 import './Contact.scss';
 import { RiArrowRightDownLine } from 'react-icons/ri';
@@ -67,6 +67,11 @@ export default function Contact() {
 	const roadFrame = useRef(null);
 	const markerInstance = useRef(null);
 	const path = useRef(process.env.PUBLIC_URL);
+	const roadview = useRef(() => {
+		new kakao.current.maps.RoadviewClient().getNearestPanoId(mapInfo.current[Index].latlng, 100, panoId => {
+			new kakao.current.maps.Roadview(roadFrame.current).setPanoId(panoId, mapInfo.current[Index].latlng);
+		});
+	});
 	const mapInfo = useRef([
 		{
 			title: 'SHOWROOM',
@@ -101,16 +106,10 @@ export default function Contact() {
 		)
 	});
 
-	const roadview = () => {
-		new kakao.current.maps.RoadviewClient().getNearestPanoId(mapInfo.current[Index].latlng, 100, panoId => {
-			new kakao.current.maps.Roadview(roadFrame.current).setPanoId(panoId, mapInfo.current[Index].latlng);
-		});
-	};
-
-	const setCenter = () => {
-		roadview();
+	const setCenter = useCallback(() => {
+		roadview.current();
 		mapInstance.current.setCenter(mapInfo.current[Index].latlng);
-	};
+	}, [Index]);
 
 	useEffect(() => {
 		mapFrame.current.innerHTML = '';
@@ -121,7 +120,7 @@ export default function Contact() {
 		});
 		markerInstance.current.setMap(mapInstance.current);
 		// 로드뷰 출력
-		roadview();
+		roadview.current();
 		setTraffic(false);
 		setRoadView(false);
 		// 줌 기능 관련
@@ -129,7 +128,7 @@ export default function Contact() {
 		mapInstance.current.addControl(new kakao.current.maps.ZoomControl(), kakao.current.maps.ControlPosition.RIGHT);
 		window.addEventListener('resize', setCenter);
 		return () => window.removeEventListener('resize', setCenter);
-	}, [Index]);
+	}, [Index, setCenter]);
 
 	useEffect(() => {
 		Traffic

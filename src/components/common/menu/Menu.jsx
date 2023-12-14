@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useCallback } from 'react';
 import './Menu.scss';
 import { Link, NavLink } from 'react-router-dom';
 import { FaFacebookF, FaTwitter, FaYoutube, FaGithub } from 'react-icons/fa';
@@ -12,9 +12,9 @@ export default function Menu({ setMenuToggle, MenuToggle, setDark, Dark }) {
 	const menuEl = ['department', 'youtube', 'gallery', 'community', 'members', 'contact'];
 	const customMenu = customText('combine');
 
-	const closeMenu = () => {
+	const closeMenu = useCallback(() => {
 		window.innerWidth >= 1000 && setMenuToggle(false);
-	};
+	}, [setMenuToggle]);
 
 	useEffect(() => {
 		closeMenu();
@@ -22,7 +22,7 @@ export default function Menu({ setMenuToggle, MenuToggle, setDark, Dark }) {
 		return () => {
 			window.removeEventListener('resize', closeMenu);
 		};
-	}, []);
+	}, [closeMenu]);
 
 	return (
 		<AnimatePresence>

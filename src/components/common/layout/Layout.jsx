@@ -14,15 +14,21 @@ export default function Layout({ index, title, children }) {
 		setTimeout(() => {
 			box.current.classList.add('on');
 		}, 300);
-	}, []);
+	}, [index, splitTitle, title]);
 
 	return (
-		<main ref={box} className={`Layout ${title}`}>
+		<main
+			ref={box}
+			className={`Layout ${title}`}>
 			<div className='tit-set'>
-				<p ref={numBox} className='num'>
+				<p
+					ref={numBox}
+					className='num'>
 					{index}
 				</p>
-				<h1 ref={titBox} className='tit'>
+				<h1
+					ref={titBox}
+					className='tit'>
 					{title}
 				</h1>
 			</div>

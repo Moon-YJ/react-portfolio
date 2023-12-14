@@ -1,0 +1,76 @@
+{
+	"dummyPosts": [
+		{
+			"subject": "Title 12",
+			"content": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Odit neque architecto, libero sit dolor reiciendis.",
+			"date": "2023-12-11T16:05:57.864Z",
+			"enableUpdate": false
+		},
+		{
+			"subject": "Title 11",
+			"content": "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Voluptatem, in.",
+			"date": "2023-12-11T16:05:57.864Z",
+			"enableUpdate": false
+		},
+		{
+			"subject": "Title 10",
+			"content": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Odit neque architecto, libero sit dolor reiciendis.",
+			"date": "2023-12-11T16:05:57.864Z",
+			"enableUpdate": false
+		},
+		{
+			"subject": "Title 9",
+			"content": "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Voluptatem, in.",
+			"date": "2023-12-11T16:05:57.864Z",
+			"enableUpdate": false
+		},
+		{
+			"subject": "Title 8",
+			"content": "Lorem ipsum dolor sit amet.",
+			"date": "2023-12-11T16:05:57.864Z",
+			"enableUpdate": false
+		},
+		{
+			"subject": "Title 7",
+			"content": "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Voluptatem, in.",
+			"date": "2023-12-11T16:05:57.864Z",
+			"enableUpdate": false
+		},
+		{
+			"subject": "Title 6",
+			"content": "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Voluptatem, in.",
+			"date": "2023-12-11T16:05:57.864Z",
+			"enableUpdate": false
+		},
+		{
+			"subject": "Title 5",
+			"content": "Lorem ipsum dolor sit amet.",
+			"date": "2023-12-11T16:05:57.864Z",
+			"enableUpdate": false
+		},
+		{
+			"subject": "Title 4",
+			"content": "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Voluptatem, in.",
+			"date": "2023-12-11T16:05:57.864Z",
+			"enableUpdate": false
+		},
+		{
+			"subject": "Title 3",
+			"content": "Lorem ipsum dolor sit amet.",
+			"date": "2023-12-11T16:05:57.864Z",
+			"enableUpdate": false
+		},
+		{
+			"subject": "Title 2",
+			"content": "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Voluptatem, in.",
+			"date": "2023-12-11T16:05:57.864Z",
+			"enableUpdate": false
+		},
+		{
+			"subject": "Title 1",
+			"content": "Lorem ipsum dolor sit amet.",
+			"date": "2023-12-11T16:05:57.864Z",
+			"enableUpdate": false
+		}
+	]
+}

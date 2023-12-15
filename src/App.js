@@ -21,16 +21,51 @@ export default function App() {
 
 	return (
 		<div className={`wrap ${Dark ? 'dark' : ''} ${useMedia()}`}>
-			<Header MenuToggle={MenuToggle} setMenuToggle={setMenuToggle} Dark={Dark} setDark={setDark} />
-			<Route exact path='/' component={MainWrap} />
-			<Route path='/department' component={Department} />
-			<Route path='/gallery' component={Gallery} />
-			<Route path='/community' component={Community} />
-			<Route path='/members' component={Members} />
-			<Route path='/contact' component={Contact} />
-			<Route path='/youtube' component={Youtube} />
-			<Route path='/detail/:id' component={Detail} />
-			<Menu setMenuToggle={setMenuToggle} MenuToggle={MenuToggle} Dark={Dark} setDark={setDark} />
+			<Header
+				MenuToggle={MenuToggle}
+				setMenuToggle={setMenuToggle}
+				Dark={Dark}
+				setDark={setDark}
+			/>
+			<Route
+				exact
+				path='/'
+				component={MainWrap}
+			/>
+			<Route
+				path='/department'
+				component={Department}
+			/>
+			<Route
+				path='/gallery'
+				component={Gallery}
+			/>
+			<Route
+				path='/community'
+				component={Community}
+			/>
+			<Route
+				path='/member'
+				component={Members}
+			/>
+			<Route
+				path='/contact'
+				component={Contact}
+			/>
+			<Route
+				path='/youtube'
+				component={Youtube}
+			/>
+			<Route
+				path='/detail/:id'
+				component={Detail}
+			/>
+			<Menu
+				setMenuToggle={setMenuToggle}
+				MenuToggle={MenuToggle}
+				Dark={Dark}
+				setDark={setDark}
+			/>
 			<Footer setDark={setDark} />
 		</div>
 	);

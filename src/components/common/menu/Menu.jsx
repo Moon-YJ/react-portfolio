@@ -9,7 +9,7 @@ import { AnimatePresence, motion } from 'framer-motion';
 
 export default function Menu({ setMenuToggle, MenuToggle, setDark, Dark }) {
 	const path = useRef(process.env.PUBLIC_URL);
-	const menuEl = ['department', 'youtube', 'gallery', 'community', 'members', 'contact'];
+	const menuEl = ['department', 'youtube', 'gallery', 'community', 'member', 'contact'];
 	const customMenu = customText('combine');
 
 	const closeMenu = useCallback(() => {

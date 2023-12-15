@@ -12,7 +12,7 @@ export default function Layout({ index, title, children }) {
 		splitTitle(numBox.current, index, 1, 0.3);
 		splitTitle(titBox.current, title, 0.5, 0.1);
 		setTimeout(() => {
-			box.current.classList.add('on');
+			box.current && box.current.classList.add('on');
 		}, 300);
 	}, [index, splitTitle, title]);
 

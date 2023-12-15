@@ -7,7 +7,7 @@ import { BiSolidMoon } from 'react-icons/bi';
 
 export default function Header({ MenuToggle, setMenuToggle, Dark, setDark }) {
 	const path = useRef(process.env.PUBLIC_URL);
-	const menuEl = ['department', 'youtube', 'gallery', 'community', 'members', 'contact'];
+	const menuEl = ['department', 'youtube', 'gallery', 'community', 'member', 'contact'];
 
 	return (
 		<header className='Header'>

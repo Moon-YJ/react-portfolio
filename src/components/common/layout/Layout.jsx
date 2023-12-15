@@ -6,14 +6,18 @@ export default function Layout({ index, title, children }) {
 	const box = useRef(null);
 	const numBox = useRef(null);
 	const titBox = useRef(null);
+	const isMounted = useRef(false);
 	const splitTitle = useSplitText();
 
 	useEffect(() => {
+		isMounted.current = true;
 		splitTitle(numBox.current, index, 1, 0.3);
 		splitTitle(titBox.current, title, 0.5, 0.1);
 		setTimeout(() => {
-			box.current && box.current.classList.add('on');
-		}, 300);
+			isMounted.current && box.current.classList.add('on');
+		}, 500);
+
+		return () => (isMounted.current = false);
 	}, [index, splitTitle, title]);
 
 	return (

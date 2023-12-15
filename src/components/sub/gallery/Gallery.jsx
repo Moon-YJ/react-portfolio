@@ -126,8 +126,6 @@ export default function Gallery() {
 		conWrap.current && conWrap.current.style.setProperty('--gap', gap.current + 'px');
 		endLoading();
 		fetchFlickr({ type: 'user', id: id.current });
-
-		return () => setLoaded(false);
 	}, []);
 
 	return (

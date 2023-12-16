@@ -1,8 +1,10 @@
 import { useEffect, useRef, useState } from 'react';
+import { useHistory } from 'react-router-dom';
 import Layout from '../../common/layout/Layout';
 import './Members.scss';
 
 export default function Members() {
+	const setHistory = useHistory();
 	const initValue = useRef({
 		userid: '',
 		email: '',
@@ -19,6 +21,16 @@ export default function Members() {
 
 	const handleReset = () => {
 		setValue(initValue.current);
+	};
+
+	const handleForm = e => {
+		e.preventDefault();
+		if (Object.keys(checkErr(Value)).length === 0) {
+			alert('Your form has been submitted successfully.');
+			setHistory.push('/');
+		} else {
+			alert('Please fill out all required fields.');
+		}
 	};
 
 	const handleInput = e => {
@@ -93,7 +105,7 @@ export default function Members() {
 					<div className='form'>
 						<h3>Be member of Henge</h3>
 						<p>Please be a member of us and save up to 15% with FREE magazine shipping every month.</p>
-						<form>
+						<form onSubmit={handleForm}>
 							<fieldset>
 								<legend className='h'>Sign up form</legend>
 								<table>

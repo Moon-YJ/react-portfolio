@@ -59,6 +59,13 @@ a {
 			font-family: var(--baseFont);
 		}
 	}
+	input[type='checkbox'],
+	input[type='radio'] {
+		-webkit-appearance: auto;
+		-moz-appearance: auto;
+		appearance: auto;
+		outline: auto;
+	}
 	select {
 		color: rgba(var(--baseColor-code), 0.5);
 		font-size: inherit;

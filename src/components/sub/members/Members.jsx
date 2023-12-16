@@ -17,6 +17,10 @@ export default function Members() {
 
 	const path = useRef(process.env.PUBLIC_URL);
 
+	const handleReset = () => {
+		setValue(initValue.current);
+	};
+
 	const handleInput = e => {
 		const { name, value } = e.target;
 		setValue({ ...Value, [name]: value });
@@ -34,7 +38,17 @@ export default function Members() {
 
 	const checkErr = value => {
 		let errs = {};
+		const text = /[a-zA-Z]/;
+		const num = /[0-9]/;
+		const spc = /[~!@#$%^&*()_+]/;
+		const [txt1, txt2] = value.email.split('@');
+		const txt3 = txt2 && txt2.split('.');
 		if (value.userid.trim().length < 5) errs.userid = 'Please enter 5 or more characters.';
+		if (!txt1 || !txt2 || !txt3[0] || !txt3[1]) errs.email = 'Please enter your email correctly.';
+		//prettier-ignore
+		if (!text.test(value.pwd1) || !num.test(value.pwd1) || !spc.test(value.pwd1) || value.pwd1.trim().length < 7) errs.pwd1 = '7+ characters, 1 number, 1 special character required.';
+		//prettier-ignore
+		if (value.pwd1.trim() !== value.pwd2.trim() || !value.pwd2.trim()) errs.pwd2 = 'Please ensure that both passwords match.';
 		if (!value.how) errs.how = 'Please select at least one.';
 		if (!value.gender) errs.gender = 'Please select at least one.';
 		if (value.interest.length === 0) errs.interest = 'Please select at least one.';
@@ -98,33 +112,37 @@ export default function Members() {
 										</tr>
 										<tr>
 											<th>Email</th>
-											<td>
+											<td className={Error.email ? 'error' : ''}>
 												<input
 													type='text'
 													name='email'
+													onChange={handleInput}
 												/>
+												{Error.email && <p>{Error.email}</p>}
 											</td>
 										</tr>
 										<tr>
 											<th className='necessary'>Password</th>
-											<td>
+											<td className={Error.pwd1 ? 'error' : ''}>
 												<input
 													type='password'
 													name='pwd1'
 													value={Value.pwd1}
 													onChange={handleInput}
 												/>
+												{Error.pwd1 && <p>{Error.pwd1}</p>}
 											</td>
 										</tr>
 										<tr>
 											<th className='necessary'>Confirm Password</th>
-											<td>
+											<td className={Error.pwd2 ? 'error' : ''}>
 												<input
 													type='password'
 													name='pwd2'
 													value={Value.pwd2}
 													onChange={handleInput}
 												/>
+												{Error.pwd2 && <p>{Error.pwd2}</p>}
 											</td>
 										</tr>
 										<tr>
@@ -139,7 +157,7 @@ export default function Members() {
 													<option value='high-school'>Billboard</option>
 													<option value='college'>By friends</option>
 												</select>
-												{Error.select && <p>{Error.select}</p>}
+												{Error.how && <p>{Error.how}</p>}
 											</td>
 										</tr>
 										<tr>
@@ -208,6 +226,7 @@ export default function Members() {
 												<input
 													type='reset'
 													value='Cancel'
+													onClick={handleReset}
 												/>
 												<input
 													type='submit'

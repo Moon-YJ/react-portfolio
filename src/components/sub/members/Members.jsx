@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import Layout from '../../common/layout/Layout';
 import './Members.scss';
+import { useDebounce } from '../../../hooks/useDebounce';
 
 export default function Members() {
 	const setHistory = useHistory();
@@ -16,6 +17,8 @@ export default function Members() {
 	});
 	const [Value, setValue] = useState(initValue.current);
 	const [Error, setError] = useState({});
+
+	const DebouncedValue = useDebounce(Value);
 
 	const path = useRef(process.env.PUBLIC_URL);
 
@@ -68,8 +71,8 @@ export default function Members() {
 	};
 
 	useEffect(() => {
-		setError(checkErr(Value));
-	}, [Value]);
+		setError(checkErr(DebouncedValue));
+	}, [DebouncedValue]);
 
 	return (
 		<Layout

@@ -16,6 +16,7 @@ export default function Gallery() {
 	const isUser = useRef('');
 	const refInput = useRef(null);
 	const isSearch = useRef(false);
+	const isMounted = useRef(false);
 	const path = useRef(process.env.PUBLIC_URL);
 	const [Pics, setPics] = useState([]);
 	const [Loaded, setLoaded] = useState(false);
@@ -24,9 +25,11 @@ export default function Gallery() {
 
 	const endLoading = () => {
 		setTimeout(() => {
-			setLoaded(true);
-			conWrap.current && conWrap.current.classList.add('on');
-		}, 1500);
+			if (isMounted.current) {
+				setLoaded(true);
+				conWrap.current && conWrap.current.classList.add('on');
+			}
+		}, 1200);
 	};
 
 	const setLoading = () => {
@@ -123,9 +126,12 @@ export default function Gallery() {
 	};
 
 	useEffect(() => {
+		isMounted.current = true;
 		conWrap.current && conWrap.current.style.setProperty('--gap', gap.current + 'px');
 		endLoading();
 		fetchFlickr({ type: 'user', id: id.current });
+
+		return () => (isMounted.current = false);
 	}, []);
 
 	return (

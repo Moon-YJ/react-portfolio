@@ -6,7 +6,11 @@ export default function Members() {
 		<Layout
 			index={'05'}
 			title={'Member'}>
-			<h2>join</h2>
+			<h2 className='stit'>
+				Iscriviti e diventa un membro
+				<br />
+				20121 Milano (MI) - Italy
+			</h2>
 		</Layout>
 	);
 }

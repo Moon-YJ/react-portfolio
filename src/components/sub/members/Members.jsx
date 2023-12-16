@@ -1,9 +1,50 @@
-import { useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import Layout from '../../common/layout/Layout';
 import './Members.scss';
 
 export default function Members() {
+	const initValue = useRef({
+		userid: '',
+		email: '',
+		pwd1: '',
+		pwd2: '',
+		how: '',
+		gender: '',
+		interest: []
+	});
+	const [Value, setValue] = useState(initValue.current);
+	const [Error, setError] = useState({});
+
 	const path = useRef(process.env.PUBLIC_URL);
+
+	const handleInput = e => {
+		const { name, value } = e.target;
+		setValue({ ...Value, [name]: value });
+	};
+
+	const handleChk = e => {
+		let chkArr = [];
+		const { name } = e.target;
+		const inputs = e.target.parentElement.querySelectorAll('input');
+		inputs.forEach(input => {
+			input.checked && chkArr.push(input.defaultValue);
+		});
+		setValue({ ...Value, [name]: chkArr });
+	};
+
+	const checkErr = value => {
+		let errs = {};
+		if (value.userid.trim().length < 5) errs.userid = 'Please enter 5 or more characters.';
+		if (!value.how) errs.how = 'Please select at least one.';
+		if (!value.gender) errs.gender = 'Please select at least one.';
+		if (value.interest.length === 0) errs.interest = 'Please select at least one.';
+		return errs;
+	};
+
+	useEffect(() => {
+		setError(checkErr(Value));
+	}, [Value]);
+
 	return (
 		<Layout
 			index={'05'}
@@ -45,11 +86,14 @@ export default function Members() {
 									<tbody>
 										<tr>
 											<th className='necessary'>Your ID</th>
-											<td>
+											<td className={Error.userid ? 'error' : ''}>
 												<input
 													type='text'
 													name='userid'
+													value={Value.userid}
+													onChange={handleInput}
 												/>
+												{Error.userid && <p>{Error.userid}</p>}
 											</td>
 										</tr>
 										<tr>
@@ -67,6 +111,8 @@ export default function Members() {
 												<input
 													type='password'
 													name='pwd1'
+													value={Value.pwd1}
+													onChange={handleInput}
 												/>
 											</td>
 										</tr>
@@ -76,29 +122,35 @@ export default function Members() {
 												<input
 													type='password'
 													name='pwd2'
+													value={Value.pwd2}
+													onChange={handleInput}
 												/>
 											</td>
 										</tr>
 										<tr>
 											<th>How you discovered Henge</th>
-											<td>
-												<select name='how'>
+											<td className={Error.how ? 'error' : ''}>
+												<select
+													name='how'
+													onChange={handleInput}>
 													<option value=''>Choose one from the options.</option>
 													<option value='elementary-school'>Magazine</option>
 													<option value='middle-school'>Internet surfing</option>
 													<option value='high-school'>Billboard</option>
 													<option value='college'>By friends</option>
 												</select>
+												{Error.select && <p>{Error.select}</p>}
 											</td>
 										</tr>
 										<tr>
 											<th>Gender</th>
-											<td>
+											<td className={Error.gender ? 'error' : ''}>
 												<input
 													type='radio'
 													defaultValue='female'
 													id='female'
 													name='gender'
+													onChange={handleInput}
 												/>
 												<label htmlFor='female'>Female</label>
 
@@ -107,19 +159,21 @@ export default function Members() {
 													defaultValue='male'
 													id='male'
 													name='gender'
+													onChange={handleInput}
 												/>
 												<label htmlFor='male'>Male</label>
-												<p className='err-txt'>error phrase here</p>
+												{Error.gender && <p>{Error.gender}</p>}
 											</td>
 										</tr>
 										<tr>
 											<th>Interest</th>
-											<td>
+											<td className={Error.interest ? 'error' : ''}>
 												<input
 													type='checkbox'
 													name='interest'
 													id='lighting'
-													defaultValue='Lighting'
+													defaultValue='lighting'
+													onChange={handleChk}
 												/>
 												<label htmlFor='lighting'>Lighting</label>
 												<input
@@ -127,6 +181,7 @@ export default function Members() {
 													name='interest'
 													id='cabinets'
 													defaultValue='cabinets'
+													onChange={handleChk}
 												/>
 												<label htmlFor='cabinets'>Cabinets</label>
 												<input
@@ -134,6 +189,7 @@ export default function Members() {
 													name='interest'
 													id='tables'
 													defaultValue='tables'
+													onChange={handleChk}
 												/>
 												<label htmlFor='tables'>Tables</label>
 												<input
@@ -141,8 +197,10 @@ export default function Members() {
 													name='interest'
 													id='armchairs'
 													defaultValue='armchairs'
+													onChange={handleChk}
 												/>
 												<label htmlFor='armchairs'>Armchairs</label>
+												{Error.interest && <p>{Error.interest}</p>}
 											</td>
 										</tr>
 										<tr>

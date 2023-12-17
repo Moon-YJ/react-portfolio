@@ -76,11 +76,11 @@ export default function Members() {
 	}, [DebouncedValue]);
 
 	return (
-		<div className='wrapper'>
-			<Layout
-				index={'05'}
-				title={'Member'}>
-				<section className='join'>
+		<Layout
+			index={'05'}
+			title={'Member'}>
+			<section className='join'>
+				<div className='top'>
 					<h2 className='stit'>
 						Via della Spiga 34
 						<br />
@@ -100,191 +100,198 @@ export default function Members() {
 							<p className='txt'>Products</p>
 						</div>
 					</div>
-					<div className='join-set'>
-						<div className='pic'>
-							<img
-								src={`${path.current}/img/member/join.jpg`}
-								alt='living room'
-							/>
-						</div>
-						<div className='form'>
-							<h3>Be member of Henge</h3>
-							<p>Please be a member of us and save up to 15% with FREE magazine shipping every month.</p>
-							<form onSubmit={handleForm}>
-								<fieldset>
-									<legend className='h'>Sign up form</legend>
-									<table>
-										<tbody>
-											<tr>
-												<th className='necessary'>Your ID</th>
-												<td className={Error.userid ? 'error' : ''}>
-													<input
-														type='text'
-														name='userid'
-														value={Value.userid}
-														onChange={handleInput}
-													/>
-													{Error.userid && <p>{Error.userid}</p>}
-												</td>
-											</tr>
-											<tr>
-												<th>Email</th>
-												<td className={Error.email ? 'error' : ''}>
-													<input
-														type='text'
-														name='email'
-														onChange={handleInput}
-													/>
-													{Error.email && <p>{Error.email}</p>}
-												</td>
-											</tr>
-											<tr>
-												<th className='necessary'>Password</th>
-												<td className={Error.pwd1 ? 'error' : ''}>
-													<input
-														type='password'
-														name='pwd1'
-														value={Value.pwd1}
-														onChange={handleInput}
-													/>
-													{Error.pwd1 && <p>{Error.pwd1}</p>}
-												</td>
-											</tr>
-											<tr>
-												<th className='necessary'>Confirm Password</th>
-												<td className={Error.pwd2 ? 'error' : ''}>
-													<input
-														type='password'
-														name='pwd2'
-														value={Value.pwd2}
-														onChange={handleInput}
-													/>
-													{Error.pwd2 && <p>{Error.pwd2}</p>}
-												</td>
-											</tr>
-											<tr>
-												<th>How you discovered Henge</th>
-												<td className={Error.how ? 'error' : ''}>
-													<select
-														name='how'
-														onChange={handleInput}>
-														<option value=''>Choose one from the options.</option>
-														<option value='elementary-school'>Magazine</option>
-														<option value='middle-school'>Internet surfing</option>
-														<option value='high-school'>Billboard</option>
-														<option value='college'>By friends</option>
-													</select>
-													{Error.how && <p>{Error.how}</p>}
-												</td>
-											</tr>
-											<tr>
-												<th>Gender</th>
-												<td className={Error.gender ? 'error' : ''}>
-													<input
-														type='radio'
-														defaultValue='female'
-														id='female'
-														name='gender'
-														onChange={handleInput}
-													/>
-													<label htmlFor='female'>Female</label>
+				</div>
+				<div className='join-set'>
+					<div className='pic'>
+						<img
+							src={`${path.current}/img/member/join.jpg`}
+							alt='living room'
+						/>
+					</div>
+					<div className='form'>
+						<h3>Be member of Henge</h3>
+						<p>Please be a member of us and save up to 15% with FREE magazine shipping every month.</p>
+						<form onSubmit={handleForm}>
+							<fieldset>
+								<legend className='h'>Sign up form</legend>
+								<table>
+									<tbody>
+										<tr>
+											<th className='necessary'>Your ID</th>
+											<td className={Error.userid ? 'error' : ''}>
+												<input
+													type='text'
+													name='userid'
+													value={Value.userid}
+													onChange={handleInput}
+												/>
+												{Error.userid && <p>{Error.userid}</p>}
+											</td>
+										</tr>
+										<tr>
+											<th>Email</th>
+											<td className={Error.email ? 'error' : ''}>
+												<input
+													type='text'
+													name='email'
+													onChange={handleInput}
+												/>
+												{Error.email && <p>{Error.email}</p>}
+											</td>
+										</tr>
+										<tr>
+											<th className='necessary'>Password</th>
+											<td className={Error.pwd1 ? 'error' : ''}>
+												<input
+													type='password'
+													name='pwd1'
+													value={Value.pwd1}
+													onChange={handleInput}
+												/>
+												{Error.pwd1 && <p>{Error.pwd1}</p>}
+											</td>
+										</tr>
+										<tr>
+											<th className='necessary'>Confirm Password</th>
+											<td className={Error.pwd2 ? 'error' : ''}>
+												<input
+													type='password'
+													name='pwd2'
+													value={Value.pwd2}
+													onChange={handleInput}
+												/>
+												{Error.pwd2 && <p>{Error.pwd2}</p>}
+											</td>
+										</tr>
+										<tr>
+											<th>How you discovered Henge</th>
+											<td className={Error.how ? 'error' : ''}>
+												<select
+													name='how'
+													onChange={handleInput}>
+													<option value=''>Choose one from the options.</option>
+													<option value='elementary-school'>Magazine</option>
+													<option value='middle-school'>Internet surfing</option>
+													<option value='high-school'>Billboard</option>
+													<option value='college'>By friends</option>
+												</select>
+												{Error.how && <p>{Error.how}</p>}
+											</td>
+										</tr>
+										<tr>
+											<th>Gender</th>
+											<td className={Error.gender ? 'error' : ''}>
+												<input
+													type='radio'
+													defaultValue='female'
+													id='female'
+													name='gender'
+													onChange={handleInput}
+												/>
+												<label htmlFor='female'>Female</label>
 
-													<input
-														type='radio'
-														defaultValue='male'
-														id='male'
-														name='gender'
-														onChange={handleInput}
-													/>
-													<label htmlFor='male'>Male</label>
-													{Error.gender && <p>{Error.gender}</p>}
-												</td>
-											</tr>
-											<tr>
-												<th>Interest</th>
-												<td className={Error.interest ? 'error' : ''}>
-													<input
-														type='checkbox'
-														name='interest'
-														id='lighting'
-														defaultValue='lighting'
-														onChange={handleChk}
-													/>
-													<label htmlFor='lighting'>Lighting</label>
-													<input
-														type='checkbox'
-														name='interest'
-														id='cabinets'
-														defaultValue='cabinets'
-														onChange={handleChk}
-													/>
-													<label htmlFor='cabinets'>Cabinets</label>
-													<input
-														type='checkbox'
-														name='interest'
-														id='tables'
-														defaultValue='tables'
-														onChange={handleChk}
-													/>
-													<label htmlFor='tables'>Tables</label>
-													<input
-														type='checkbox'
-														name='interest'
-														id='armchairs'
-														defaultValue='armchairs'
-														onChange={handleChk}
-													/>
-													<label htmlFor='armchairs'>Armchairs</label>
-													{Error.interest && <p>{Error.interest}</p>}
-												</td>
-											</tr>
-											<tr>
-												<td>
-													<input
-														type='reset'
-														value='Cancel'
-														onClick={handleReset}
-													/>
-													<input
-														type='submit'
-														value='Submit'
-													/>
-												</td>
-											</tr>
-										</tbody>
-									</table>
-								</fieldset>
-							</form>
-						</div>
-					</div>
-				</section>
-				<section className='mail'>
-					<div className='mail-txt'>
-						<h3>Subscribe to our newsletter</h3>
-						<p>To stay up to date on new products and events of the Henge world</p>
-					</div>
-					<div className='mail-set'>
-						<form>
-							<input
-								type='text'
-								name='email'
-							/>
-							<button className='send'>
-								<MdKeyboardArrowRight />
-							</button>
-							<label htmlFor='terms'>
-								<input
-									type='checkbox'
-									name='terms'
-									id='terms'
-									defaultValue='terms'
-								/>
-								<span>Agree to Terms and Conditions</span>
-							</label>
+												<input
+													type='radio'
+													defaultValue='male'
+													id='male'
+													name='gender'
+													onChange={handleInput}
+												/>
+												<label htmlFor='male'>Male</label>
+												{Error.gender && <p>{Error.gender}</p>}
+											</td>
+										</tr>
+										<tr>
+											<th>Interest</th>
+											<td className={Error.interest ? 'error' : ''}>
+												<input
+													type='checkbox'
+													name='interest'
+													id='lighting'
+													defaultValue='lighting'
+													onChange={handleChk}
+												/>
+												<label htmlFor='lighting'>Lighting</label>
+												<input
+													type='checkbox'
+													name='interest'
+													id='cabinets'
+													defaultValue='cabinets'
+													onChange={handleChk}
+												/>
+												<label htmlFor='cabinets'>Cabinets</label>
+												<input
+													type='checkbox'
+													name='interest'
+													id='tables'
+													defaultValue='tables'
+													onChange={handleChk}
+												/>
+												<label htmlFor='tables'>Tables</label>
+												<input
+													type='checkbox'
+													name='interest'
+													id='armchairs'
+													defaultValue='armchairs'
+													onChange={handleChk}
+												/>
+												<label htmlFor='armchairs'>Armchairs</label>
+												{Error.interest && <p>{Error.interest}</p>}
+											</td>
+										</tr>
+										<tr>
+											<td>
+												<input
+													type='reset'
+													value='Cancel'
+													onClick={handleReset}
+												/>
+												<input
+													type='submit'
+													value='Submit'
+												/>
+											</td>
+										</tr>
+									</tbody>
+								</table>
+							</fieldset>
 						</form>
 					</div>
-				</section>
-			</Layout>
-		</div>
+				</div>
+			</section>
+			<section className='mail'>
+				<div className='mail-txt'>
+					<h3>
+						Subscribe to
+						<br />
+						our newsletter
+					</h3>
+					<p>To stay up to date on new products and events of the Henge world</p>
+				</div>
+				<form>
+					<div className='mail-box'>
+						<input
+							type='text'
+							name='email'
+							placeholder='Email *'
+						/>
+						<button className='send'>
+							<MdKeyboardArrowRight />
+						</button>
+					</div>
+					<label htmlFor='terms'>
+						<input
+							type='checkbox'
+							name='terms'
+							id='terms'
+							defaultValue='terms'
+						/>
+						<span>
+							Agree to <span className='line'>Terms and Conditions</span>
+						</span>
+					</label>
+				</form>
+			</section>
+		</Layout>
 	);
 }

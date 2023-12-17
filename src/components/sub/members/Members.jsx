@@ -22,6 +22,8 @@ export default function Members() {
 	const DebouncedValue = useDebounce(Value);
 
 	const path = useRef(process.env.PUBLIC_URL);
+	const refEmail = useRef(null);
+	const refChk = useRef(null);
 
 	const handleReset = () => {
 		setValue(initValue.current);
@@ -50,6 +52,21 @@ export default function Members() {
 			input.checked && chkArr.push(input.defaultValue);
 		});
 		setValue({ ...Value, [name]: chkArr });
+	};
+
+	const handleEmail = e => {
+		e.preventDefault();
+		const [txt1, txt2] = refEmail.current.value.split('@');
+		const txt3 = txt2 && txt2.split('.');
+		console.log(refChk.current.checked);
+		//prettier-ignore
+		if (!txt1 || !txt2 || !txt3[0] || !txt3[1] || !refChk.current.checked) {
+			alert('Please enter your email correctly and agree by checking the box.')
+		} else {
+			alert('Thank you! Your subscription has been submitted successfully.');
+			refEmail.current.value = '';
+			refChk.current.checked = false;
+		}
 	};
 
 	const checkErr = value => {
@@ -268,12 +285,13 @@ export default function Members() {
 					</h3>
 					<p>To stay up to date on new products and events of the Henge world</p>
 				</div>
-				<form>
+				<form onSubmit={handleEmail}>
 					<div className='mail-box'>
 						<input
 							type='text'
 							name='email'
 							placeholder='Email *'
+							ref={refEmail}
 						/>
 						<button className='send'>
 							<MdKeyboardArrowRight />
@@ -285,6 +303,7 @@ export default function Members() {
 							name='terms'
 							id='terms'
 							defaultValue='terms'
+							ref={refChk}
 						/>
 						<span>
 							Agree to <span className='line'>Terms and Conditions</span>

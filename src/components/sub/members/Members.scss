@@ -192,7 +192,7 @@
 		color: var(--invertColor);
 		background-color: rgba(var(--baseColor-code), 0.95);
 		&-txt {
-			width: 57%;
+			width: 58%;
 			h3 {
 				font-family: var(--gFont);
 				font-weight: var(--lightWeight);
@@ -206,12 +206,12 @@
 			}
 		}
 		form {
-			width: 40%;
+			width: 38%;
 			.mail-box {
 				position: relative;
 				input {
 					width: 100%;
-					padding: 20px 25px;
+					padding: 19px 25px;
 					border: none;
 					border-radius: 50px;
 					&::placeholder {

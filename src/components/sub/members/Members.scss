@@ -19,8 +19,8 @@
 				display: flex;
 				align-items: center;
 				gap: 80px;
+				margin-top: 60px;
 				.info {
-					margin-top: 60px;
 					text-align: center;
 					&:first-child {
 						margin-left: 0;
@@ -113,7 +113,7 @@
 										color: var(--baseColor);
 										font-family: var(--baseFont);
 										font-weight: var(--lightWeight);
-										font-size: var(--bodySize);
+										font-size: var(--mSize);
 										background-color: transparent;
 										border: none;
 										outline: 0;
@@ -262,6 +262,258 @@
 					font-weight: var(--lightWeight);
 					.line {
 						border-bottom: 1px solid var(--invertColor);
+					}
+				}
+			}
+		}
+	}
+}
+
+// laptop
+.laptop,
+.tablet,
+.mobile {
+	.Member {
+		.join {
+			&-set {
+				margin-top: 60px;
+				.pic {
+					width: 54%;
+				}
+				.form {
+					width: 43%;
+					h3 {
+						font-size: var(--lgSize);
+					}
+					> p {
+						font-size: var(--mSize);
+					}
+					form {
+						margin-top: 0;
+						table {
+							tr {
+								td {
+									input[type='text'],
+									input[type='password'],
+									textarea,
+									label,
+									select {
+										padding-left: 5px;
+										font-size: var(--smSize);
+									}
+									select {
+										padding-left: 0;
+									}
+									input[type='checkbox'],
+									input[type='radio'] {
+										margin-left: 5px;
+									}
+									label {
+										padding-left: 0;
+										font-size: var(--xsmSize);
+									}
+									> p {
+										font-size: var(--xsmSize);
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+}
+
+// tablet
+.tablet,
+.mobile {
+	.Member {
+		width: 100%;
+		.tit-set {
+			width: calc(100% - 15vw);
+			margin-bottom: 20px;
+		}
+		.join {
+			.top {
+				padding: 0 7.5vw;
+				.info-set {
+					margin-top: 30px;
+				}
+			}
+			&-set {
+				.pic {
+					display: none;
+				}
+				.form {
+					width: 100%;
+					padding: 0 7.5vw;
+					h3 {
+						font-size: var(--xlgSize);
+					}
+					> p {
+						font-size: var(--bodySize);
+					}
+					form {
+						margin-top: 0;
+						table {
+							width: 70%;
+							tr {
+								th {
+									margin-top: 35px;
+								}
+								td {
+									input[type='text'],
+									input[type='password'],
+									textarea,
+									label,
+									select {
+										padding-left: 10px;
+										font-size: var(--mSize);
+									}
+									select {
+										padding-left: 5px;
+									}
+									input[type='checkbox'],
+									input[type='radio'] {
+										margin-left: 10px;
+									}
+									label {
+										padding-left: 0;
+										font-size: var(--mSize);
+									}
+									> p {
+										font-size: var(--smSize);
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+		.mail {
+			flex-wrap: wrap;
+			gap: 40px;
+			padding: 150px 100px;
+			&-txt {
+				width: 100%;
+				h3 {
+					font-size: var(--titSize1s);
+				}
+				p {
+					margin-top: 10px;
+					font-size: var(--mSize);
+				}
+			}
+			form {
+				width: 100%;
+			}
+		}
+	}
+}
+
+// mobile
+.mobile {
+	.Member {
+		.join {
+			.top {
+				padding: 0 7.5vw;
+				.stit {
+					font-size: var(--lgSize);
+				}
+				.info-set {
+					gap: 30px;
+					margin-top: 30px;
+					.info {
+						.num {
+							font-size: var(--medSize);
+						}
+						.txt {
+							font-size: var(--mSize);
+						}
+					}
+				}
+				&:after {
+					content: '';
+					display: inline-block;
+					width: 100%;
+					height: 1px;
+					margin: 35px auto 0;
+					background-color: rgba(var(--baseColor-code), 0.3);
+				}
+			}
+			&-set {
+				margin-top: 20px;
+				.pic {
+					display: none;
+				}
+				.form {
+					h3 {
+						font-size: var(--lgSize);
+						line-height: 1.2;
+					}
+					> p {
+						font-size: var(--mSize);
+					}
+					form {
+						table {
+							width: 100%;
+							tr {
+								th {
+									margin-top: 25px;
+								}
+								td {
+									input[type='text'],
+									input[type='password'],
+									textarea,
+									label,
+									select {
+										font-size: var(--smSize);
+									}
+									input[type='checkbox'],
+									input[type='radio'] {
+										margin-left: 10px;
+									}
+									input[type='submit'],
+									input[type='reset'] {
+										width: 100px;
+										height: 35px;
+										margin: 25px 15px 0 0;
+										font-size: var(--smSize);
+									}
+									label {
+										font-size: var(--smSize);
+									}
+									> p {
+										display: none;
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+		.mail {
+			gap: 35px;
+			padding: 120px 50px;
+			&-txt {
+				width: 100%;
+				h3 {
+					font-size: var(--titSize2);
+				}
+				p {
+					margin-top: 10px;
+					font-size: var(--mSize);
+				}
+			}
+			form {
+				.mail-box {
+					input {
+						&::placeholder {
+							font-size: var(--bodySize);
+						}
 					}
 				}
 			}

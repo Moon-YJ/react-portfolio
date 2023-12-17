@@ -89,7 +89,7 @@ export default function Members() {
 	};
 
 	useEffect(() => {
-		setError(checkErr(DebouncedValue, 300));
+		setError(checkErr(DebouncedValue, 100));
 	}, [DebouncedValue]);
 
 	return (

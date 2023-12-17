@@ -1,5 +1,5 @@
 import './Modal.scss';
-import { AiOutlineClose } from 'react-icons/ai';
+import { IoMdClose } from 'react-icons/io';
 import { AnimatePresence, motion } from 'framer-motion';
 
 export default function Modal({ children, Open, setOpen }) {
@@ -9,20 +9,25 @@ export default function Modal({ children, Open, setOpen }) {
 				<motion.aside
 					initial={{ opacity: 0 }}
 					animate={{ opacity: 1 }}
-					exit={{ opacity: 0, transition: { delay: 0.2 } }}
+					exit={{ opacity: 0, transition: { delay: 0.1 } }}
 					transition={{ duration: 0.2 }}
 					className='Modal'>
-					<div
+					<motion.div
+						className='pic'
 						initial={{ opacity: 0 }}
-						animate={{ opacity: 1 }}
+						animate={{ opacity: 1, transition: { delay: 0.7 } }}
 						exit={{ opacity: 0 }}
-						transition={{ duration: 0.2 }}
-						className='pic'>
+						transition={{ duration: 0.4 }}>
 						{children}
-					</div>
-					<button onClick={() => setOpen(false)}>
-						<AiOutlineClose />
-					</button>
+					</motion.div>
+					<motion.button
+						initial={{ rotate: 0, scale: 0.5 }}
+						animate={{ rotate: 90, scale: 1 }}
+						exit={{ rotate: 180, scale: 0.5 }}
+						transition={{ duration: 0.5 }}
+						onClick={() => setOpen(false)}>
+						<IoMdClose />
+					</motion.button>
 				</motion.aside>
 			)}
 		</AnimatePresence>

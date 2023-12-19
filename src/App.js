@@ -15,6 +15,7 @@ import Detail from './components/sub/youtube/Detail';
 import Menu from './components/common/menu/Menu';
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { useDispatch } from 'react-redux';
+import * as types from './redux/action';
 
 export default function App() {
 	const [MenuToggle, setMenuToggle] = useState(false);
@@ -25,7 +26,7 @@ export default function App() {
 	const fetchMember = useCallback(async () => {
 		const data = await fetch(`${path.current}/DB/department.json`);
 		const json = await data.json();
-		dispatch({ type: 'SET_MEMBERS', payload: json });
+		dispatch({ type: types.MEMBER.success, payload: json });
 	}, [dispatch]);
 
 	const fetchYoutube = useCallback(async () => {
@@ -36,9 +37,9 @@ export default function App() {
 		try {
 			const data = await fetch(baseURL);
 			const json = await data.json();
-			dispatch({ type: 'SET_YOUTUBE', payload: json.items });
+			dispatch({ type: types.YOUTUBE.success, payload: json.items });
 		} catch (err) {
-			dispatch({ type: 'SET_YOUTUBE_ERR', payload: err });
+			dispatch({ type: types.YOUTUBE.fail, payload: err });
 		}
 	}, [dispatch]);
 

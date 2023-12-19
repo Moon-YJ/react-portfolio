@@ -23,16 +23,16 @@ export default function Department() {
 				<section className='president'>
 					<div className='pic'>
 						<img
-							src={`${path.current}/img/${TopData[0].pic}`}
-							alt={TopData[0].name}
+							src={`${path.current}/img/${TopData[0]?.pic}`}
+							alt={TopData[0]?.name}
 						/>
 					</div>
 					<div className='quotes'>"</div>
 					<div className='con'>
 						<div className='con-top'>
-							<h2>{TopData[0].text}</h2>
-							<p className='name'>{TopData[0].name}</p>
-							<p className='position'>{TopData[0].position}</p>
+							<h2>{TopData[0]?.text}</h2>
+							<p className='name'>{TopData[0]?.name}</p>
+							<p className='position'>{TopData[0]?.position}</p>
 						</div>
 						<div className='con-btm'>
 							<p>PAST</p>

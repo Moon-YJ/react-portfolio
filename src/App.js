@@ -28,9 +28,24 @@ export default function App() {
 		dispatch({ type: 'SET_MEMBERS', payload: json });
 	}, [dispatch]);
 
+	const fetchYoutube = useCallback(async () => {
+		const api_key = process.env.REACT_APP_YOUTUBE_API;
+		const pId = process.env.REACT_APP_YOUTUBE_pID;
+		const num = 7;
+		const baseURL = `https://www.googleapis.com/youtube/v3/playlistItems?key=${api_key}&part=snippet&playlistId=${pId}&maxResults=${num}`;
+		try {
+			const data = await fetch(baseURL);
+			const json = await data.json();
+			dispatch({ type: 'SET_YOUTUBE', payload: json.items });
+		} catch (err) {
+			dispatch({ type: 'SET_YOUTUBE_ERR', payload: err });
+		}
+	}, [dispatch]);
+
 	useEffect(() => {
 		fetchMember();
-	}, [fetchMember]);
+		fetchYoutube();
+	}, [fetchMember, fetchYoutube]);
 
 	return (
 		<div className={`wrap ${Dark ? 'dark' : ''} ${useMedia()}`}>

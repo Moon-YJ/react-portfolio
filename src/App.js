@@ -66,7 +66,10 @@ export default function App() {
 				Dark={Dark}
 				setDark={setDark}
 			/>
-			<Footer setDark={setDark} />
+			<Footer
+				Dark={Dark}
+				setDark={setDark}
+			/>
 		</div>
 	);
 }

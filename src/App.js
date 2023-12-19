@@ -13,11 +13,24 @@ import './globalStyles/Reset.scss';
 import { useMedia } from './hooks/useMedia';
 import Detail from './components/sub/youtube/Detail';
 import Menu from './components/common/menu/Menu';
-import { useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
+import { useDispatch } from 'react-redux';
 
 export default function App() {
 	const [MenuToggle, setMenuToggle] = useState(false);
 	const [Dark, setDark] = useState(false);
+	const path = useRef(process.env.PUBLIC_URL);
+	const dispatch = useDispatch();
+
+	const fetchMember = useCallback(async () => {
+		const data = await fetch(`${path.current}/DB/department.json`);
+		const json = await data.json();
+		dispatch({ type: 'SET_MEMBERS', payload: json });
+	}, [dispatch]);
+
+	useEffect(() => {
+		fetchMember();
+	}, [fetchMember]);
 
 	return (
 		<div className={`wrap ${Dark ? 'dark' : ''} ${useMedia()}`}>

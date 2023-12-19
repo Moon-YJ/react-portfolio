@@ -13,11 +13,17 @@ import './globalStyles/Reset.scss';
 import { useMedia } from './hooks/useMedia';
 import Detail from './components/sub/youtube/Detail';
 import Menu from './components/common/menu/Menu';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import { useDispatch } from 'react-redux';
+import * as types from './redux/actionType';
 
 export default function App() {
 	const [MenuToggle, setMenuToggle] = useState(false);
 	const [Dark, setDark] = useState(false);
+	const dispatch = useDispatch();
+	useEffect(() => {
+		dispatch({ type: types.MEMBERS.start });
+	}, [dispatch]);
 
 	return (
 		<div className={`wrap ${Dark ? 'dark' : ''} ${useMedia()}`}>

@@ -1,4 +1,3 @@
-import { useState, useEffect } from 'react';
 import Layout from '../../common/layout/Layout';
 import './Youtube.scss';
 import { customText } from '../../../hooks/useText';

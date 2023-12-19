@@ -6,6 +6,8 @@ import { CgSearch } from 'react-icons/cg';
 import { AiOutlineClose } from 'react-icons/ai';
 import { RiArrowRightDownLine } from 'react-icons/ri';
 import Modal from '../../common/modal/Modal';
+import { useDispatch, useSelector } from 'react-redux';
+import * as types from '../../../redux/actionType';
 
 export default function Gallery() {
 	const myId = '195472166@N07';
@@ -18,10 +20,12 @@ export default function Gallery() {
 	const isSearch = useRef(false);
 	const isMounted = useRef(false);
 	const path = useRef(process.env.PUBLIC_URL);
-	const [Pics, setPics] = useState([]);
 	const [Loaded, setLoaded] = useState(false);
 	const [Index, setIndex] = useState(0);
 	const [Open, setOpen] = useState(false);
+
+	const dispatch = useDispatch();
+	const Pics = useSelector(store => store.flickrReducer.flickr);
 
 	const endLoading = () => {
 		setTimeout(() => {
@@ -52,7 +56,7 @@ export default function Gallery() {
 		activeBtn(e);
 		id.current = '';
 		isUser.current = '';
-		fetchFlickr({ type: 'random' });
+		dispatch({ type: types.FLICKR.start, opt: { type: 'random' } });
 		endLoading();
 	};
 
@@ -62,7 +66,7 @@ export default function Gallery() {
 		activeBtn(e);
 		id.current = myId;
 		isUser.current = 'myId';
-		fetchFlickr({ type: 'user', id: id.current });
+		dispatch({ type: types.FLICKR.start, opt: { type: 'user', id: id.current } });
 		endLoading();
 	};
 
@@ -73,7 +77,7 @@ export default function Gallery() {
 		if (isUser.current) return;
 		setLoading();
 		isUser.current = ownerId;
-		fetchFlickr({ type: 'user', id: ownerId });
+		dispatch({ type: types.FLICKR.start, opt: { type: 'user', id: ownerId } });
 		endLoading();
 	};
 
@@ -83,7 +87,7 @@ export default function Gallery() {
 		if (e.target.innerText === myId) return;
 		setLoading();
 		activeBtn();
-		fetchFlickr({ type: 'user', id: e.target.innerText });
+		dispatch({ type: types.FLICKR.start, opt: { type: 'user', id: e.target.innerText } });
 		endLoading();
 	};
 
@@ -95,7 +99,7 @@ export default function Gallery() {
 		if (!searchVal) return;
 		setLoading();
 		activeBtn();
-		fetchFlickr({ type: 'search', keyword: refInput.current.value });
+		dispatch({ type: types.FLICKR.start, opt: { type: 'search', keyword: refInput.current.value } });
 		endLoading();
 		refInput.current.value = '';
 	};
@@ -105,31 +109,10 @@ export default function Gallery() {
 		setIndex(idx);
 	};
 
-	const fetchFlickr = async opt => {
-		const num = 20;
-		const flickr_api = process.env.REACT_APP_FLICKR_KEY;
-		const baseURL = `https://www.flickr.com/services/rest/?&api_key=${flickr_api}&per_page=${num}&format=json&nojsoncallback=1&method=`;
-		const method_random = 'flickr.interestingness.getList';
-		const method_user = 'flickr.people.getPhotos';
-		const method_search = 'flickr.photos.search';
-		const randomURL = `${baseURL}${method_random}`;
-		const userURL = `${baseURL}${method_user}&user_id=${opt.id}`;
-		const searchURL = `${baseURL}${method_search}&tags=${opt.keyword}`;
-		let url = '';
-		opt.type === 'random' && (url = randomURL);
-		opt.type === 'user' && (url = userURL);
-		opt.type === 'search' && (url = searchURL);
-
-		const data = await fetch(url);
-		const json = await data.json();
-		setPics(json.photos.photo);
-	};
-
 	useEffect(() => {
 		isMounted.current = true;
 		conWrap.current && conWrap.current.style.setProperty('--gap', gap.current + 'px');
 		endLoading();
-		fetchFlickr({ type: 'user', id: id.current });
 
 		return () => (isMounted.current = false);
 	}, []);

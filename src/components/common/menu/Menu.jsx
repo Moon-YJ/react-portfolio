@@ -6,15 +6,20 @@ import { MdWbSunny } from 'react-icons/md';
 import { BiSolidMoon } from 'react-icons/bi';
 import { customText } from '../../../hooks/useText';
 import { AnimatePresence, motion } from 'framer-motion';
+import { useDispatch, useSelector } from 'react-redux';
+import * as types from '../../../redux/actionType';
 
-export default function Menu({ setMenuToggle, MenuToggle, setDark, Dark }) {
+export default function Menu() {
 	const path = useRef(process.env.PUBLIC_URL);
 	const menuEl = ['department', 'youtube', 'gallery', 'community', 'member', 'contact'];
 	const customMenu = customText('combine');
+	const dispatch = useDispatch();
+	const MenuToggle = useSelector(store => store.menuReducer.menu);
+	const Dark = useSelector(store => store.darkReducer.dark);
 
 	const closeMenu = useCallback(() => {
-		window.innerWidth >= 1000 && setMenuToggle(false);
-	}, [setMenuToggle]);
+		window.innerWidth >= 1000 && dispatch({ type: types.MENU.start, payload: false });
+	}, [dispatch]);
 
 	useEffect(() => {
 		closeMenu();
@@ -35,7 +40,7 @@ export default function Menu({ setMenuToggle, MenuToggle, setDark, Dark }) {
 					transition={{ duration: 0.4 }}>
 					<h1
 						className='logo'
-						onClick={() => setMenuToggle(false)}>
+						onClick={() => dispatch({ type: types.MENU.start, payload: false })}>
 						<Link to='/'>
 							<img
 								src={`${path.current}/img/logo/logo.png`}
@@ -50,7 +55,7 @@ export default function Menu({ setMenuToggle, MenuToggle, setDark, Dark }) {
 									<NavLink
 										to={`/${el}`}
 										activeClassName={'on'}
-										onClick={() => setMenuToggle(false)}>
+										onClick={() => dispatch({ type: types.MENU.start, payload: false })}>
 										{customMenu(el)}
 									</NavLink>
 								</li>
@@ -59,7 +64,7 @@ export default function Menu({ setMenuToggle, MenuToggle, setDark, Dark }) {
 						<div
 							className={`theme ${Dark ? 'dark' : ''}`}
 							onClick={() => {
-								setDark(!Dark);
+								dispatch({ type: types.DARK.start, payload: !Dark });
 							}}>
 							<div className='ball'></div>
 							<span className='icon'>

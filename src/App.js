@@ -13,14 +13,14 @@ import './globalStyles/Reset.scss';
 import { useMedia } from './hooks/useMedia';
 import Detail from './components/sub/youtube/Detail';
 import Menu from './components/common/menu/Menu';
-import { useEffect, useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import * as types from './redux/actionType';
 
 export default function App() {
-	const [MenuToggle, setMenuToggle] = useState(false);
-	const [Dark, setDark] = useState(false);
 	const dispatch = useDispatch();
+	const Dark = useSelector(store => store.darkReducer.dark);
+
 	useEffect(() => {
 		dispatch({ type: types.MEMBERS.start });
 		dispatch({ type: types.YOUTUBE.start });
@@ -29,12 +29,7 @@ export default function App() {
 
 	return (
 		<div className={`wrap ${Dark ? 'dark' : ''} ${useMedia()}`}>
-			<Header
-				MenuToggle={MenuToggle}
-				setMenuToggle={setMenuToggle}
-				Dark={Dark}
-				setDark={setDark}
-			/>
+			<Header />
 			<Route
 				exact
 				path='/'
@@ -68,13 +63,8 @@ export default function App() {
 				path='/detail/:id'
 				component={Detail}
 			/>
-			<Menu
-				setMenuToggle={setMenuToggle}
-				MenuToggle={MenuToggle}
-				Dark={Dark}
-				setDark={setDark}
-			/>
-			<Footer setDark={setDark} />
+			<Menu />
+			<Footer />
 		</div>
 	);
 }

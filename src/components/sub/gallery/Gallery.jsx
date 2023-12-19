@@ -22,7 +22,6 @@ export default function Gallery() {
 	const path = useRef(process.env.PUBLIC_URL);
 	const [Loaded, setLoaded] = useState(false);
 	const [Index, setIndex] = useState(0);
-	const [Open, setOpen] = useState(false);
 
 	const dispatch = useDispatch();
 	const Pics = useSelector(store => store.flickrReducer.flickr);
@@ -105,7 +104,7 @@ export default function Gallery() {
 	};
 
 	const handleModal = idx => {
-		setOpen(true);
+		dispatch({ type: types.MODAL.start, payload: true });
 		setIndex(idx);
 	};
 
@@ -214,9 +213,7 @@ export default function Gallery() {
 				</section>
 			</Layout>
 
-			<Modal
-				Open={Open}
-				setOpen={setOpen}>
+			<Modal>
 				{Pics.length !== 0 && (
 					<img
 						src={`https://live.staticflickr.com/${Pics[Index].server}/${Pics[Index].id}_${Pics[Index].secret}_b.jpg`}

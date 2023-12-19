@@ -4,10 +4,15 @@ import { useRef } from 'react';
 //import { CgMenuRight, CgClose } from 'react-icons/cg';
 import { MdWbSunny } from 'react-icons/md';
 import { BiSolidMoon } from 'react-icons/bi';
+import { useDispatch, useSelector } from 'react-redux';
+import * as types from '../../../redux/actionType';
 
-export default function Header({ MenuToggle, setMenuToggle, Dark, setDark }) {
+export default function Header() {
 	const path = useRef(process.env.PUBLIC_URL);
 	const menuEl = ['department', 'youtube', 'gallery', 'community', 'member', 'contact'];
+	const dispatch = useDispatch();
+	const MenuToggle = useSelector(store => store.menuReducer.menu);
+	const Dark = useSelector(store => store.darkReducer.dark);
 
 	return (
 		<header className='Header'>
@@ -35,7 +40,7 @@ export default function Header({ MenuToggle, setMenuToggle, Dark, setDark }) {
 			<div
 				className={`theme ${Dark ? 'dark' : ''}`}
 				onClick={() => {
-					setDark(!Dark);
+					dispatch({ type: types.DARK.start, payload: !Dark });
 				}}>
 				<div className='ball'></div>
 				<span className='icon'>
@@ -58,7 +63,7 @@ export default function Header({ MenuToggle, setMenuToggle, Dark, setDark }) {
 			)} */}
 			<div
 				className={`menu ${MenuToggle ? 'on' : ''}`}
-				onClick={() => setMenuToggle(!MenuToggle)}>
+				onClick={() => dispatch({ type: types.MENU.start, payload: !MenuToggle })}>
 				<span className='line1'></span>
 				<span className='line2'></span>
 				<span className='line3'></span>

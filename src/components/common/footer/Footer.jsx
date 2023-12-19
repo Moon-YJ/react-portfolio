@@ -1,27 +1,29 @@
 import './Footer.scss';
 import { Link } from 'react-router-dom';
-import { useRef, useState, useEffect } from 'react';
+import { useRef } from 'react';
 import { FaFacebookF, FaTwitter, FaYoutube, FaGithub } from 'react-icons/fa';
+import { useDispatch, useSelector } from 'react-redux';
+import * as types from '../../../redux/actionType';
 
-export default function Footer({ setDark }) {
+export default function Footer() {
 	const path = useRef(process.env.PUBLIC_URL);
-	const selectList = ['Light', 'Dark'];
-	const [Selected, setSelected] = useState('Light');
+	const dispatch = useDispatch();
+	const Dark = useSelector(store => store.darkReducer.dark);
 
-	const handleSelect = (e) => {
-		setSelected(e.target.value);
+	const handleSelect = e => {
+		e.target.value === 'Dark'
+			? dispatch({ type: types.DARK.start, payload: true })
+			: dispatch({ type: types.DARK.start, payload: false });
 	};
-
-	useEffect(() => {
-		Selected === 'Dark' && setDark(true);
-		Selected === 'Light' && setDark(false);
-	}, [Selected, setDark]);
 
 	return (
 		<footer className='Footer'>
 			<h1>
 				<Link to='/'>
-					<img src={`${path.current}/img/logo/logo.png`} alt='henge_logo' />
+					<img
+						src={`${path.current}/img/logo/logo.png`}
+						alt='henge_logo'
+					/>
 				</Link>
 			</h1>
 			<ul className='txt-set'>
@@ -31,12 +33,11 @@ export default function Footer({ setDark }) {
 				<li>Sitemap</li>
 			</ul>
 			<div className='btm'>
-				<select onChange={handleSelect} value={Selected}>
-					{selectList.map((list) => (
-						<option value={list} key={list}>
-							{list}
-						</option>
-					))}
+				<select
+					onChange={handleSelect}
+					value={Dark ? 'Dark' : 'Light'}>
+					<option value='Light'>Light</option>
+					<option value='Dark'>Dark</option>
 				</select>
 				<ul className='icon-set'>
 					<li>

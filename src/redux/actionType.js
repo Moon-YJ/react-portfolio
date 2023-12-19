@@ -3,3 +3,9 @@ export const MEMBERS = {
 	success: 'MEMBERS_SUCCESS',
 	fail: 'MEMBERS_FAIL'
 };
+
+export const YOUTUBE = {
+	start: 'YOUTUBE_START',
+	success: 'YOUTUBE_SUCCESS',
+	fail: 'YOUTUBE_FAIL'
+};

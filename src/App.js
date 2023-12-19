@@ -23,6 +23,7 @@ export default function App() {
 	const dispatch = useDispatch();
 	useEffect(() => {
 		dispatch({ type: types.MEMBERS.start });
+		dispatch({ type: types.YOUTUBE.start });
 	}, [dispatch]);
 
 	return (

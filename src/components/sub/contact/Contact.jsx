@@ -7,6 +7,7 @@ import { RiArrowRightDownLine } from 'react-icons/ri';
 import { IoIosMail } from 'react-icons/io';
 import { BsFillTelephoneFill } from 'react-icons/bs';
 import emailjs from '@emailjs/browser';
+import { useThrottle } from '../../../hooks/useThrottle';
 
 export default function Contact() {
 	const form = useRef(null);
@@ -67,11 +68,13 @@ export default function Contact() {
 	const roadFrame = useRef(null);
 	const markerInstance = useRef(null);
 	const path = useRef(process.env.PUBLIC_URL);
-	const roadview = useRef(() => {
+
+	const roadview = useCallback(() => {
 		new kakao.current.maps.RoadviewClient().getNearestPanoId(mapInfo.current[Index].latlng, 100, panoId => {
 			new kakao.current.maps.Roadview(roadFrame.current).setPanoId(panoId, mapInfo.current[Index].latlng);
 		});
-	});
+	}, [Index]);
+
 	const mapInfo = useRef([
 		{
 			title: 'SHOWROOM',
@@ -90,7 +93,7 @@ export default function Contact() {
 			support: 'Request info or get price',
 			email: 'info2@arredodalpozzo.it',
 			tel: '+01 987-4134-29',
-			latlng: new kakao.current.maps.LatLng(37.56250041835499, 126.98516157408622),
+			latlng: new kakao.current.maps.LatLng(37.39277016022578, 127.11203617994478),
 			imgSrc: `${path.current}/img/contact/pin.png`,
 			imgSize: new kakao.current.maps.Size(40, 40),
 			imgPos: { offset: new kakao.current.maps.Point(20, 40) }
@@ -107,34 +110,39 @@ export default function Contact() {
 	});
 
 	const setCenter = useCallback(() => {
-		roadview.current();
 		mapInstance.current.setCenter(mapInfo.current[Index].latlng);
 	}, [Index]);
 
+	const setThrottled = useThrottle(setCenter, 300);
+
 	useEffect(() => {
 		mapFrame.current.innerHTML = '';
+		roadFrame.current.innerHTML = '';
 		// 지도 출력
 		mapInstance.current = new kakao.current.maps.Map(mapFrame.current, {
 			center: mapInfo.current[Index].latlng,
 			level: 4
 		});
 		markerInstance.current.setMap(mapInstance.current);
-		// 로드뷰 출력
-		roadview.current();
+
 		setTraffic(false);
 		setRoadView(false);
 		// 줌 기능 관련
 		mapInstance.current.setZoomable(false);
 		mapInstance.current.addControl(new kakao.current.maps.ZoomControl(), kakao.current.maps.ControlPosition.RIGHT);
-		window.addEventListener('resize', setCenter);
-		return () => window.removeEventListener('resize', setCenter);
-	}, [Index, setCenter]);
+		window.addEventListener('resize', setThrottled);
+		return () => window.removeEventListener('resize', setThrottled);
+	}, [Index, setCenter, setThrottled]);
 
 	useEffect(() => {
 		Traffic
 			? mapInstance.current.addOverlayMapTypeId(kakao.current.maps.MapTypeId.TRAFFIC)
 			: mapInstance.current.removeOverlayMapTypeId(kakao.current.maps.MapTypeId.TRAFFIC);
 	}, [Traffic]);
+
+	useEffect(() => {
+		RoadView && roadFrame.current.children.length === 0 && roadview();
+	}, [RoadView, roadview]);
 
 	useEffect(() => {
 		setErrors(chkInput(Val));
@@ -257,6 +265,7 @@ export default function Contact() {
 						<button
 							className={Traffic ? 'on' : ''}
 							onClick={() => {
+								console.log(Traffic, '::traffic btn');
 								if (RoadView) return;
 								setTraffic(!Traffic);
 							}}
@@ -266,6 +275,7 @@ export default function Contact() {
 						<button
 							className={RoadView ? 'on' : ''}
 							onClick={() => {
+								console.log(RoadView);
 								setRoadView(!RoadView);
 								setTraffic(false);
 							}}>

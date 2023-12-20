@@ -69,12 +69,6 @@ export default function Contact() {
 	const markerInstance = useRef(null);
 	const path = useRef(process.env.PUBLIC_URL);
 
-	const roadview = useCallback(() => {
-		new kakao.current.maps.RoadviewClient().getNearestPanoId(mapInfo.current[Index].latlng, 100, panoId => {
-			new kakao.current.maps.Roadview(roadFrame.current).setPanoId(panoId, mapInfo.current[Index].latlng);
-		});
-	}, [Index]);
-
 	const mapInfo = useRef([
 		{
 			title: 'SHOWROOM',
@@ -109,11 +103,17 @@ export default function Contact() {
 		)
 	});
 
+	const roadview = useCallback(() => {
+		new kakao.current.maps.RoadviewClient().getNearestPanoId(mapInfo.current[Index].latlng, 100, panoId => {
+			new kakao.current.maps.Roadview(roadFrame.current).setPanoId(panoId, mapInfo.current[Index].latlng);
+		});
+	}, [Index]);
+
 	const setCenter = useCallback(() => {
 		mapInstance.current.setCenter(mapInfo.current[Index].latlng);
 	}, [Index]);
 
-	const setThrottled = useThrottle(setCenter, 300);
+	const setThrottled = useThrottle(setCenter, 100);
 
 	useEffect(() => {
 		mapFrame.current.innerHTML = '';
@@ -132,7 +132,7 @@ export default function Contact() {
 		mapInstance.current.addControl(new kakao.current.maps.ZoomControl(), kakao.current.maps.ControlPosition.RIGHT);
 		window.addEventListener('resize', setThrottled);
 		return () => window.removeEventListener('resize', setThrottled);
-	}, [Index, setCenter, setThrottled]);
+	}, [Index, setThrottled]);
 
 	useEffect(() => {
 		Traffic

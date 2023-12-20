@@ -113,7 +113,7 @@ export default function Contact() {
 		mapInstance.current.setCenter(mapInfo.current[Index].latlng);
 	}, [Index]);
 
-	const setThrottled = useThrottle(setCenter, 100);
+	//const setThrottled = useThrottle(setCenter, 100);
 
 	useEffect(() => {
 		mapFrame.current.innerHTML = '';
@@ -130,9 +130,9 @@ export default function Contact() {
 		// 줌 기능 관련
 		mapInstance.current.setZoomable(false);
 		mapInstance.current.addControl(new kakao.current.maps.ZoomControl(), kakao.current.maps.ControlPosition.RIGHT);
-		window.addEventListener('resize', setThrottled);
-		return () => window.removeEventListener('resize', setThrottled);
-	}, [Index, setThrottled]);
+		window.addEventListener('resize', setCenter);
+		return () => window.removeEventListener('resize', setCenter);
+	}, [Index, setCenter]);
 
 	useEffect(() => {
 		Traffic

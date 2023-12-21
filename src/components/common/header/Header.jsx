@@ -4,8 +4,14 @@ import { useRef } from 'react';
 //import { CgMenuRight, CgClose } from 'react-icons/cg';
 import { MdWbSunny } from 'react-icons/md';
 import { BiSolidMoon } from 'react-icons/bi';
+import { useDispatch, useSelector } from 'react-redux';
+import { darkToggle } from '../../../redux/darkSlice';
+import { menuToggle } from '../../../redux/menuSlice';
 
-export default function Header({ MenuToggle, setMenuToggle, Dark, setDark }) {
+export default function Header() {
+	const dispatch = useDispatch();
+	const Dark = useSelector(store => store.dark.isDark);
+	const MenuToggle = useSelector(store => store.menu.toggle);
 	const path = useRef(process.env.PUBLIC_URL);
 	const menuEl = ['department', 'youtube', 'gallery', 'community', 'member', 'contact'];
 
@@ -35,7 +41,7 @@ export default function Header({ MenuToggle, setMenuToggle, Dark, setDark }) {
 			<div
 				className={`theme ${Dark ? 'dark' : ''}`}
 				onClick={() => {
-					setDark(!Dark);
+					dispatch(darkToggle());
 				}}>
 				<div className='ball'></div>
 				<span className='icon'>
@@ -58,7 +64,7 @@ export default function Header({ MenuToggle, setMenuToggle, Dark, setDark }) {
 			)} */}
 			<div
 				className={`menu ${MenuToggle ? 'on' : ''}`}
-				onClick={() => setMenuToggle(!MenuToggle)}>
+				onClick={() => dispatch(menuToggle())}>
 				<span className='line1'></span>
 				<span className='line2'></span>
 				<span className='line3'></span>

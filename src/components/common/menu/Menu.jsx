@@ -6,15 +6,21 @@ import { MdWbSunny } from 'react-icons/md';
 import { BiSolidMoon } from 'react-icons/bi';
 import { customText } from '../../../hooks/useText';
 import { AnimatePresence, motion } from 'framer-motion';
+import { useDispatch, useSelector } from 'react-redux';
+import { darkToggle } from '../../../redux/darkSlice';
+import { menuClose, menuToggle } from '../../../redux/menuSlice';
 
-export default function Menu({ setMenuToggle, MenuToggle, setDark, Dark }) {
+export default function Menu() {
+	const dispatch = useDispatch();
+	const Dark = useSelector(store => store.dark.isDark);
+	const MenuToggle = useSelector(store => store.menu.toggle);
 	const path = useRef(process.env.PUBLIC_URL);
 	const menuEl = ['department', 'youtube', 'gallery', 'community', 'member', 'contact'];
 	const customMenu = customText('combine');
 
 	const closeMenu = useCallback(() => {
-		window.innerWidth >= 1000 && setMenuToggle(false);
-	}, [setMenuToggle]);
+		window.innerWidth >= 1000 && dispatch(menuClose());
+	}, [dispatch]);
 
 	useEffect(() => {
 		closeMenu();
@@ -35,7 +41,7 @@ export default function Menu({ setMenuToggle, MenuToggle, setDark, Dark }) {
 					transition={{ duration: 0.4 }}>
 					<h1
 						className='logo'
-						onClick={() => setMenuToggle(false)}>
+						onClick={() => dispatch(menuToggle())}>
 						<Link to='/'>
 							<img
 								src={`${path.current}/img/logo/logo.png`}
@@ -50,7 +56,7 @@ export default function Menu({ setMenuToggle, MenuToggle, setDark, Dark }) {
 									<NavLink
 										to={`/${el}`}
 										activeClassName={'on'}
-										onClick={() => setMenuToggle(false)}>
+										onClick={() => dispatch(menuToggle())}>
 										{customMenu(el)}
 									</NavLink>
 								</li>
@@ -59,7 +65,7 @@ export default function Menu({ setMenuToggle, MenuToggle, setDark, Dark }) {
 						<div
 							className={`theme ${Dark ? 'dark' : ''}`}
 							onClick={() => {
-								setDark(!Dark);
+								dispatch(darkToggle());
 							}}>
 							<div className='ball'></div>
 							<span className='icon'>

@@ -2,12 +2,16 @@ import './Footer.scss';
 import { Link } from 'react-router-dom';
 import { useRef } from 'react';
 import { FaFacebookF, FaTwitter, FaYoutube, FaGithub } from 'react-icons/fa';
+import { useDispatch, useSelector } from 'react-redux';
+import { darkOff, darkOn } from '../../../redux/darkSlice';
 
-export default function Footer({ Dark, setDark }) {
+export default function Footer() {
+	const dispatch = useDispatch();
+	const Dark = useSelector(store => store.dark.isDark);
 	const path = useRef(process.env.PUBLIC_URL);
 
 	const handleSelect = e => {
-		e.target.value === 'Dark' ? setDark(true) : setDark(false);
+		e.target.value === 'Dark' ? dispatch(darkOn()) : dispatch(darkOff());
 	};
 
 	return (

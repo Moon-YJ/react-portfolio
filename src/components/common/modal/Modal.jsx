@@ -1,8 +1,13 @@
 import './Modal.scss';
 import { IoMdClose } from 'react-icons/io';
 import { AnimatePresence, motion } from 'framer-motion';
+import { useDispatch, useSelector } from 'react-redux';
+import { modalClose } from '../../../redux/modalSlice';
 
-export default function Modal({ children, Open, setOpen }) {
+export default function Modal({ children }) {
+	const dispatch = useDispatch();
+	const Open = useSelector(store => store.modal.open);
+
 	return (
 		<AnimatePresence>
 			{Open && (
@@ -25,7 +30,7 @@ export default function Modal({ children, Open, setOpen }) {
 						animate={{ rotate: 90, scale: 1 }}
 						exit={{ rotate: 180, scale: 0.5 }}
 						transition={{ duration: 0.5 }}
-						onClick={() => setOpen(false)}>
+						onClick={() => dispatch(modalClose())}>
 						<IoMdClose />
 					</motion.button>
 				</motion.aside>

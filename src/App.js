@@ -13,17 +13,17 @@ import './globalStyles/Reset.scss';
 import { useMedia } from './hooks/useMedia';
 import Detail from './components/sub/youtube/Detail';
 import Menu from './components/common/menu/Menu';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { fetchDepartment } from './redux/departmentSlice';
 import { fetchYoutube } from './redux/youtubeSlice';
 import { fetchFlickr } from './redux/flickrSlice';
 import { useDispatch, useSelector } from 'react-redux';
 
 export default function App() {
-	const [MenuToggle, setMenuToggle] = useState(false);
-	const [Dark, setDark] = useState(false);
 	const dispatch = useDispatch();
-	console.log(useSelector(store => store));
+	const Dark = useSelector(store => store.dark.isDark);
+
+	//console.log(useSelector(store => store));
 
 	useEffect(() => {
 		dispatch(fetchDepartment());
@@ -33,12 +33,7 @@ export default function App() {
 
 	return (
 		<div className={`wrap ${Dark ? 'dark' : ''} ${useMedia()}`}>
-			<Header
-				MenuToggle={MenuToggle}
-				setMenuToggle={setMenuToggle}
-				Dark={Dark}
-				setDark={setDark}
-			/>
+			<Header />
 			<Route
 				exact
 				path='/'
@@ -72,16 +67,8 @@ export default function App() {
 				path='/detail/:id'
 				component={Detail}
 			/>
-			<Menu
-				setMenuToggle={setMenuToggle}
-				MenuToggle={MenuToggle}
-				Dark={Dark}
-				setDark={setDark}
-			/>
-			<Footer
-				Dark={Dark}
-				setDark={setDark}
-			/>
+			<Menu />
+			<Footer />
 		</div>
 	);
 }

@@ -6,6 +6,8 @@ import { CgSearch } from 'react-icons/cg';
 import { AiOutlineClose } from 'react-icons/ai';
 import { RiArrowRightDownLine } from 'react-icons/ri';
 import Modal from '../../common/modal/Modal';
+import { useDispatch } from 'react-redux';
+import { modalOpen } from '../../../redux/modalSlice';
 
 export default function Gallery() {
 	const myId = '195472166@N07';
@@ -20,8 +22,8 @@ export default function Gallery() {
 	const [Pics, setPics] = useState([]);
 	const [Loaded, setLoaded] = useState(false);
 	const [Index, setIndex] = useState(0);
-	const [Open, setOpen] = useState(false);
 	const [Mounted, setMounted] = useState(true);
+	const dispatch = useDispatch();
 
 	const endLoading = useCallback(() => {
 		setTimeout(() => {
@@ -101,7 +103,7 @@ export default function Gallery() {
 	};
 
 	const handleModal = idx => {
-		setOpen(true);
+		dispatch(modalOpen());
 		setIndex(idx);
 	};
 
@@ -231,9 +233,7 @@ export default function Gallery() {
 				</section>
 			</Layout>
 
-			<Modal
-				Open={Open}
-				setOpen={setOpen}>
+			<Modal>
 				{Pics.length !== 0 && (
 					<img
 						src={`https://live.staticflickr.com/${Pics[Index].server}/${Pics[Index].id}_${Pics[Index].secret}_b.jpg`}

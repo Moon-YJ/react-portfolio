@@ -113,9 +113,10 @@ export default function Gallery() {
 	useEffect(() => {
 		conWrap.current?.style.setProperty('--gap', gap.current + 'px');
 		endLoading();
+		dispatch(fetchFlickr({ type: 'user', id: id.current }));
 
 		return () => setMounted(false);
-	}, [endLoading]);
+	}, [endLoading, dispatch]);
 
 	return (
 		<>

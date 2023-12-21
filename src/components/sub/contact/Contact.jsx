@@ -130,9 +130,7 @@ export default function Contact() {
 		// 줌 기능 관련
 		mapInstance.current.setZoomable(false);
 		mapInstance.current.addControl(new kakao.current.maps.ZoomControl(), kakao.current.maps.ControlPosition.RIGHT);
-		window.addEventListener('resize', setThrottled);
-		return () => window.removeEventListener('resize', setThrottled);
-	}, [Index, setCenter, setThrottled]);
+	}, [Index]);
 
 	useEffect(() => {
 		Traffic
@@ -143,6 +141,11 @@ export default function Contact() {
 	useEffect(() => {
 		RoadView && roadFrame.current.children.length === 0 && roadview();
 	}, [RoadView, roadview]);
+
+	useEffect(() => {
+		window.addEventListener('resize', setThrottled);
+		return () => window.removeEventListener('resize', setThrottled);
+	}, [setThrottled]);
 
 	useEffect(() => {
 		setErrors(chkInput(Val));
@@ -265,7 +268,6 @@ export default function Contact() {
 						<button
 							className={Traffic ? 'on' : ''}
 							onClick={() => {
-								console.log(Traffic, '::traffic btn');
 								if (RoadView) return;
 								setTraffic(!Traffic);
 							}}
@@ -275,7 +277,6 @@ export default function Contact() {
 						<button
 							className={RoadView ? 'on' : ''}
 							onClick={() => {
-								console.log(RoadView);
 								setRoadView(!RoadView);
 								setTraffic(false);
 							}}>

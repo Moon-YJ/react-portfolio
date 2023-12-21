@@ -7,6 +7,7 @@ import { RiArrowRightDownLine } from 'react-icons/ri';
 import { IoIosMail } from 'react-icons/io';
 import { BsFillTelephoneFill } from 'react-icons/bs';
 import emailjs from '@emailjs/browser';
+import { useThrottle } from '../../../hooks/useThrottle';
 
 export default function Contact() {
 	const form = useRef(null);
@@ -111,6 +112,8 @@ export default function Contact() {
 		mapInstance.current.setCenter(mapInfo.current[Index].latlng);
 	}, [Index]);
 
+	const setThrottled = useThrottle(setCenter, 300);
+
 	useEffect(() => {
 		mapFrame.current.innerHTML = '';
 		// 지도 출력
@@ -126,15 +129,18 @@ export default function Contact() {
 		// 줌 기능 관련
 		mapInstance.current.setZoomable(false);
 		mapInstance.current.addControl(new kakao.current.maps.ZoomControl(), kakao.current.maps.ControlPosition.RIGHT);
-		window.addEventListener('resize', setCenter);
-		return () => window.removeEventListener('resize', setCenter);
-	}, [Index, setCenter]);
+	}, [Index]);
 
 	useEffect(() => {
 		Traffic
 			? mapInstance.current.addOverlayMapTypeId(kakao.current.maps.MapTypeId.TRAFFIC)
 			: mapInstance.current.removeOverlayMapTypeId(kakao.current.maps.MapTypeId.TRAFFIC);
 	}, [Traffic]);
+
+	useEffect(() => {
+		window.addEventListener('resize', setThrottled);
+		return () => window.removeEventListener('resize', setThrottled);
+	}, [setThrottled]);
 
 	useEffect(() => {
 		setErrors(chkInput(Val));

@@ -10,6 +10,7 @@ export default function Department() {
 	const [Tit, setTit] = useState('');
 	const [SubMemberData, setSubMemberData] = useState([]);
 	const [SubTit, setSubTit] = useState('');
+	const [Mounted, setMounted] = useState(true);
 
 	const customTit = customText('combine');
 
@@ -29,14 +30,20 @@ export default function Department() {
 
 	useEffect(() => {
 		fetchMember();
+		return () => setMounted(false);
 	}, []);
 
 	return (
-		<Layout index={'01'} title={'Department'}>
-			{TopData && (
+		<Layout
+			index={'01'}
+			title={'Department'}>
+			{Mounted && TopData && (
 				<section className='president'>
 					<div className='pic'>
-						<img src={`${path.current}/img/${TopData.pic}`} alt={TopData.name} />
+						<img
+							src={`${path.current}/img/${TopData.pic}`}
+							alt={TopData.name}
+						/>
 					</div>
 					<div className='quotes'>"</div>
 					<div className='con'>
@@ -59,24 +66,8 @@ export default function Department() {
 			<section className='team'>
 				<h1 className='tit'>{customTit(Tit)}</h1>
 				<div className='team-box'>
-					{MemberData.map((data, idx) => {
-						return (
-							<article key={data + idx}>
-								<div className='info'>
-									<h3>{data.name}</h3>
-									<p>{data.position}</p>
-								</div>
-								<div className='pic'>
-									<img src={`${path.current}/img/${data.pic}`} alt={data.name} />
-								</div>
-							</article>
-						);
-					})}
-				</div>
-				<div className='team-support'>
-					<h2 className='stit'>{customTit(SubTit)}</h2>
-					<div className='team-box'>
-						{SubMemberData.map((data, idx) => {
+					{Mounted &&
+						MemberData.map((data, idx) => {
 							return (
 								<article key={data + idx}>
 									<div className='info'>
@@ -84,11 +75,35 @@ export default function Department() {
 										<p>{data.position}</p>
 									</div>
 									<div className='pic'>
-										<img src={`${path.current}/img/${data.pic}`} alt={data.name} />
+										<img
+											src={`${path.current}/img/${data.pic}`}
+											alt={data.name}
+										/>
 									</div>
 								</article>
 							);
 						})}
+				</div>
+				<div className='team-support'>
+					<h2 className='stit'>{customTit(SubTit)}</h2>
+					<div className='team-box'>
+						{Mounted &&
+							SubMemberData.map((data, idx) => {
+								return (
+									<article key={data + idx}>
+										<div className='info'>
+											<h3>{data.name}</h3>
+											<p>{data.position}</p>
+										</div>
+										<div className='pic'>
+											<img
+												src={`${path.current}/img/${data.pic}`}
+												alt={data.name}
+											/>
+										</div>
+									</article>
+								);
+							})}
 					</div>
 				</div>
 			</section>

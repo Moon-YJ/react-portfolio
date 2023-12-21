@@ -1,7 +1,9 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 
+const path = process.env.PUBLIC_URL;
+
 export const fetchDepartment = createAsyncThunk('members', async () => {
-	const data = await fetch(`${process.env.PUBLIC_URL}/DB/department.json`);
+	const data = await fetch(`${path}/DB/department.json`);
 	const json = await data.json();
 	return json;
 });
@@ -13,14 +15,16 @@ const departmentSlice = createSlice({
 		isLoading: false
 	},
 	extraReducers: {
-		[fetchDepartment.pending]: state => (state.isLoading = true),
-		[fetchDepartment.fulfilled]: (state, action) => {
-			state.data = action.payload;
+		[fetchDepartment.pending]: state => {
 			state.isLoading = true;
 		},
-		[fetchDepartment.rejected]: (state, action) => {
+		[fetchDepartment.fulfilled]: (state, action) => {
+			state.isLoading = false;
 			state.data = action.payload;
-			state.isLoading = true;
+		},
+		[fetchDepartment.rejected]: (state, action) => {
+			state.isLoading = false;
+			state.data = action.payload;
 		}
 	}
 });

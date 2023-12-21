@@ -22,11 +22,11 @@ const youtubeSlice = createSlice({
 		},
 		[fetchYoutube.fulfilled]: (state, action) => {
 			state.data = action.payload;
-			state.isLoading = true;
+			state.isLoading = false;
 		},
 		[fetchYoutube.rejected]: (state, action) => {
 			state.data = action.payload;
-			state.isLoading = true;
+			state.isLoading = false;
 		}
 	}
 });

@@ -13,11 +13,23 @@ import './globalStyles/Reset.scss';
 import { useMedia } from './hooks/useMedia';
 import Detail from './components/sub/youtube/Detail';
 import Menu from './components/common/menu/Menu';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import { fetchDepartment } from './redux/departmentSlice';
+import { fetchYoutube } from './redux/youtubeSlice';
+import { fetchFlickr } from './redux/flickrSlice';
+import { useDispatch, useSelector } from 'react-redux';
 
 export default function App() {
 	const [MenuToggle, setMenuToggle] = useState(false);
 	const [Dark, setDark] = useState(false);
+	const dispatch = useDispatch();
+	console.log(useSelector(store => store));
+
+	useEffect(() => {
+		dispatch(fetchDepartment());
+		dispatch(fetchYoutube());
+		dispatch(fetchFlickr({ type: 'user', id: '195294341@N02' }));
+	}, [dispatch]);
 
 	return (
 		<div className={`wrap ${Dark ? 'dark' : ''} ${useMedia()}`}>

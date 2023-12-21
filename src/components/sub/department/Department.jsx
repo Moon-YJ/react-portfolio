@@ -1,4 +1,4 @@
-import { useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { customText } from '../../../hooks/useText';
 import Layout from '../../common/layout/Layout';
 import './Department.scss';
@@ -7,6 +7,7 @@ import { useSelector } from 'react-redux';
 export default function Department() {
 	const path = useRef(process.env.PUBLIC_URL);
 	const customTit = customText('combine');
+	const [Mounted, setMounted] = useState(true);
 
 	const membersReducer = useSelector(store => store.membersReducer.members);
 	const TopData = Object.values(membersReducer)[0];
@@ -15,11 +16,15 @@ export default function Department() {
 	const SubMemberData = Object.values(membersReducer)[2];
 	const SubTit = Object.keys(membersReducer)[2];
 
+	useEffect(() => {
+		return () => setMounted(false);
+	}, []);
+
 	return (
 		<Layout
 			index={'01'}
 			title={'Department'}>
-			{TopData && (
+			{Mounted && TopData && (
 				<section className='president'>
 					<div className='pic'>
 						<img
@@ -45,27 +50,8 @@ export default function Department() {
 			<section className='team'>
 				<h1 className='tit'>{Tit && customTit(Tit)}</h1>
 				<div className='team-box'>
-					{MemberData?.map((data, idx) => {
-						return (
-							<article key={data + idx}>
-								<div className='info'>
-									<h3>{data.name}</h3>
-									<p>{data.position}</p>
-								</div>
-								<div className='pic'>
-									<img
-										src={`${path.current}/img/${data.pic}`}
-										alt={data.name}
-									/>
-								</div>
-							</article>
-						);
-					})}
-				</div>
-				<div className='team-support'>
-					<h2 className='stit'>{SubTit && customTit(SubTit)}</h2>
-					<div className='team-box'>
-						{SubMemberData?.map((data, idx) => {
+					{Mounted &&
+						MemberData?.map((data, idx) => {
 							return (
 								<article key={data + idx}>
 									<div className='info'>
@@ -81,6 +67,27 @@ export default function Department() {
 								</article>
 							);
 						})}
+				</div>
+				<div className='team-support'>
+					<h2 className='stit'>{SubTit && customTit(SubTit)}</h2>
+					<div className='team-box'>
+						{Mounted &&
+							SubMemberData?.map((data, idx) => {
+								return (
+									<article key={data + idx}>
+										<div className='info'>
+											<h3>{data.name}</h3>
+											<p>{data.position}</p>
+										</div>
+										<div className='pic'>
+											<img
+												src={`${path.current}/img/${data.pic}`}
+												alt={data.name}
+											/>
+										</div>
+									</article>
+								);
+							})}
 					</div>
 				</div>
 			</section>

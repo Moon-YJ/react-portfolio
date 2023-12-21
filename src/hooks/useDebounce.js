@@ -1,4 +1,4 @@
-import { useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 export const useDebounce = (value, delay = 500) => {
 	const [Debounced, setDebounced] = useState(value);
@@ -9,5 +9,9 @@ export const useDebounce = (value, delay = 500) => {
 	blocker.current = setTimeout(() => {
 		setDebounced(value);
 	}, delay);
+
+	useEffect(() => {
+		return () => clearTimeout(blocker.current);
+	}, []);
 	return Debounced;
 };

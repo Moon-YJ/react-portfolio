@@ -1,4 +1,4 @@
-import { useEffect, useState, useRef } from 'react';
+import { useEffect, useState, useRef, useCallback } from 'react';
 import Layout from '../../common/layout/Layout';
 import './Gallery.scss';
 import Masonry from 'react-masonry-component';
@@ -18,22 +18,22 @@ export default function Gallery() {
 	const isUser = useRef('');
 	const refInput = useRef(null);
 	const isSearch = useRef(false);
-	const isMounted = useRef(false);
 	const path = useRef(process.env.PUBLIC_URL);
 	const [Loaded, setLoaded] = useState(false);
 	const [Index, setIndex] = useState(0);
+	const [Mounted, setMounted] = useState(true);
 
 	const dispatch = useDispatch();
 	const Pics = useSelector(store => store.flickrReducer.flickr);
 
-	const endLoading = () => {
+	const endLoading = useCallback(() => {
 		setTimeout(() => {
-			if (isMounted.current) {
+			if (Mounted) {
 				setLoaded(true);
-				conWrap.current && conWrap.current.classList.add('on');
+				conWrap.current?.classList.add('on');
 			}
 		}, 1200);
-	};
+	}, [Mounted]);
 
 	const setLoading = () => {
 		setLoaded(false);
@@ -109,12 +109,11 @@ export default function Gallery() {
 	};
 
 	useEffect(() => {
-		isMounted.current = true;
 		conWrap.current && conWrap.current.style.setProperty('--gap', gap.current + 'px');
 		endLoading();
 
-		return () => (isMounted.current = false);
-	}, []);
+		return () => setMounted(false);
+	}, [endLoading]);
 
 	return (
 		<>
@@ -182,32 +181,33 @@ export default function Gallery() {
 							className={'container'}
 							options={{ gutter: gap.current }}>
 							{Pics.length === 0 && isSearch.current && <h3>No matching images found</h3>}
-							{Pics.map((pic, idx) => {
-								return (
-									<article key={pic.id}>
-										<div className='pic'>
-											<img
-												src={`https://live.staticflickr.com/${pic.server}/${pic.id}_${pic.secret}_b.jpg`}
-												alt={pic.title}
-												onClick={() => handleModal(idx)}
-											/>
-										</div>
-										<h2>
-											<span className='num'>{idx < 9 ? '0' + (idx + 1) : idx + 1}</span>
-											{pic.title}
-										</h2>
-										<div className='profile'>
-											<p onClick={handleOwner}>{pic.owner}</p>
-											<img
-												src={`http://farm${pic.farm}.staticflickr.com/${pic.server}/buddyicons/${pic.owner}.jpg`}
-												alt={pic.owner}
-												onClick={handleImg}
-												onError={e => e.target.setAttribute('src', 'https://www.flickr.com/images/buddyicon.gif')}
-											/>
-										</div>
-									</article>
-								);
-							})}
+							{Mounted &&
+								Pics.map((pic, idx) => {
+									return (
+										<article key={pic.id}>
+											<div className='pic'>
+												<img
+													src={`https://live.staticflickr.com/${pic.server}/${pic.id}_${pic.secret}_b.jpg`}
+													alt={pic.title}
+													onClick={() => handleModal(idx)}
+												/>
+											</div>
+											<h2>
+												<span className='num'>{idx < 9 ? '0' + (idx + 1) : idx + 1}</span>
+												{pic.title}
+											</h2>
+											<div className='profile'>
+												<p onClick={handleOwner}>{pic.owner}</p>
+												<img
+													src={`http://farm${pic.farm}.staticflickr.com/${pic.server}/buddyicons/${pic.owner}.jpg`}
+													alt={pic.owner}
+													onClick={handleImg}
+													onError={e => e.target.setAttribute('src', 'https://www.flickr.com/images/buddyicon.gif')}
+												/>
+											</div>
+										</article>
+									);
+								})}
 						</Masonry>
 					</div>
 				</section>

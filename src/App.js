@@ -23,12 +23,10 @@ export default function App() {
 	const dispatch = useDispatch();
 	const Dark = useSelector(store => store.dark.isDark);
 
-	//console.log(useSelector(store => store));
-
 	useEffect(() => {
 		dispatch(fetchDepartment());
 		dispatch(fetchYoutube());
-		dispatch(fetchFlickr({ type: 'user', id: '195294341@N02' }));
+		dispatch(fetchFlickr({ type: 'user', id: '195472166@N07' }));
 	}, [dispatch]);
 
 	return (

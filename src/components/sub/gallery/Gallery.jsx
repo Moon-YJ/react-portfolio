@@ -6,8 +6,10 @@ import { CgSearch } from 'react-icons/cg';
 import { AiOutlineClose } from 'react-icons/ai';
 import { RiArrowRightDownLine } from 'react-icons/ri';
 import Modal from '../../common/modal/Modal';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { modalOpen } from '../../../redux/modalSlice';
+import { fetchFlickr } from '../../../redux/flickrSlice';
+import { customText } from '../../../hooks/useText';
 
 export default function Gallery() {
 	const myId = '195472166@N07';
@@ -19,11 +21,12 @@ export default function Gallery() {
 	const refInput = useRef(null);
 	const isSearch = useRef(false);
 	const path = useRef(process.env.PUBLIC_URL);
-	const [Pics, setPics] = useState([]);
 	const [Loaded, setLoaded] = useState(false);
 	const [Index, setIndex] = useState(0);
 	const [Mounted, setMounted] = useState(true);
 	const dispatch = useDispatch();
+	const Pics = useSelector(store => store.flickr.data);
+	const shortenTxt = customText('shorten');
 
 	const endLoading = useCallback(() => {
 		setTimeout(() => {
@@ -54,7 +57,7 @@ export default function Gallery() {
 		activeBtn(e);
 		id.current = '';
 		isUser.current = '';
-		fetchFlickr({ type: 'random' });
+		dispatch(fetchFlickr({ type: 'random' }));
 		endLoading();
 	};
 
@@ -64,7 +67,7 @@ export default function Gallery() {
 		activeBtn(e);
 		id.current = myId;
 		isUser.current = 'myId';
-		fetchFlickr({ type: 'user', id: id.current });
+		dispatch(fetchFlickr({ type: 'user', id: id.current }));
 		endLoading();
 	};
 
@@ -75,7 +78,7 @@ export default function Gallery() {
 		if (isUser.current) return;
 		setLoading();
 		isUser.current = ownerId;
-		fetchFlickr({ type: 'user', id: ownerId });
+		dispatch(fetchFlickr({ type: 'user', id: ownerId }));
 		endLoading();
 	};
 
@@ -85,7 +88,7 @@ export default function Gallery() {
 		if (e.target.innerText === myId) return;
 		setLoading();
 		activeBtn();
-		fetchFlickr({ type: 'user', id: e.target.innerText });
+		dispatch(fetchFlickr({ type: 'user', id: e.target.innerText }));
 		endLoading();
 	};
 
@@ -97,7 +100,7 @@ export default function Gallery() {
 		if (!searchVal) return;
 		setLoading();
 		activeBtn();
-		fetchFlickr({ type: 'search', keyword: refInput.current.value });
+		dispatch(fetchFlickr({ type: 'search', keyword: refInput.current.value }));
 		endLoading();
 		refInput.current.value = '';
 	};
@@ -107,30 +110,9 @@ export default function Gallery() {
 		setIndex(idx);
 	};
 
-	const fetchFlickr = async opt => {
-		const num = 20;
-		const flickr_api = process.env.REACT_APP_FLICKR_KEY;
-		const baseURL = `https://www.flickr.com/services/rest/?&api_key=${flickr_api}&per_page=${num}&format=json&nojsoncallback=1&method=`;
-		const method_random = 'flickr.interestingness.getList';
-		const method_user = 'flickr.people.getPhotos';
-		const method_search = 'flickr.photos.search';
-		const randomURL = `${baseURL}${method_random}`;
-		const userURL = `${baseURL}${method_user}&user_id=${opt.id}`;
-		const searchURL = `${baseURL}${method_search}&tags=${opt.keyword}`;
-		let url = '';
-		opt.type === 'random' && (url = randomURL);
-		opt.type === 'user' && (url = userURL);
-		opt.type === 'search' && (url = searchURL);
-
-		const data = await fetch(url);
-		const json = await data.json();
-		setPics(json.photos.photo);
-	};
-
 	useEffect(() => {
-		conWrap.current && conWrap.current.style.setProperty('--gap', gap.current + 'px');
+		conWrap.current?.style.setProperty('--gap', gap.current + 'px');
 		endLoading();
-		fetchFlickr({ type: 'user', id: id.current });
 
 		return () => setMounted(false);
 	}, [endLoading]);
@@ -189,7 +171,10 @@ export default function Gallery() {
 								type='text'
 								placeholder='Search'
 							/>
-							<button onClick={() => refInput.current.value && (refInput.current.value = '')}>
+							<button
+								onClick={() => {
+									refInput.current.value && (refInput.current.value = '');
+								}}>
 								<AiOutlineClose />
 							</button>
 						</form>
@@ -214,7 +199,7 @@ export default function Gallery() {
 											</div>
 											<h2>
 												<span className='num'>{idx < 9 ? '0' + (idx + 1) : idx + 1}</span>
-												{pic.title}
+												{shortenTxt(pic.title, 25)}
 											</h2>
 											<div className='profile'>
 												<p onClick={handleOwner}>{pic.owner}</p>

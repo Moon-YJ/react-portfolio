@@ -13,18 +13,17 @@ import './globalStyles/Reset.scss';
 import { useMedia } from './hooks/useMedia';
 import Detail from './components/sub/youtube/Detail';
 import Menu from './components/common/menu/Menu';
-import { useEffect } from 'react';
+import { useEffect, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import * as types from './redux/actionType';
 
 export default function App() {
 	const dispatch = useDispatch();
 	const Dark = useSelector(store => store.darkReducer.dark);
+	const arr = useRef(['MEMBERS', 'YOUTUBE', 'FLICKR']);
 
 	useEffect(() => {
-		dispatch({ type: types.MEMBERS.start });
-		dispatch({ type: types.YOUTUBE.start });
-		dispatch({ type: types.FLICKR.start, opt: { type: 'user', id: '195472166@N07' } });
+		arr.current.forEach(name => dispatch({ type: types[name].start }));
 	}, [dispatch]);
 
 	return (

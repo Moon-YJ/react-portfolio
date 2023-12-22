@@ -110,10 +110,11 @@ export default function Gallery() {
 
 	useEffect(() => {
 		conWrap.current && conWrap.current.style.setProperty('--gap', gap.current + 'px');
+		dispatch({ type: types.FLICKR.start, opt: { type: 'user', id: id.current } });
 		endLoading();
 
 		return () => setMounted(false);
-	}, [endLoading]);
+	}, [endLoading, dispatch]);
 
 	return (
 		<>

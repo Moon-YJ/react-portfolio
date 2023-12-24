@@ -1,6 +1,6 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 
-export const fetchFlickr = createAsyncThunk('flickr', async opt => {
+export const fetchFlickr = createAsyncThunk('flickr', async (opt = { type: 'user', id: '195472166@N07' }) => {
 	const num = 20;
 	const flickr_api = process.env.REACT_APP_FLICKR_KEY;
 	const baseURL = `https://www.flickr.com/services/rest/?&api_key=${flickr_api}&per_page=${num}&format=json&nojsoncallback=1&method=`;

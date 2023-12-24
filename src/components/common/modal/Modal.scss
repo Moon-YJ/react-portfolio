@@ -32,3 +32,21 @@
 		}
 	}
 }
+
+// tablet
+.tablet,
+.mobile {
+	.Modal {
+		.pic {
+			width: 70%;
+		}
+	}
+}
+// mobile
+.mobile {
+	.Modal {
+		.pic {
+			width: 85%;
+		}
+	}
+}

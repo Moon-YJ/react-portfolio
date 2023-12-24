@@ -4,9 +4,9 @@ import App from './App';
 import { BrowserRouter } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import { configureStore } from '@reduxjs/toolkit';
-import departmentReducer from './redux/departmentSlice';
-import youtubeReducer from './redux/youtubeSlice';
-import flickrReducer from './redux/flickrSlice';
+import departmentReducer, { fetchDepartment } from './redux/departmentSlice';
+import youtubeReducer, { fetchYoutube } from './redux/youtubeSlice';
+import flickrReducer, { fetchFlickr } from './redux/flickrSlice';
 import modalReducer from './redux/modalSlice';
 import menuReducer from './redux/menuSlice';
 import darkReducer from './redux/darkSlice';
@@ -25,7 +25,7 @@ const store = configureStore({
 ReactDOM.render(
 	<BrowserRouter>
 		<Provider store={store}>
-			<App />
+			<App apiArr={[fetchDepartment, fetchYoutube, fetchFlickr]} />
 		</Provider>
 	</BrowserRouter>,
 	document.getElementById('root')

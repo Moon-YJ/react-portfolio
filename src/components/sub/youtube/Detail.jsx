@@ -4,6 +4,8 @@ import { useEffect, useState, useCallback, useRef } from 'react';
 import { customText } from '../../../hooks/useText';
 import Layout from '../../common/layout/Layout';
 import { Link } from 'react-router-dom';
+import { IoEye } from 'react-icons/io5';
+import { BiSolidLike } from 'react-icons/bi';
 
 export default function Detail() {
 	const { id } = useParams();
@@ -72,11 +74,19 @@ export default function Detail() {
 							src={`https://www.youtube.com/embed/${YoutubeData.resourceId.videoId}`}
 							frameBorder={0}></iframe>
 					</div>
+					<div className='count-info'>
+						<div className='view'>
+							<IoEye />
+							<span>{StatisticData?.viewCount}</span>
+						</div>
+						<div className='like'>
+							<BiSolidLike />
+							<span>{StatisticData?.likeCount}</span>
+						</div>
+					</div>
 					<p className='txt'>
 						{YoutubeData.description === '' ? YoutubeData.title : customTxt(YoutubeData.description, 450)}
 					</p>
-					<p>{StatisticData?.viewCount}</p>
-					<p>{StatisticData?.likeCount}</p>
 				</article>
 			)}
 		</Layout>

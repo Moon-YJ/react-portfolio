@@ -4,9 +4,12 @@
 		padding-top: 60px;
 		border-top: 1px solid var(--baseColor);
 		> a {
-			margin-bottom: 50px;
+			display: inline-block;
+			width: 30px;
 			font-size: var(--lgSize);
 			opacity: 0.9;
+			cursor: pointer;
+			transition: transform 0.5s;
 			.arrow {
 				position: relative;
 				width: 20px;
@@ -14,8 +17,6 @@
 				display: inline-block;
 				//transform: rotate(-45deg);
 				scale: 0.8;
-				transition: transform 0.5s;
-				cursor: pointer;
 				&::before,
 				&::after {
 					content: '';
@@ -35,9 +36,9 @@
 					transform-origin: 0 100%;
 					transform: rotate(45deg);
 				}
-				&:hover {
-					transform: rotate(-45deg);
-				}
+			}
+			&:hover {
+				transform: rotate(-45deg);
 			}
 		}
 		.top-info {
@@ -84,9 +85,28 @@
 				object-fit: cover;
 			}
 		}
+		.count-info {
+			display: flex;
+			justify-content: flex-end;
+			align-items: center;
+			margin-top: 20px;
+			> div {
+				display: flex;
+				align-items: center;
+				font-size: var(--medSize);
+				span {
+					margin-left: 5px;
+					font-weight: var(--lightWeight);
+					font-family: var(--spcFont);
+				}
+				&.like {
+					margin-left: 25px;
+				}
+			}
+		}
 		.txt {
 			width: 90%;
-			margin: 70px auto 0;
+			margin: 60px auto 0;
 			font-size: var(--lgSize);
 			font-weight: var(--lightWeight);
 			text-align: center;
@@ -94,16 +114,16 @@
 			&::before {
 				display: block;
 				content: '';
-				width: 60px;
-				height: 2px;
+				width: 40px;
+				height: 1.5px;
 				margin: 0 auto 30px;
 				background: var(--baseColor);
 			}
 			&::after {
 				display: block;
 				content: '';
-				width: 50px;
-				height: 2px;
+				width: 40px;
+				height: 1.5px;
 				margin: 30px auto 0;
 				background: var(--baseColor);
 			}
@@ -140,10 +160,10 @@
 			.txt {
 				font-size: var(--medSize);
 				&:before {
-					width: 50px;
+					width: 35px;
 				}
 				&::after {
-					width: 50px;
+					width: 35px;
 				}
 			}
 		}
@@ -160,6 +180,14 @@
 			}
 			.video {
 				height: 50vh;
+			}
+			.count-info {
+				> div {
+					font-size: var(--bodySize);
+					&.like {
+						margin-left: 20px;
+					}
+				}
 			}
 			.txt {
 				margin-top: 50px;

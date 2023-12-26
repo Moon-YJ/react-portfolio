@@ -1,6 +1,6 @@
 import './Detail.scss';
 import { useParams } from 'react-router-dom';
-import { useEffect, useState, useCallback } from 'react';
+import { useEffect, useState, useCallback, useRef } from 'react';
 import { customText } from '../../../hooks/useText';
 import Layout from '../../common/layout/Layout';
 import { Link } from 'react-router-dom';
@@ -8,17 +8,36 @@ import { Link } from 'react-router-dom';
 export default function Detail() {
 	const { id } = useParams();
 	const [YoutubeData, setYoutubeData] = useState(null);
-	const fetchYoutube = useCallback(async () => {
-		const api_key = 'AIzaSyB81cXmxoWdzbYs8QZUlN_LQskZFT_Xqoo';
-		const baseURL = `https://www.googleapis.com/youtube/v3/playlistItems?key=${api_key}&part=snippet&id=${id}`;
-		const data = await fetch(baseURL);
-		const json = await data.json();
-		setYoutubeData(json.items[0].snippet);
+	const [StatisticData, setStatisticData] = useState(null);
+	const api_key = useRef(process.env.REACT_APP_YOUTUBE_API);
+	const vidId = useRef('');
+
+	const fetchDetail = useCallback(async () => {
+		const baseURL = `https://www.googleapis.com/youtube/v3/playlistItems?key=${api_key.current}&part=snippet&id=${id}`;
+		try {
+			const data = await fetch(baseURL);
+			const json = await data.json();
+			setYoutubeData(json.items[0].snippet);
+			vidId.current = json.items[0].snippet.resourceId.videoId;
+			const statisticsURL = `https://www.googleapis.com/youtube/v3/videos?part=snippet,statistics&id=${vidId.current}&key=${api_key.current}`;
+			try {
+				const data = await fetch(statisticsURL);
+				const json = await data.json();
+				setStatisticData(json.items[0].statistics);
+				console.log(json);
+			} catch (err) {
+				console.log(err);
+			}
+		} catch (err) {
+			console.log(err);
+		}
 	}, [id]);
+
 	const customTxt = customText('shorten');
+
 	useEffect(() => {
-		fetchYoutube();
-	}, [fetchYoutube]);
+		fetchDetail();
+	}, [fetchDetail]);
 
 	return (
 		<Layout
@@ -56,6 +75,8 @@ export default function Detail() {
 					<p className='txt'>
 						{YoutubeData.description === '' ? YoutubeData.title : customTxt(YoutubeData.description, 450)}
 					</p>
+					<p>{StatisticData?.viewCount}</p>
+					<p>{StatisticData?.likeCount}</p>
 				</article>
 			)}
 		</Layout>

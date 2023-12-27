@@ -26,7 +26,6 @@ export default function Detail() {
 				const data = await fetch(statisticsURL);
 				const json = await data.json();
 				setStatisticData(json.items[0].statistics);
-				console.log(json);
 			} catch (err) {
 				console.log(err);
 			}

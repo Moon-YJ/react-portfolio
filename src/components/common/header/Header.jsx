@@ -4,10 +4,12 @@ import { useRef } from 'react';
 //import { CgMenuRight, CgClose } from 'react-icons/cg';
 import { MdWbSunny } from 'react-icons/md';
 import { BiSolidMoon } from 'react-icons/bi';
+import { useCommonData } from '../../../hooks/useCommonData';
 
-export default function Header({ MenuToggle, setMenuToggle, Dark, setDark }) {
+export default function Header() {
 	const path = useRef(process.env.PUBLIC_URL);
 	const menuEl = ['department', 'youtube', 'gallery', 'community', 'member', 'contact'];
+	const { MenuToggle, setMenuToggle, Dark, setDark } = useCommonData();
 
 	return (
 		<header className='Header'>

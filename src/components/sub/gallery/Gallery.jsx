@@ -7,6 +7,7 @@ import { AiOutlineClose } from 'react-icons/ai';
 import { RiArrowRightDownLine } from 'react-icons/ri';
 import Modal from '../../common/modal/Modal';
 import { useFlickrQuery } from '../../../hooks/useFlickrQuery';
+import { useCommonData } from '../../../hooks/useCommonData';
 
 export default function Gallery() {
 	const myId = '195472166@N07';
@@ -21,10 +22,10 @@ export default function Gallery() {
 	const path = useRef(process.env.PUBLIC_URL);
 	const [Loaded, setLoaded] = useState(false);
 	const [Index, setIndex] = useState(0);
-	const [Open, setOpen] = useState(false);
 	const [Opt, setOpt] = useState({ type: 'user', id: id.current });
 
 	const { data: Pics, isSuccess } = useFlickrQuery(Opt);
+	const { setOpen } = useCommonData();
 
 	const endLoading = useCallback(() => {
 		setTimeout(() => {
@@ -214,9 +215,7 @@ export default function Gallery() {
 				</section>
 			</Layout>
 
-			<Modal
-				Open={Open}
-				setOpen={setOpen}>
+			<Modal>
 				{isSuccess && Pics.length !== 0 && (
 					<img
 						src={`https://live.staticflickr.com/${Pics[Index].server}/${Pics[Index].id}_${Pics[Index].secret}_b.jpg`}

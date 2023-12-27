@@ -6,11 +6,14 @@ import { MdWbSunny } from 'react-icons/md';
 import { BiSolidMoon } from 'react-icons/bi';
 import { customText } from '../../../hooks/useText';
 import { AnimatePresence, motion } from 'framer-motion';
+import { useCommonData } from '../../../hooks/useCommonData';
 
-export default function Menu({ setMenuToggle, MenuToggle, setDark, Dark }) {
+export default function Menu() {
 	const path = useRef(process.env.PUBLIC_URL);
 	const menuEl = ['department', 'youtube', 'gallery', 'community', 'member', 'contact'];
 	const customMenu = customText('combine');
+
+	const { MenuToggle, setMenuToggle, Dark, setDark } = useCommonData();
 
 	const closeMenu = useCallback(() => {
 		window.innerWidth >= 1000 && setMenuToggle(false);

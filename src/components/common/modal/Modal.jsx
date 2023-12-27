@@ -1,8 +1,10 @@
 import './Modal.scss';
 import { IoMdClose } from 'react-icons/io';
 import { AnimatePresence, motion } from 'framer-motion';
+import { useCommonData } from '../../../hooks/useCommonData';
 
-export default function Modal({ children, Open, setOpen }) {
+export default function Modal({ children }) {
+	const { Open, setOpen } = useCommonData();
 	return (
 		<AnimatePresence>
 			{Open && (

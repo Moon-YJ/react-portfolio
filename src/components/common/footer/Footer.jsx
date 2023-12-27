@@ -2,9 +2,11 @@ import './Footer.scss';
 import { Link } from 'react-router-dom';
 import { useRef } from 'react';
 import { FaFacebookF, FaTwitter, FaYoutube, FaGithub } from 'react-icons/fa';
+import { useCommonData } from '../../../hooks/useCommonData';
 
-export default function Footer({ Dark, setDark }) {
+export default function Footer() {
 	const path = useRef(process.env.PUBLIC_URL);
+	const { Dark, setDark } = useCommonData();
 
 	const handleSelect = e => {
 		e.target.value === 'Dark' ? setDark(true) : setDark(false);

@@ -1,43 +1,26 @@
-import { useEffect, useRef, useState } from 'react';
+import { useRef } from 'react';
 import { customText } from '../../../hooks/useText';
 import Layout from '../../common/layout/Layout';
 import './Department.scss';
+import { useDepartmentQuery } from '../../../hooks/useDepartmentQuery';
 
 export default function Department() {
 	const path = useRef(process.env.PUBLIC_URL);
-	const [TopData, setTopData] = useState(null);
-	const [MemberData, setMemberData] = useState([]);
-	const [Tit, setTit] = useState('');
-	const [SubMemberData, setSubMemberData] = useState([]);
-	const [SubTit, setSubTit] = useState('');
-	const [Mounted, setMounted] = useState(true);
 
 	const customTit = customText('combine');
 
-	const fetchMember = async () => {
-		try {
-			const data = await fetch(`${path.current}/DB/department.json`);
-			const json = await data.json();
-			setTopData(json.president[0]);
-			setMemberData(Object.values(json)[1]);
-			setTit(Object.keys(json)[1]);
-			setSubMemberData(Object.values(json)[2]);
-			setSubTit(Object.keys(json)[2]);
-		} catch (err) {
-			console.log(err);
-		}
-	};
-
-	useEffect(() => {
-		fetchMember();
-		return () => setMounted(false);
-	}, []);
+	const { data: departmentData, isSuccess } = useDepartmentQuery();
+	const TopData = departmentData?.president[0];
+	const MemberData = departmentData?.team;
+	const Tit = departmentData && Object.keys(departmentData)[1];
+	const SubMemberData = departmentData && Object.values(departmentData)[2];
+	const SubTit = departmentData && Object.keys(departmentData)[2];
 
 	return (
 		<Layout
 			index={'01'}
 			title={'Department'}>
-			{Mounted && TopData && (
+			{isSuccess && TopData && (
 				<section className='president'>
 					<div className='pic'>
 						<img
@@ -64,9 +47,9 @@ export default function Department() {
 				</section>
 			)}
 			<section className='team'>
-				<h1 className='tit'>{customTit(Tit)}</h1>
+				<h1 className='tit'>{isSuccess && customTit(Tit)}</h1>
 				<div className='team-box'>
-					{Mounted &&
+					{isSuccess &&
 						MemberData.map((data, idx) => {
 							return (
 								<article key={data + idx}>
@@ -85,9 +68,9 @@ export default function Department() {
 						})}
 				</div>
 				<div className='team-support'>
-					<h2 className='stit'>{customTit(SubTit)}</h2>
+					<h2 className='stit'>{isSuccess && customTit(SubTit)}</h2>
 					<div className='team-box'>
-						{Mounted &&
+						{isSuccess &&
 							SubMemberData.map((data, idx) => {
 								return (
 									<article key={data + idx}>

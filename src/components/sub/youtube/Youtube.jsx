@@ -1,34 +1,20 @@
-import { useState, useEffect } from 'react';
 import Layout from '../../common/layout/Layout';
 import './Youtube.scss';
 import { customText } from '../../../hooks/useText';
 import { Link } from 'react-router-dom';
+import { useYoutubeQuery } from '../../../hooks/useYoutubeQuery';
 
 export default function Youtube() {
-	const [Vids, setVids] = useState([]);
-	const [Mounted, setMounted] = useState(true);
-	const fetchYoutube = async () => {
-		const api_key = process.env.REACT_APP_YOUTUBE_API;
-		const pId = process.env.REACT_APP_YOUTUBE_pID;
-		const num = 7;
-		const baseURL = `https://www.googleapis.com/youtube/v3/playlistItems?key=${api_key}&part=snippet&playlistId=${pId}&maxResults=${num}`;
-		const data = await fetch(baseURL);
-		const json = await data.json();
-		setVids(json.items);
-	};
 	const shortenTit = customText('shorten');
 	const customDate = customText('combine');
 
-	useEffect(() => {
-		fetchYoutube();
-		return () => setMounted(false);
-	}, []);
+	const { data: Vids, isSuccess } = useYoutubeQuery();
 
 	return (
 		<Layout
 			index={'02'}
 			title={'Youtube'}>
-			{Mounted &&
+			{isSuccess &&
 				Vids.map((vid, idx) => {
 					const [date] = vid.snippet.publishedAt.split('T');
 					return (

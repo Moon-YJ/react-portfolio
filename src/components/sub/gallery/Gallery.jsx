@@ -6,6 +6,7 @@ import { CgSearch } from 'react-icons/cg';
 import { AiOutlineClose } from 'react-icons/ai';
 import { RiArrowRightDownLine } from 'react-icons/ri';
 import Modal from '../../common/modal/Modal';
+import { useFlickrQuery } from '../../../hooks/useFlickrQuery';
 
 export default function Gallery() {
 	const myId = '195472166@N07';
@@ -18,10 +19,12 @@ export default function Gallery() {
 	const isSearch = useRef(false);
 	const [Mounted, setMounted] = useState(true);
 	const path = useRef(process.env.PUBLIC_URL);
-	const [Pics, setPics] = useState([]);
 	const [Loaded, setLoaded] = useState(false);
 	const [Index, setIndex] = useState(0);
 	const [Open, setOpen] = useState(false);
+	const [Opt, setOpt] = useState({ type: 'user', id: id.current });
+
+	const { data: Pics, isSuccess } = useFlickrQuery(Opt);
 
 	const endLoading = useCallback(() => {
 		setTimeout(() => {
@@ -53,7 +56,7 @@ export default function Gallery() {
 		activeBtn(e);
 		id.current = '';
 		isUser.current = '';
-		fetchFlickr({ type: 'random' });
+		setOpt({ type: 'random' });
 		endLoading();
 	};
 
@@ -63,7 +66,7 @@ export default function Gallery() {
 		activeBtn(e);
 		id.current = myId;
 		isUser.current = 'myId';
-		fetchFlickr({ type: 'user', id: id.current });
+		setOpt({ type: 'user', id: id.current });
 		endLoading();
 	};
 
@@ -74,7 +77,7 @@ export default function Gallery() {
 		if (isUser.current) return;
 		setLoading();
 		isUser.current = ownerId;
-		fetchFlickr({ type: 'user', id: ownerId });
+		setOpt({ type: 'user', id: ownerId });
 		endLoading();
 	};
 
@@ -84,7 +87,7 @@ export default function Gallery() {
 		if (e.target.innerText === myId) return;
 		setLoading();
 		activeBtn();
-		fetchFlickr({ type: 'user', id: e.target.innerText });
+		setOpt({ type: 'user', id: e.target.innerText });
 		endLoading();
 	};
 
@@ -96,7 +99,7 @@ export default function Gallery() {
 		if (!searchVal) return;
 		setLoading();
 		activeBtn();
-		fetchFlickr({ type: 'search', keyword: refInput.current.value });
+		setOpt({ type: 'search', keyword: refInput.current.value });
 		endLoading();
 		refInput.current.value = '';
 	};
@@ -106,30 +109,9 @@ export default function Gallery() {
 		setIndex(idx);
 	};
 
-	const fetchFlickr = async opt => {
-		const num = 20;
-		const flickr_api = process.env.REACT_APP_FLICKR_KEY;
-		const baseURL = `https://www.flickr.com/services/rest/?&api_key=${flickr_api}&per_page=${num}&format=json&nojsoncallback=1&method=`;
-		const method_random = 'flickr.interestingness.getList';
-		const method_user = 'flickr.people.getPhotos';
-		const method_search = 'flickr.photos.search';
-		const randomURL = `${baseURL}${method_random}`;
-		const userURL = `${baseURL}${method_user}&user_id=${opt.id}`;
-		const searchURL = `${baseURL}${method_search}&tags=${opt.keyword}`;
-		let url = '';
-		opt.type === 'random' && (url = randomURL);
-		opt.type === 'user' && (url = userURL);
-		opt.type === 'search' && (url = searchURL);
-
-		const data = await fetch(url);
-		const json = await data.json();
-		setPics(json.photos.photo);
-	};
-
 	useEffect(() => {
 		conWrap.current && conWrap.current.style.setProperty('--gap', gap.current + 'px');
 		endLoading();
-		fetchFlickr({ type: 'user', id: id.current });
 
 		return () => setMounted(false);
 	}, [endLoading]);
@@ -199,8 +181,8 @@ export default function Gallery() {
 						<Masonry
 							className={'container'}
 							options={{ gutter: gap.current }}>
-							{Pics.length === 0 && isSearch.current && <h3>No matching images found</h3>}
-							{Mounted &&
+							{isSuccess && Pics.length === 0 && isSearch.current && <h3>No matching images found</h3>}
+							{isSuccess &&
 								Pics.map((pic, idx) => {
 									return (
 										<article key={pic.id}>
@@ -235,7 +217,7 @@ export default function Gallery() {
 			<Modal
 				Open={Open}
 				setOpen={setOpen}>
-				{Pics.length !== 0 && (
+				{isSuccess && Pics.length !== 0 && (
 					<img
 						src={`https://live.staticflickr.com/${Pics[Index].server}/${Pics[Index].id}_${Pics[Index].secret}_b.jpg`}
 						alt={Pics[Index].id}

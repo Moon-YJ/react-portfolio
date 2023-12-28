@@ -16,6 +16,7 @@ import Menu from './components/common/menu/Menu';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import { useCommonData } from './hooks/useCommonData';
+import CookieModal from './components/common/cookieModal/CookieModal';
 
 export default function App() {
 	const queryClient = new QueryClient();
@@ -58,8 +59,15 @@ export default function App() {
 					path='/detail/:id'
 					component={Detail}
 				/>
-				<Menu />
 				<Footer />
+				<Menu />
+				<CookieModal
+					wid={370}
+					hgt={435}
+					titTxt={'We use Cookies'}
+					infoTxt={'This website uses cookies to ensure you get the best experience on our website'}
+					btnTxt={'Accept'}
+				/>
 			</div>
 			<ReactQueryDevtools />
 		</QueryClientProvider>

@@ -21,33 +21,47 @@ export const useYoutubeQuery = () => {
 	});
 };
 
-// const fetchYoutubeDetail = async ({ queryKey }) => {
-//   let vidId = '';
-// 	const baseURL = `https://www.googleapis.com/youtube/v3/playlistItems?key=${api_key}&part=snippet&id=${queryKey[1]}`;
-// 	try {
-// 		const data = await fetch(baseURL);
-// 		const json = await data.json();
-// 		vidId = json.items[0].snippet.resourceId.videoId;
-// 		const statisticsURL = `https://www.googleapis.com/youtube/v3/videos?part=snippet,statistics&id=${vidId}&key=${api_key}`;
-//     return json.items[0].snippet;
-// 		try {
-// 			const data = await fetch(statisticsURL);
-// 			const json = await data.json();
-// 			return json.items[0].statistics;
-// 		} catch (err) {
-// 			throw err;
-// 		}
-// 	} catch (err) {
-// 		throw err;
-// 	}
-// };
+const fetchYoutubeDetail = async ({ queryKey: [_, id] }) => {
+	let vidId = '';
+	const baseURL = `https://www.googleapis.com/youtube/v3/playlistItems?key=${api_key}&part=snippet&id=${id}`;
+	try {
+		const data = await fetch(baseURL);
+		const json = await data.json();
+		const result = json.items[0].snippet;
+		vidId = result.resourceId.videoId;
+		const statisticsURL = `https://www.googleapis.com/youtube/v3/videos?part=snippet,statistics&id=${vidId}&key=${api_key}`;
+		return { result, statisticsURL };
+	} catch (err) {
+		throw err;
+	}
+};
 
-// export const useYoutubeDetailQuery = id => {
-// 	return useQuery(['fetchYoutube', id], fetchYoutubeDetail, {
-// 		refetchOnMount: false,
-// 		refetchOnWindowFocus: false,
-// 		cacheTime: 1000 * 60 * 60 * 20,
-// 		staleTime: 1000 * 60 * 60 * 20,
-// 		retry: 4
-// 	});
-// };
+export const useYoutubeDetailQuery = id => {
+	return useQuery(['fetchYoutube', id], fetchYoutubeDetail, {
+		refetchOnMount: false,
+		refetchOnWindowFocus: false,
+		cacheTime: 1000 * 60 * 60 * 20,
+		staleTime: 1000 * 60 * 60 * 20,
+		retry: 4
+	});
+};
+
+const fetchYoutubeStatistics = async ({ queryKey: [_, url] }) => {
+	try {
+		const data = await fetch(url);
+		const json = await data.json();
+		return json.items[0].statistics;
+	} catch (err) {
+		throw err;
+	}
+};
+
+export const useYoutubeStatisticsQuery = url => {
+	return useQuery(['fetchYoutube', url], fetchYoutubeStatistics, {
+		refetchOnMount: false,
+		refetchOnWindowFocus: false,
+		cacheTime: 1000 * 60 * 60 * 20,
+		staleTime: 1000 * 60 * 60 * 20,
+		retry: 4
+	});
+};

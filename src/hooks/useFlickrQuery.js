@@ -1,6 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
 
-const fetchFlickr = async ({ queryKey }) => {
+const fetchFlickr = async ({ queryKey: [_, opt] }) => {
 	const num = 20;
 	const flickr_api = process.env.REACT_APP_FLICKR_KEY;
 	const baseURL = `https://www.flickr.com/services/rest/?&api_key=${flickr_api}&per_page=${num}&format=json&nojsoncallback=1&method=`;
@@ -8,12 +8,12 @@ const fetchFlickr = async ({ queryKey }) => {
 	const method_user = 'flickr.people.getPhotos';
 	const method_search = 'flickr.photos.search';
 	const randomURL = `${baseURL}${method_random}`;
-	const userURL = `${baseURL}${method_user}&user_id=${queryKey[1].id}`;
-	const searchURL = `${baseURL}${method_search}&tags=${queryKey[1].keyword}`;
+	const userURL = `${baseURL}${method_user}&user_id=${opt.id}`;
+	const searchURL = `${baseURL}${method_search}&tags=${opt.keyword}`;
 	let url = '';
-	queryKey[1].type === 'random' && (url = randomURL);
-	queryKey[1].type === 'user' && (url = userURL);
-	queryKey[1].type === 'search' && (url = searchURL);
+	opt.type === 'random' && (url = randomURL);
+	opt.type === 'user' && (url = userURL);
+	opt.type === 'search' && (url = searchURL);
 
 	const data = await fetch(url);
 	const json = await data.json();

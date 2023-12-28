@@ -9,19 +9,17 @@ import { useYoutubeDetailQuery, useYoutubeStatisticsQuery } from '../../../hooks
 
 export default function Detail() {
 	const { id } = useParams();
+	const customTxt = customText('shorten');
 
 	const { data: VidInfo, isSuccess: isVids } = useYoutubeDetailQuery(id);
 	const YoutubeData = VidInfo?.result;
-	// const { data: StatisticData, isSuccess: isStatistics } = useYoutubeStatisticsQuery(`${VidInfo?.statisticsURL}`);
-	console.log(typeof VidInfo?.statisticsURL);
-
-	const customTxt = customText('shorten');
+	const { data: StatisticData, isSuccess: isStatistics } = useYoutubeStatisticsQuery(VidInfo?.statisticsURL);
 
 	return (
 		<Layout
 			index={'00'}
 			title={'Detail'}>
-			{isVids && (
+			{isVids && isStatistics && (
 				<article>
 					<Link to='/youtube'>
 						<span className='arrow'></span>
@@ -50,16 +48,16 @@ export default function Detail() {
 							src={`https://www.youtube.com/embed/${YoutubeData.resourceId.videoId}`}
 							frameBorder={0}></iframe>
 					</div>
-					{/* <div className='count-info'>
+					<div className='count-info'>
 						<div className='view'>
 							<IoEye />
-							<span>{isStatistics && StatisticData.viewCount}</span>
+							<span>{StatisticData.viewCount}</span>
 						</div>
 						<div className='like'>
 							<BiSolidLike />
-							<span>{isStatistics && StatisticData.likeCount}</span>
+							<span>{StatisticData.likeCount}</span>
 						</div>
-					</div> */}
+					</div>
 					<p className='txt'>
 						{YoutubeData.description === '' ? YoutubeData.title : customTxt(YoutubeData.description, 450)}
 					</p>

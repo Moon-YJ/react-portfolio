@@ -22,14 +22,12 @@ export const useYoutubeQuery = () => {
 };
 
 const fetchYoutubeDetail = async ({ queryKey: [_, id] }) => {
-	let vidId = '';
 	const baseURL = `https://www.googleapis.com/youtube/v3/playlistItems?key=${api_key}&part=snippet&id=${id}`;
 	try {
 		const data = await fetch(baseURL);
 		const json = await data.json();
 		const result = json.items[0].snippet;
-		vidId = result.resourceId.videoId;
-		const statisticsURL = `https://www.googleapis.com/youtube/v3/videos?part=snippet,statistics&id=${vidId}&key=${api_key}`;
+		const statisticsURL = `https://www.googleapis.com/youtube/v3/videos?part=snippet,statistics&id=${result.resourceId.videoId}&key=${api_key}`;
 		return { result, statisticsURL };
 	} catch (err) {
 		throw err;

@@ -5,7 +5,7 @@
 	left: 0;
 	width: 100%;
 	height: 100%;
-	background-color: rgba(var(--baseColor-code), 0.6);
+	background-color: rgba(var(--baseColor-code), 0.8);
 	.CookieModal {
 		z-index: 5;
 		position: fixed;
@@ -15,10 +15,10 @@
 		align-content: space-between;
 		flex-wrap: wrap;
 		padding: 20px 30px 40px;
-		color: var(--bgColor);
-		background-color: var(--baseColor);
+		color: #111;
+		background-color: #f1f1f1;
 		border-radius: 15px;
-		box-shadow: 1px 1px 10px 7px rgba(var(--baseColor-code), 0.2);
+		box-shadow: 1px 1px 10px 7px rgba(18, 18, 18, 0.2);
 		* {
 			color: inherit;
 		}
@@ -39,7 +39,7 @@
 			p {
 				margin-top: 10px;
 				font-size: var(--mSize);
-				font-weight: var(--lightWeight);
+				font-weight: var(--regWeight);
 			}
 		}
 		.input-set {
@@ -53,7 +53,7 @@
 				margin-left: 10px;
 				font-size: var(--smSize);
 				font-weight: var(--lightWeight);
-				opacity: 0.5;
+				opacity: 0.8;
 			}
 		}
 		button {
@@ -61,10 +61,10 @@
 				display: inline-block;
 				padding: 10px 43px;
 				margin: 0 auto;
-				color: var(--baseColor);
+				color: #111;
 				font-size: var(--bodySize);
 				font-weight: var(--medWeight);
-				background-color: rgba(var(--invertColor-code), 0.8);
+				background-color: rgba(18, 18, 18, 0.3);
 				border-radius: 25px;
 			}
 			&.close {

@@ -26,9 +26,10 @@ const fetchYoutubeDetail = async ({ queryKey: [_, id] }) => {
 	try {
 		const data = await fetch(baseURL);
 		const json = await data.json();
-		const result = json.items[0].snippet;
-		const statisticsURL = `https://www.googleapis.com/youtube/v3/videos?part=snippet,statistics&id=${result.resourceId.videoId}&key=${api_key}`;
-		return { result, statisticsURL };
+		//const result = json.items[0].snippet;
+		//const statisticsURL = `https://www.googleapis.com/youtube/v3/videos?part=snippet,statistics&id=${result.resourceId.videoId}&key=${api_key}`;
+		return json.items[0].snippet;
+		//return { result, statisticsURL };
 	} catch (err) {
 		throw err;
 	}

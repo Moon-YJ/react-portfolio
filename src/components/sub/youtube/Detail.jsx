@@ -13,8 +13,10 @@ export default function Detail() {
 	const customTxt = customText('shorten');
 
 	const { data: VidInfo, isSuccess: isVids } = useYoutubeDetailQuery(id);
-	const YoutubeData = VidInfo?.result;
-	const { data: StatisticData, isSuccess: isStatistics } = useYoutubeStatisticsQuery(VidInfo?.statisticsURL);
+	const YoutubeData = VidInfo;
+	const statisticsURL = `https://www.googleapis.com/youtube/v3/videos?part=snippet,statistics&id=${VidInfo?.resourceId.videoId}&key=${process.env.REACT_APP_YOUTUBE_API}`;
+
+	const { data: StatisticData, isSuccess: isStatistics } = useYoutubeStatisticsQuery(statisticsURL);
 
 	return (
 		<Layout
@@ -52,11 +54,11 @@ export default function Detail() {
 					<div className='count-info'>
 						<div className='view'>
 							<IoEye />
-							<span>{StatisticData?.viewCount}</span>
+							<span>{StatisticData.viewCount}</span>
 						</div>
 						<div className='like'>
 							<BiSolidLike />
-							<span>{StatisticData?.likeCount}</span>
+							<span>{StatisticData.likeCount}</span>
 						</div>
 					</div>
 					<p className='txt'>

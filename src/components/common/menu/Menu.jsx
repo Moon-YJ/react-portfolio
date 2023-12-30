@@ -2,18 +2,17 @@ import { useEffect, useRef, useCallback } from 'react';
 import './Menu.scss';
 import { Link, NavLink } from 'react-router-dom';
 import { FaFacebookF, FaTwitter, FaYoutube, FaGithub } from 'react-icons/fa';
-import { MdWbSunny } from 'react-icons/md';
-import { BiSolidMoon } from 'react-icons/bi';
 import { customText } from '../../../hooks/useText';
 import { AnimatePresence, motion } from 'framer-motion';
 import { useCommonData } from '../../../hooks/useCommonData';
+import DarkTheme from '../darkTheme/DarkTheme';
 
 export default function Menu() {
 	const path = useRef(process.env.PUBLIC_URL);
 	const menuEl = ['department', 'youtube', 'gallery', 'community', 'member', 'contact'];
 	const customMenu = customText('combine');
 
-	const { MenuToggle, setMenuToggle, Dark, setDark } = useCommonData();
+	const { MenuToggle, setMenuToggle } = useCommonData();
 
 	const closeMenu = useCallback(() => {
 		window.innerWidth >= 1000 && setMenuToggle(false);
@@ -59,17 +58,7 @@ export default function Menu() {
 								</li>
 							);
 						})}
-						<div
-							className={`theme ${Dark ? 'dark' : ''}`}
-							onClick={() => {
-								setDark(!Dark);
-							}}>
-							<div className='ball'></div>
-							<span className='icon'>
-								<MdWbSunny className='sun' />
-								<BiSolidMoon className='moon' />
-							</span>
-						</div>
+						<DarkTheme />
 					</ul>
 					<div className='btm'>
 						<ul className='icon-set'>

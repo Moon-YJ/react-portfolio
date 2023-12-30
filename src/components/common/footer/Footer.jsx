@@ -1,16 +1,23 @@
 import './Footer.scss';
 import { Link } from 'react-router-dom';
-import { useRef } from 'react';
+import { useEffect, useRef } from 'react';
 import { FaFacebookF, FaTwitter, FaYoutube, FaGithub } from 'react-icons/fa';
 import { useCommonData } from '../../../hooks/useCommonData';
+import { useCookie } from '../../../hooks/useCookie';
 
 export default function Footer() {
 	const path = useRef(process.env.PUBLIC_URL);
-	const { Dark, setDark } = useCommonData();
+	const { Theme, setTheme } = useCommonData();
+	const { setCookie, isCookie } = useCookie();
 
 	const handleSelect = e => {
-		e.target.value === 'Dark' ? setDark(true) : setDark(false);
+		e.target.value === 'Dark' ? setTheme('dark') : setTheme('light');
+		setCookie('Theme', Theme === 'dark' ? 'light' : 'dark', 60 * 60 * 12);
 	};
+
+	useEffect(() => {
+		if (isCookie('Theme')) setTheme(document.cookie.split('Theme=')[1].split(';')[0]);
+	}, [isCookie, setTheme]);
 
 	return (
 		<footer className='Footer'>
@@ -31,7 +38,7 @@ export default function Footer() {
 			<div className='btm'>
 				<select
 					onChange={handleSelect}
-					value={Dark ? 'Dark' : 'Light'}>
+					value={Theme === 'dark' ? 'Dark' : 'Light'}>
 					<option value='Light'>Light</option>
 					<option value='Dark'>Dark</option>
 				</select>

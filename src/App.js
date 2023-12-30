@@ -20,11 +20,11 @@ import CookieModal from './components/common/cookieModal/CookieModal';
 
 export default function App() {
 	const queryClient = new QueryClient();
-	const { Dark } = useCommonData();
+	const { Theme } = useCommonData();
 
 	return (
 		<QueryClientProvider client={queryClient}>
-			<div className={`wrap ${Dark ? 'dark' : ''} ${useMedia()}`}>
+			<div className={`wrap ${Theme === 'dark' ? 'dark' : ''} ${useMedia()}`}>
 				<Header />
 				<Route
 					exact

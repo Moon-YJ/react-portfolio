@@ -12,11 +12,11 @@ export default function Footer() {
 
 	const handleSelect = e => {
 		e.target.value === 'Dark' ? setTheme('dark') : setTheme('light');
-		setCookie('Theme', Theme === 'dark' ? 'light' : 'dark', 60 * 60 * 12);
+		setCookie('darkTheme', Theme === 'dark' ? 'light' : 'dark', 60 * 60 * 12);
 	};
 
 	useEffect(() => {
-		if (isCookie('Theme')) setTheme(document.cookie.split('Theme=')[1].split(';')[0]);
+		if (isCookie('darkTheme')) setTheme(document.cookie.split('darkTheme=')[1].split(';')[0]);
 	}, [isCookie, setTheme]);
 
 	return (

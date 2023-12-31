@@ -13,15 +13,15 @@ export default function ColorTheme() {
 	};
 
 	const handleReset = () => {
-		setCookie('theme', 'done', 0);
+		setCookie('colorTheme', 'done', 0);
 		const resetColor = '#fa5b5b';
 		input.current.value = resetColor;
 		document.body.style.setProperty('--pointColor', resetColor);
 	};
 
 	useEffect(() => {
-		isCookie('theme')
-			? document.body.style.setProperty('--pointColor', document.cookie.split('theme=')[1].split(';')[0])
+		isCookie('colorTheme')
+			? document.body.style.setProperty('--pointColor', document.cookie.split('colorTheme=')[1].split(';')[0])
 			: document.body.style.setProperty(
 					'--pointColor',
 					getComputedStyle(document.body).getPropertyValue('--pointColor')

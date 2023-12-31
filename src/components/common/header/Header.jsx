@@ -3,6 +3,7 @@ import { Link, NavLink } from 'react-router-dom';
 import { useRef } from 'react';
 import { useCommonData } from '../../../hooks/useCommonData';
 import DarkTheme from '../darkTheme/DarkTheme';
+import ColorTheme from '../colorTheme/ColorTheme';
 
 export default function Header() {
 	const path = useRef(process.env.PUBLIC_URL);

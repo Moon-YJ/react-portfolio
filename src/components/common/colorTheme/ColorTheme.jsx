@@ -9,9 +9,9 @@ import { RxReset } from 'react-icons/rx';
 
 export default function ColorTheme() {
 	const [Chart, setChart] = useState(false);
-
-	const { setCookie, isCookie } = useCookie();
 	const input = useRef(null);
+	const { setCookie, isCookie } = useCookie();
+
 	const changeColor = () => {
 		const color = input.current.value;
 		setCookie('colorTheme', color, 60 * 60 * 12);

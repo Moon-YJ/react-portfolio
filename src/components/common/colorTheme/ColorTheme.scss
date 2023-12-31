@@ -1,0 +1,32 @@
+.ColorTheme {
+	position: relative;
+	.btn-set {
+		display: flex;
+		align-items: center;
+		button {
+			margin-top: 5px;
+			color: var(--pointColor);
+			svg {
+				font-size: var(--medSize);
+			}
+		}
+		span {
+			margin: 4px 0 0 5px;
+		}
+	}
+	.chart {
+		position: absolute;
+		top: 35px;
+		right: -25px;
+		display: flex;
+		padding: 7px 10px;
+		background-color: rgba(var(--baseColor-code), 0.95);
+		input {
+			width: 40px;
+		}
+		svg {
+			margin: 5px 0 0 7px;
+			color: var(--invertColor);
+		}
+	}
+}

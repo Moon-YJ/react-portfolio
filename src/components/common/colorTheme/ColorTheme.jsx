@@ -1,8 +1,15 @@
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import './ColorTheme.scss';
 import { useCookie } from '../../../hooks/useCookie';
+import { IoColorPaletteOutline } from 'react-icons/io5';
+import { IoColorPaletteSharp } from 'react-icons/io5';
+import { MdOutlineKeyboardArrowDown } from 'react-icons/md';
+import { MdOutlineKeyboardArrowUp } from 'react-icons/md';
+import { RxReset } from 'react-icons/rx';
 
 export default function ColorTheme() {
+	const [Chart, setChart] = useState(false);
+
 	const { setCookie, isCookie } = useCookie();
 	const input = useRef(null);
 	const changeColor = () => {
@@ -17,6 +24,7 @@ export default function ColorTheme() {
 		const resetColor = '#fa5b5b';
 		input.current.value = resetColor;
 		document.body.style.setProperty('--pointColor', resetColor);
+		setChart(false);
 	};
 
 	useEffect(() => {
@@ -26,17 +34,27 @@ export default function ColorTheme() {
 					'--pointColor',
 					getComputedStyle(document.body).getPropertyValue('--pointColor')
 			  );
-		input.current.value = document.body.style.getPropertyValue('--pointColor');
+		if (input.current) input.current.value = document.body.style.getPropertyValue('--pointColor');
 	}, [isCookie]);
 
 	return (
 		<div className='ColorTheme'>
-			<input
-				type='color'
-				ref={input}
-				onChange={changeColor}
-			/>
-			<button onClick={handleReset}>reset</button>
+			<div
+				className='btn-set'
+				onClick={() => setChart(!Chart)}>
+				<button>{Chart ? <IoColorPaletteSharp /> : <IoColorPaletteOutline />}</button>
+				<span>{Chart ? <MdOutlineKeyboardArrowUp /> : <MdOutlineKeyboardArrowDown />}</span>
+			</div>
+			{Chart && (
+				<div className='chart'>
+					<input
+						type='color'
+						ref={input}
+						onChange={changeColor}
+					/>
+					<RxReset onClick={handleReset} />
+				</div>
+			)}
 		</div>
 	);
 }

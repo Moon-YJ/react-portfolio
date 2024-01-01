@@ -10,6 +10,7 @@ import { RxReset } from 'react-icons/rx';
 export default function ColorTheme() {
 	const [Chart, setChart] = useState(false);
 	const input = useRef(null);
+	const colorTheme = useRef(null);
 	const { setCookie, isCookie } = useCookie();
 
 	const changeColor = () => {
@@ -27,6 +28,12 @@ export default function ColorTheme() {
 		setChart(false);
 	};
 
+	const handleOutside = event => {
+		if (colorTheme.current && !colorTheme.current.contains(event.target)) {
+			setChart(false);
+		}
+	};
+
 	useEffect(() => {
 		isCookie('colorTheme')
 			? document.body.style.setProperty('--pointColor', document.cookie.split('colorTheme=')[1].split(';')[0])
@@ -37,8 +44,17 @@ export default function ColorTheme() {
 		if (input.current) input.current.value = document.body.style.getPropertyValue('--pointColor');
 	}, [isCookie]);
 
+	useEffect(() => {
+		document.addEventListener('mousedown', handleOutside);
+		return () => {
+			document.removeEventListener('mousedown', handleOutside);
+		};
+	});
+
 	return (
-		<div className='ColorTheme'>
+		<div
+			className='ColorTheme'
+			ref={colorTheme}>
 			<div
 				className='btn-set'
 				onClick={() => setChart(!Chart)}>

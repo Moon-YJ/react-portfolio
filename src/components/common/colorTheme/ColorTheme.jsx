@@ -49,7 +49,7 @@ export default function ColorTheme() {
 		return () => {
 			document.removeEventListener('mousedown', handleOutside);
 		};
-	});
+	}, []);
 
 	return (
 		<div

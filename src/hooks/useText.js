@@ -13,7 +13,7 @@ export function useSplitText() {
 }
 
 export function customText(type) {
-	const setUpperTxt = (txt) => {
+	const setUpperTxt = txt => {
 		return txt.charAt(0).toUpperCase() + txt.slice(1);
 	};
 
@@ -21,15 +21,15 @@ export function customText(type) {
 		return (txt, spc = ' ') => {
 			return txt
 				.split(/-|_|\+/)
-				.map((el) => setUpperTxt(el))
+				.map(el => setUpperTxt(el))
 				.join(spc);
 		};
 	}
 
 	if (type === 'shorten') {
-		return (txt, num = 50) => {
+		return (txt, num = 50, spc = '...') => {
 			if (txt.length > num) {
-				return txt.slice(0, num) + '...';
+				return txt.slice(0, num) + spc;
 			} else {
 				return txt;
 			}

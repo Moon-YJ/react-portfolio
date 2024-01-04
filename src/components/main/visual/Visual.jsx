@@ -4,13 +4,14 @@ import 'swiper/css';
 import 'swiper/css/pagination';
 import { useYoutubeQuery } from '../../../hooks/useYoutubeQuery';
 import './Visual.scss';
-//import { Link } from 'react-router-dom/cjs/react-router-dom.min';
+import { Link } from 'react-router-dom/cjs/react-router-dom.min';
 import { useRef, useState } from 'react';
 import { customText } from '../../../hooks/useText';
 
 export default function Visual() {
 	const { data, isSuccess } = useYoutubeQuery();
 	const [Index, setIndex] = useState(0);
+	const swiperRef = useRef(null);
 	const swiperOpt = useRef({
 		modules: [Pagination, Autoplay],
 		pagination: { clickable: true },
@@ -24,7 +25,10 @@ export default function Visual() {
 			640: { slidesPerView: 2 },
 			1000: { slidesPerView: 3 }
 		},
-		onSwiper: swiper => swiper.slideNext(300),
+		onSwiper: swiper => {
+			swiperRef.current = swiper;
+			swiper.slideNext(300);
+		},
 		onSlideChange: swiper => setIndex(swiper.realIndex)
 	});
 	const shortenTit = customText('shorten');
@@ -39,7 +43,6 @@ export default function Visual() {
 						return (
 							<SwiperSlide key={vid.id}>
 								<div className='inner'>
-									{/* <h3 className='num'>{idx + 1}</h3> */}
 									<div className='pic-box'>
 										<div className='pic'>
 											<img
@@ -54,6 +57,12 @@ export default function Visual() {
 											/>
 										</div>
 									</div>
+									<Link
+										to={`/detail/${vid.id}`}
+										onMouseEnter={swiperRef.current?.autoplay.stop}
+										onMouseLeave={swiperRef.current?.autoplay.start}>
+										<div className='detail'>Discover</div>
+									</Link>
 									<div className='txt'>
 										<h2>{shortenTit(vid.snippet.title, 13, '')}</h2>
 									</div>

@@ -17,12 +17,13 @@
 		}
 	}
 	h1 {
-		// position: absolute;
-		// top: 50%;
-		// left: 30%;
+		z-index: 2;
+		position: absolute;
+		top: 55%;
+		left: 10vw;
 		color: #fff;
 		font-family: var(--spcFont);
-		font-size: var(--titSize0);
+		font-size: var(--titSize1);
 		font-weight: var(--lightWeight);
 		line-height: 1.2;
 	}

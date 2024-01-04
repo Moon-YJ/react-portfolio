@@ -5,6 +5,7 @@
 	.swiper {
 		width: 100%;
 		height: 100%;
+		margin-top: 12vw;
 		.num {
 			position: absolute;
 			top: 23%;
@@ -46,8 +47,8 @@
 							height: 50%;
 							overflow: hidden;
 							&:nth-of-type(1) {
-								filter: blur(20px) saturate(1.4);
-								transform: translate(20px, 20px);
+								filter: blur(10px) saturate(1.4);
+								transform: translate(15px, 15px);
 								opacity: 0.5;
 							}
 							img {
@@ -55,6 +56,27 @@
 								height: 100%;
 								object-fit: cover;
 								transform: scale(1.5);
+							}
+						}
+					}
+					.detail {
+						margin: 15px auto 25px;
+						font-size: var(--mSize);
+						text-align: right;
+						cursor: pointer;
+						transition: opacity 0.5s;
+						&::before {
+							display: inline-block;
+							content: '+';
+							margin-right: 10px;
+							transform: rotate(0);
+							transition: 0.3s;
+						}
+						&:hover {
+							opacity: 0.7;
+							&::before {
+								transform: rotate(90deg);
+								margin-right: 5px;
 							}
 						}
 					}
@@ -115,10 +137,10 @@
 				width: 6px;
 				height: 6px;
 				background: transparent;
-				border: 1px solid rgba(var(--baseColor-code), 0.9);
+				border: 1px solid var(--baseColor);
 				&-active {
 					background-color: var(--baseColor);
-					opacity: 0.6;
+					opacity: 0.7;
 				}
 			}
 		}

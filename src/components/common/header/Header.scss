@@ -8,8 +8,11 @@
 	height: 150px;
 	padding: 0 10vw;
 	margin: 0 auto;
+	background-color: rgba(var(--baseColor-code), 0.7);
 	font-weight: var(--lightWeight);
 	font-family: var(--pointFont);
+	transform: translateY(0);
+	transition: transform 0.8s, background-color 0.2s;
 	h1 {
 		width: 100px;
 		height: 100%;
@@ -116,6 +119,13 @@
 				}
 			}
 		}
+	}
+	&.scrolled {
+		transform: translateY(-100%);
+		background-color: transparent;
+	}
+	&.reset {
+		background-color: transparent;
 	}
 }
 

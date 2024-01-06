@@ -8,7 +8,7 @@
 	height: 150px;
 	padding: 0 10vw;
 	margin: 0 auto;
-	background-color: rgba(var(--baseColor-code), 0.7);
+	background-color: transparent;
 	font-weight: var(--lightWeight);
 	font-family: var(--pointFont);
 	transform: translateY(0);
@@ -122,11 +122,11 @@
 	}
 	&.scrolled {
 		transform: translateY(-100%);
-		background-color: transparent;
+		// background-color: rgba(var(--baseColor-code), 0.7);
 	}
 	&.reset {
 		transform: translateY(0);
-		background-color: transparent;
+		background-color: rgba(var(--baseColor-code), 0.7) !important;
 	}
 }
 

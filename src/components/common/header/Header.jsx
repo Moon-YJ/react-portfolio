@@ -4,47 +4,46 @@ import { useCallback, useEffect, useRef, useState } from 'react';
 import { useCommonData } from '../../../hooks/useCommonData';
 import DarkTheme from '../darkTheme/DarkTheme';
 import ColorTheme from '../colorTheme/ColorTheme';
+import { useScroll } from '../../../hooks/useScroll';
 
 export default function Header() {
+	const [Frame, setFrame] = useState(null);
 	const path = useRef(process.env.PUBLIC_URL);
-	const wrap = useRef(null);
-	const isHide = useRef(false);
-	const isReset = useRef(true);
-	const [PosScroll, setPosScroll] = useState(0);
-	const [PosWheel, setPosWheel] = useState(100);
+	const headerRef = useRef(null);
 	const menuEl = ['department', 'youtube', 'gallery', 'community', 'member', 'contact'];
 	const { MenuToggle, setMenuToggle } = useCommonData();
+	const { getScrollPos } = useScroll(Frame);
 
-	const handleScroll = useCallback(() => {
-		const deltaY = wrap.current.scrollTop - PosScroll;
-		isHide.current = wrap.current.scrollTop !== 0 && deltaY >= 0;
-		if (wrap.current.scrollTop === 0) isReset.current = true;
-		else isReset.current = false;
-		setPosScroll(wrap.current.scrollTop);
-	}, [PosScroll]);
+	const handleScroll = useCallback(
+		base => {
+			getScrollPos(headerRef.current) >= base
+				? headerRef.current.classList.add('scrolled')
+				: headerRef.current.classList.remove('scrolled');
+		},
+		[getScrollPos]
+	);
 
 	const handleWheel = e => {
-		console.log(wrap.current.scrollTop, '::wrap');
-		console.log(wrap.current.offsetTop, 'offsetTop');
 		console.log(e.deltaY);
-		if (wrap.current.scrollTop === 0) isReset.current = true;
-		else isReset.current = false;
-		setPosWheel(wrap.current.scrollTop);
+		e.deltaY < 0 ? headerRef.current.classList.add('reset') : headerRef.current.classList.remove('reset');
+		if (Frame.scrollTop <= 150) headerRef.current.classList.remove('reset');
+		// else isReset.current = false;
+		// setPosWheel(wrap.current.scrollTop);
 	};
 
 	useEffect(() => {
-		isReset.current = true;
-		wrap.current = document.querySelector('.wrap');
-		wrap.current.addEventListener('scroll', handleScroll);
-		wrap.current.addEventListener('mousewheel', handleWheel);
-		return () => {
-			wrap.current.removeEventListener('scroll', handleScroll);
-			wrap.current.removeEventListener('mousewheel', handleWheel);
-		};
-	}, [handleScroll]);
+		setFrame(headerRef.current.closest('.wrap'));
+	}, []);
+
+	useEffect(() => {
+		Frame?.addEventListener('mousewheel', handleWheel);
+		Frame?.addEventListener('scroll', () => handleScroll(150));
+	}, [Frame, handleScroll]);
 
 	return (
-		<header className={`Header ${isHide.current ? 'scrolled' : ''} ${isReset.current ? 'reset' : ''}`}>
+		<header
+			className='Header'
+			ref={headerRef}>
 			<h1 className='logo'>
 				<Link to='/'>
 					<img

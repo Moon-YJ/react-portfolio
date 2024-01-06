@@ -1,6 +1,7 @@
 import { useSplitText } from '../../../hooks/useText';
 import './Layout.scss';
 import { useEffect, useRef } from 'react';
+import { MdArrowUpward } from 'react-icons/md';
 
 export default function Layout({ index, title, children }) {
 	const box = useRef(null);
@@ -33,6 +34,10 @@ export default function Layout({ index, title, children }) {
 				</h1>
 			</div>
 			{children}
+			<button>
+				<span className='line'></span>
+				<MdArrowUpward />
+			</button>
 		</main>
 	);
 }

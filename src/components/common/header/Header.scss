@@ -125,26 +125,26 @@
 	}
 	&.visible {
 		transform: translateY(0);
-		background-color: rgba(var(--baseColor-code), 0.7);
+		background-color: rgba(var(--baseColor-code), 0.5);
 	}
 	&.main {
 		z-index: 5;
 		position: fixed;
 		h1 {
 			img {
-				filter: var(--filterInvMob);
+				filter: invert(1);
 			}
 		}
 		ul {
 			li {
 				a {
-					color: var(--invertColor);
+					color: #fff;
 				}
 			}
 		}
 		.menu {
 			span {
-				background-color: var(--invertColor);
+				background-color: #fff;
 			}
 		}
 	}

@@ -17,14 +17,22 @@ import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import { useCommonData } from './hooks/useCommonData';
 import CookieModal from './components/common/cookieModal/CookieModal';
+import { useEffect, useRef } from 'react';
 
 export default function App() {
 	const queryClient = new QueryClient();
-	const { Theme } = useCommonData();
+	const { Theme, setFrame } = useCommonData();
+	const wrapRef = useRef(null);
+
+	useEffect(() => {
+		setFrame(wrapRef.current);
+	}, [setFrame]);
 
 	return (
 		<QueryClientProvider client={queryClient}>
-			<div className={`wrap ${Theme === 'dark' ? 'dark' : ''} ${useMedia()}`}>
+			<div
+				className={`wrap ${Theme === 'dark' ? 'dark' : ''} ${useMedia()}`}
+				ref={wrapRef}>
 				<Switch>
 					<Route
 						exact
@@ -33,7 +41,7 @@ export default function App() {
 						<MainWrap />
 					</Route>
 					<Route path='/'>
-						<Header />
+						<Header type={'sub'} />
 					</Route>
 				</Switch>
 				{/* <Header />

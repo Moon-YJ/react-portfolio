@@ -1,6 +1,5 @@
 .Header {
-	z-index: 5;
-	position: fixed;
+	position: relative;
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
@@ -126,9 +125,11 @@
 	}
 	&.visible {
 		transform: translateY(0);
-		background-color: rgba(var(--baseColor-code), 0.7) !important;
+		background-color: rgba(var(--baseColor-code), 0.7);
 	}
 	&.main {
+		z-index: 5;
+		position: fixed;
 		h1 {
 			img {
 				filter: var(--filterInvMob);

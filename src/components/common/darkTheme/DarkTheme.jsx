@@ -2,20 +2,25 @@ import './DarkTheme.scss';
 import { MdWbSunny } from 'react-icons/md';
 import { BiSolidMoon } from 'react-icons/bi';
 import { useCommonData } from '../../../hooks/useCommonData';
-import { useCookie } from '../../../hooks/useCookie';
 import { useEffect } from 'react';
 
 export default function DarkTheme() {
 	const { Theme, setTheme } = useCommonData();
-	const { setCookie, isCookie } = useCookie();
+	const DarkTheme = localStorage.getItem('darkTheme') || 'light';
+
 	const handleClick = () => {
-		setTheme(Theme === 'dark' ? 'light' : 'dark');
-		setCookie('darkTheme', Theme === 'dark' ? 'light' : 'dark', 60 * 60 * 12);
+		if (Theme === 'light') {
+			setTheme('dark');
+			localStorage.setItem('darkTheme', 'dark');
+		} else {
+			setTheme('light');
+			localStorage.setItem('darkTheme', 'light');
+		}
 	};
 
 	useEffect(() => {
-		if (isCookie('darkTheme')) setTheme(document.cookie.split('darkTheme=')[1].split(';')[0]);
-	}, [isCookie, setTheme]);
+		setTheme(DarkTheme);
+	}, [setTheme, DarkTheme]);
 
 	return (
 		<div

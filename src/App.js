@@ -7,7 +7,7 @@ import Department from './components/sub/department/Department';
 import Gallery from './components/sub/gallery/Gallery';
 import Members from './components/sub/members/Members';
 import Youtube from './components/sub/youtube/Youtube';
-import { Route } from 'react-router-dom';
+import { Route, Switch } from 'react-router-dom';
 import './globalStyles/Variables.scss';
 import './globalStyles/Reset.scss';
 import { useMedia } from './hooks/useMedia';
@@ -25,12 +25,23 @@ export default function App() {
 	return (
 		<QueryClientProvider client={queryClient}>
 			<div className={`wrap ${Theme === 'dark' ? 'dark' : ''} ${useMedia()}`}>
-				<Header />
+				<Switch>
+					<Route
+						exact
+						path='/'>
+						<Header type={'main'} />
+						<MainWrap />
+					</Route>
+					<Route path='/'>
+						<Header />
+					</Route>
+				</Switch>
+				{/* <Header />
 				<Route
 					exact
 					path='/'
 					component={MainWrap}
-				/>
+				/> */}
 				<Route
 					path='/department'
 					component={Department}

@@ -12,7 +12,7 @@
 	font-weight: var(--lightWeight);
 	font-family: var(--pointFont);
 	transform: translateY(0);
-	transition: transform 0.8s, background-color 0.2s;
+	transition: transform 0.7s, background-color 0.2s;
 	h1 {
 		width: 100px;
 		height: 100%;
@@ -121,12 +121,31 @@
 		}
 	}
 	&.scrolled {
-		transform: translateY(-100%);
-		// background-color: rgba(var(--baseColor-code), 0.7);
+		transform: translateY(-80%);
+		background-color: transparent;
 	}
-	&.reset {
+	&.visible {
 		transform: translateY(0);
 		background-color: rgba(var(--baseColor-code), 0.7) !important;
+	}
+	&.main {
+		h1 {
+			img {
+				filter: var(--filterInvMob);
+			}
+		}
+		ul {
+			li {
+				a {
+					color: var(--invertColor);
+				}
+			}
+		}
+		.menu {
+			span {
+				background-color: var(--invertColor);
+			}
+		}
 	}
 }
 

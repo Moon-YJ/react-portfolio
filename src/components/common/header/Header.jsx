@@ -6,7 +6,7 @@ import DarkTheme from '../darkTheme/DarkTheme';
 import ColorTheme from '../colorTheme/ColorTheme';
 import { useScroll } from '../../../hooks/useScroll';
 
-export default function Header() {
+export default function Header({ type }) {
 	const [Frame, setFrame] = useState(null);
 	const path = useRef(process.env.PUBLIC_URL);
 	const headerRef = useRef(null);
@@ -16,33 +16,35 @@ export default function Header() {
 
 	const handleScroll = useCallback(
 		base => {
-			getScrollPos(headerRef.current) >= base
-				? headerRef.current.classList.add('scrolled')
-				: headerRef.current.classList.remove('scrolled');
+			const scroll = getScrollPos(headerRef.current);
+			scroll <= base && headerRef.current.classList.remove('visible');
+			scroll >= base ? headerRef.current.classList.add('scrolled') : headerRef.current.classList.remove('scrolled');
+			return scroll;
 		},
 		[getScrollPos]
 	);
 
-	const handleWheel = e => {
-		console.log(e.deltaY);
-		e.deltaY < 0 ? headerRef.current.classList.add('reset') : headerRef.current.classList.remove('reset');
-		if (Frame.scrollTop <= 150) headerRef.current.classList.remove('reset');
-		// else isReset.current = false;
-		// setPosWheel(wrap.current.scrollTop);
-	};
+	const handleWheel = useCallback(
+		(e, base) => {
+			e.deltaY < 0 && handleScroll() > base
+				? headerRef.current?.classList.add('visible')
+				: headerRef.current.classList.remove('visible');
+		},
+		[handleScroll]
+	);
 
 	useEffect(() => {
 		setFrame(headerRef.current.closest('.wrap'));
 	}, []);
 
 	useEffect(() => {
-		Frame?.addEventListener('mousewheel', handleWheel);
-		Frame?.addEventListener('scroll', () => handleScroll(150));
-	}, [Frame, handleScroll]);
+		Frame?.addEventListener('scroll', () => handleScroll(window.innerHeight / 3));
+		Frame?.addEventListener('mousewheel', e => handleWheel(e, window.innerHeight / 2));
+	}, [Frame, handleScroll, handleWheel]);
 
 	return (
 		<header
-			className='Header'
+			className={`Header ${type === 'main' ? 'main' : ''}`}
 			ref={headerRef}>
 			<h1 className='logo'>
 				<Link to='/'>

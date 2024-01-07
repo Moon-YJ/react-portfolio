@@ -1,7 +1,8 @@
-export function useScroll(frame, sec = 0.3) {
+import Anime from '../asset/anime';
+
+export function useScroll(frame) {
 	const moveScroll = pos => {
-		frame.style.transition = `${sec}s`;
-		if (frame) frame.scrollTop = pos;
+		frame && new Anime(frame, { scroll: pos });
 	};
 
 	const getScrollPos = (target, baseNum = 0) => {

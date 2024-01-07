@@ -48,7 +48,9 @@
 		height: 40px;
 		border: 2px solid var(--baseColor) !important;
 		border-radius: 50% !important;
-		opacity: 0.8;
+		opacity: 0;
+		transform: scale(1.2);
+		transition: opacity 0.5s, transform 0.5s;
 		.line {
 			display: inline-block;
 			position: absolute;
@@ -69,6 +71,10 @@
 				margin-top: 3.5px;
 				transform: scale(1.4);
 			}
+		}
+		&.on {
+			opacity: 0.8;
+			transform: scale(1);
 		}
 	}
 	&.on {
@@ -110,6 +116,15 @@
 				font-size: var(--titSize1);
 			}
 		}
+		button {
+			bottom: 15px;
+			right: 1.5%;
+			width: 35px;
+			height: 35px;
+			.line {
+				top: 8px;
+			}
+		}
 	}
 }
 // mobile
@@ -124,6 +139,9 @@
 			h1 {
 				font-size: var(--xlgSize);
 			}
+		}
+		button {
+			display: none;
 		}
 	}
 }

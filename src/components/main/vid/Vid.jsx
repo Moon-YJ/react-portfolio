@@ -4,7 +4,7 @@ import './Vid.scss';
 export default function Vid() {
 	const path = useRef(process.env.PUBLIC_URL);
 	return (
-		<div className='Vid'>
+		<div className='Vid scrolling'>
 			<div className='wrapper'>
 				<video
 					src={`${path.current}/img/main/henge.mp4`}

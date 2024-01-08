@@ -52,6 +52,7 @@ export default function Layout({ index, title, children }) {
 			</div>
 			{children}
 			<button
+				className='top'
 				ref={btn}
 				onClick={() => moveScroll(0)}>
 				<span className='line'></span>

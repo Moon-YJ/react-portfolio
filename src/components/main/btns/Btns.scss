@@ -1,0 +1,24 @@
+.Btns {
+	z-index: 7;
+	position: fixed;
+	top: 50%;
+	right: 40px;
+	transform: translateY(-50%);
+	li {
+		width: 12px;
+		height: 12px;
+		margin: 20px 0;
+		border-radius: 50%;
+		border: 1px solid var(--baseColor);
+		opacity: 0.8;
+		cursor: pointer;
+		transition: background-color 0.2s, opacity 0.2s;
+		&:hover {
+			background-color: rgba(var(--baseColor-code), 0.8);
+		}
+		&.on {
+			background-color: var(--baseColor);
+			opacity: 1;
+		}
+	}
+}

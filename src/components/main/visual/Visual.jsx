@@ -11,6 +11,7 @@ import { customText } from '../../../hooks/useText';
 export default function Visual() {
 	const { data, isSuccess } = useYoutubeQuery();
 	const [Index, setIndex] = useState(0);
+	const slidesNum = useRef(5);
 	const swiperRef = useRef(null);
 	const swiperOpt = useRef({
 		modules: [Pagination, Autoplay],
@@ -18,12 +19,13 @@ export default function Visual() {
 		autoplay: { delay: 3000 },
 		loop: true,
 		slidesPerView: 1,
+		loopedSlides: slidesNum.current,
 		spaceBetween: 120,
 		centeredSlides: true,
 		allowTouchMove: false,
 		breakpoints: {
 			640: { slidesPerView: 2 },
-			1000: { slidesPerView: 3 }
+			1400: { slidesPerView: 3 }
 		},
 		onSwiper: swiper => {
 			swiperRef.current = swiper;
@@ -36,10 +38,10 @@ export default function Visual() {
 	return (
 		<div className='Visual scrolling'>
 			<Swiper {...swiperOpt.current}>
-				<p className='num'>{'0' + (Index + 1)}</p>
+				<p className='num'>{'0' + Index}</p>
 				{isSuccess &&
 					data.map((vid, idx) => {
-						if (idx >= 5) return null;
+						if (idx >= slidesNum.current) return null;
 						return (
 							<SwiperSlide key={vid.id}>
 								<div className='inner'>

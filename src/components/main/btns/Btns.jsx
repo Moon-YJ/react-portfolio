@@ -4,12 +4,15 @@ import Anime from '../../../asset/anime';
 import { useThrottle } from '../../../hooks/useThrottle';
 import { useScroll } from '../../../hooks/useScroll';
 
-export default function Btns() {
+export default function Btns(opt) {
+	const defaultOpt = useRef({ applyClass: '.scrolling', base: -window.innerHeight / 2, isWheel: false });
+	const renewOpt = useRef({ ...defaultOpt.current, ...opt });
 	const [Num, setNum] = useState(0);
 	const contents = useRef(null);
 	const refBtns = useRef(null);
-	const baseLine = useRef(-window.innerHeight / 2);
+	const baseLine = useRef(renewOpt.current.base);
 	const isMotion = useRef(false);
+	const isAutoWheel = useRef(renewOpt.current.isWheel);
 	const { Frame } = useScroll();
 
 	const handleScroll = () => {
@@ -31,23 +34,39 @@ export default function Btns() {
 	}, [Frame]);
 	const throttledResize = useThrottle(handleResize, 200);
 
-	const handleBtn = idx => {
-		if (isMotion.current) return;
-		isMotion.current = true;
-		new Anime(Frame, { scroll: contents.current[idx].offsetTop }, { callback: () => (isMotion.current = false) });
-	};
+	const handleBtn = useCallback(
+		idx => {
+			if (isMotion.current) return;
+			isMotion.current = true;
+			new Anime(Frame, { scroll: contents.current[idx].offsetTop }, { callback: () => (isMotion.current = false) });
+		},
+		[Frame]
+	);
+
+	const handleWheel = useCallback(
+		e => {
+			const btnArr = Array.from(refBtns.current.children);
+			const activeEl = refBtns.current.querySelector('li.on');
+			const activeIndex = btnArr.indexOf(activeEl);
+			if (e.deltaY > 0 && activeIndex !== Num - 1) Frame.scrollTop = handleBtn(activeIndex + 1);
+			else if (e.deltaY < 0 && activeIndex !== 0) Frame.scrollTop = handleBtn(activeIndex - 1);
+		},
+		[Frame, Num, handleBtn]
+	);
 
 	useEffect(() => {
-		contents.current = document.querySelectorAll('.scrolling');
+		contents.current = document.querySelectorAll(renewOpt.current.applyClass);
 		setNum(contents.current.length);
-
 		Frame?.addEventListener('scroll', throttledScroll);
+		isAutoWheel.current && Frame?.addEventListener('mousewheel', handleWheel);
 		window.addEventListener('resize', throttledResize);
+
 		return () => {
 			Frame?.removeEventListener('scroll', throttledScroll);
+			Frame?.removeEventListener('mousewheel', handleWheel);
 			window.removeEventListener('resize', throttledResize);
 		};
-	}, [throttledScroll, Frame, throttledResize]);
+	}, [throttledScroll, Frame, throttledResize, handleWheel]);
 
 	return (
 		<ul

@@ -1,3 +1,4 @@
+import { useCommonData } from '../../../hooks/useCommonData';
 import { useScroll } from '../../../hooks/useScroll';
 import { useSplitText } from '../../../hooks/useText';
 import './Layout.scss';
@@ -9,6 +10,7 @@ export default function Layout({ index, title, children }) {
 	const titBox = useRef(null);
 	const btn = useRef(null);
 	const splitTitle = useSplitText();
+	const { setTheme } = useCommonData();
 	const { moveScroll, getScrollPos, Frame, refTarget } = useScroll();
 
 	const handleScroll = useCallback(
@@ -17,6 +19,11 @@ export default function Layout({ index, title, children }) {
 		},
 		[getScrollPos]
 	);
+
+	useEffect(() => {
+		setTheme('light');
+		localStorage.setItem('darkTheme', 'light');
+	}, []);
 
 	useEffect(() => {
 		moveScroll(0);

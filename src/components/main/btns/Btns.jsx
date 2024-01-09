@@ -14,7 +14,7 @@ export default function Btns() {
 	const handleScroll = () => {
 		const scroll = Frame.scrollTop;
 		contents.current.forEach((_, idx) => {
-			if (scroll >= contents.current[idx].offsetTop + baseLine.current) {
+			if (scroll >= contents.current[idx].offsetTop + baseLine.current && refBtns.current) {
 				Array.from(refBtns.current.children).forEach(btn => btn.classList.remove('on'));
 				refBtns.current.children[idx].classList.add('on');
 			}

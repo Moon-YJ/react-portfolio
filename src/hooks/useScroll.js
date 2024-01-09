@@ -1,15 +1,23 @@
+import { useEffect, useRef, useState } from 'react';
 import Anime from '../asset/anime';
 
-export function useScroll(frame) {
+export function useScroll() {
+	const [Frame, setFrame] = useState(null);
+	const refTarget = useRef(null);
+
 	const moveScroll = pos => {
-		frame && new Anime(frame, { scroll: pos });
+		Frame && new Anime(Frame, { scroll: pos });
 	};
 
-	const getScrollPos = (target, baseNum = 0) => {
-		const pos = frame?.scrollTop - baseNum;
-		const modifiedPos = pos - target?.offsetTop;
+	const getScrollPos = (baseNum = 0) => {
+		const pos = Frame?.scrollTop - baseNum;
+		const modifiedPos = pos - refTarget.current?.offsetTop;
 		return modifiedPos;
 	};
 
-	return { moveScroll, getScrollPos };
+	useEffect(() => {
+		setFrame(document.querySelector('.wrap'));
+	}, [setFrame]);
+
+	return { moveScroll, getScrollPos, Frame, refTarget };
 }

@@ -3,20 +3,17 @@ import { useSplitText } from '../../../hooks/useText';
 import './Layout.scss';
 import { useCallback, useEffect, useRef } from 'react';
 import { MdArrowUpward } from 'react-icons/md';
-import { useCommonData } from '../../../hooks/useCommonData';
 
 export default function Layout({ index, title, children }) {
-	const { Frame } = useCommonData();
-	const box = useRef(null);
 	const numBox = useRef(null);
 	const titBox = useRef(null);
 	const btn = useRef(null);
 	const splitTitle = useSplitText();
-	const { moveScroll, getScrollPos } = useScroll(Frame);
+	const { moveScroll, getScrollPos, Frame, refTarget } = useScroll();
 
 	const handleScroll = useCallback(
 		num => {
-			getScrollPos(box.current, 0) >= num ? btn.current?.classList.add('on') : btn.current?.classList.remove('on');
+			getScrollPos() >= num ? btn.current?.classList.add('on') : btn.current?.classList.remove('on');
 		},
 		[getScrollPos]
 	);
@@ -30,13 +27,13 @@ export default function Layout({ index, title, children }) {
 		splitTitle(numBox.current, index, 1, 0.3);
 		splitTitle(titBox.current, title, 0.5, 0.1);
 		setTimeout(() => {
-			box.current?.classList.add('on');
+			refTarget.current?.classList.add('on');
 		}, 500);
-	}, [index, splitTitle, title]);
+	}, [index, splitTitle, title, refTarget]);
 
 	return (
 		<main
-			ref={box}
+			ref={refTarget}
 			className={`Layout ${title}`}>
 			<div className='tit-set'>
 				<p

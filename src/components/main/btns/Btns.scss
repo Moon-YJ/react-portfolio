@@ -10,15 +10,15 @@
 		margin: 20px 0;
 		border-radius: 50%;
 		border: 1px solid var(--baseColor);
-		opacity: 0.8;
 		cursor: pointer;
-		transition: background-color 0.2s, opacity 0.2s;
+		transition: background-color 0.3s;
 		&:hover {
-			background-color: rgba(var(--baseColor-code), 0.8);
+			background-color: var(--pointColor);
+			opacity: 0.6;
 		}
 		&.on {
-			background-color: var(--baseColor);
-			opacity: 1;
+			background-color: var(--pointColor);
+			border-color: var(--pointColor);
 		}
 	}
 }

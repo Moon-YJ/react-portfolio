@@ -7,43 +7,45 @@ import ColorTheme from '../colorTheme/ColorTheme';
 import { useScroll } from '../../../hooks/useScroll';
 
 export default function Header({ type }) {
-	const { Frame } = useCommonData();
 	const path = useRef(process.env.PUBLIC_URL);
-	const headerRef = useRef(null);
 	const menuEl = ['department', 'youtube', 'gallery', 'community', 'member', 'contact'];
 	const { MenuToggle, setMenuToggle } = useCommonData();
-	const { getScrollPos } = useScroll(Frame);
+	const { getScrollPos, Frame, refTarget } = useScroll();
 
 	const handleScroll = useCallback(
 		base => {
-			if (headerRef.current.classList.contains('sub')) return;
-			const scroll = getScrollPos(headerRef.current);
-			scroll <= base && headerRef.current.classList.remove('visible');
-			scroll >= base ? headerRef.current.classList.add('scrolled') : headerRef.current.classList.remove('scrolled');
+			if (refTarget.current.classList.contains('sub')) return;
+			const scroll = getScrollPos();
+			scroll <= base && refTarget.current.classList.remove('visible');
+			scroll >= base ? refTarget.current.classList.add('scrolled') : refTarget.current.classList.remove('scrolled');
 			return scroll;
 		},
-		[getScrollPos]
+		[getScrollPos, refTarget]
 	);
 
 	const handleWheel = useCallback(
 		(e, base) => {
-			if (headerRef.current.classList.contains('sub')) return;
+			if (refTarget.current.classList.contains('sub')) return;
 			e.deltaY < 0 && handleScroll() > base
-				? headerRef.current?.classList.add('visible')
-				: headerRef.current.classList.remove('visible');
+				? refTarget.current?.classList.add('visible')
+				: refTarget.current.classList.remove('visible');
 		},
-		[handleScroll]
+		[handleScroll, refTarget]
 	);
 
 	useEffect(() => {
 		Frame?.addEventListener('scroll', () => handleScroll(window.innerHeight / 3));
 		Frame?.addEventListener('mousewheel', e => handleWheel(e, window.innerHeight / 2));
+		return () => {
+			Frame?.removeEventListener('scroll', handleScroll);
+			Frame?.removeEventListener('mousewheel', handleWheel);
+		};
 	}, [Frame, handleScroll, handleWheel]);
 
 	return (
 		<header
 			className={`Header ${type}`}
-			ref={headerRef}>
+			ref={refTarget}>
 			<h1 className='logo'>
 				<Link to='/'>
 					<img

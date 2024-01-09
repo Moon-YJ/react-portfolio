@@ -6,10 +6,9 @@ export function CommonProvider({ children }) {
 	const [MenuToggle, setMenuToggle] = useState(false);
 	const [Open, setOpen] = useState(false);
 	const [Theme, setTheme] = useState('light');
-	const [Frame, setFrame] = useState(null);
 
 	return (
-		<CommonContext.Provider value={{ MenuToggle, setMenuToggle, Open, setOpen, Theme, setTheme, Frame, setFrame }}>
+		<CommonContext.Provider value={{ MenuToggle, setMenuToggle, Open, setOpen, Theme, setTheme }}>
 			{children}
 		</CommonContext.Provider>
 	);

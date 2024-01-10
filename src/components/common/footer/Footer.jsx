@@ -1,23 +1,22 @@
 import './Footer.scss';
 import { Link } from 'react-router-dom';
-import { useEffect, useRef } from 'react';
+import { useRef } from 'react';
 import { FaFacebookF, FaTwitter, FaYoutube, FaGithub } from 'react-icons/fa';
 import { useCommonData } from '../../../hooks/useCommonData';
-import { useCookie } from '../../../hooks/useCookie';
 
 export default function Footer() {
 	const path = useRef(process.env.PUBLIC_URL);
 	const { Theme, setTheme } = useCommonData();
-	const { setCookie, isCookie } = useCookie();
 
 	const handleSelect = e => {
-		e.target.value === 'Dark' ? setTheme('dark') : setTheme('light');
-		setCookie('darkTheme', Theme === 'dark' ? 'light' : 'dark', 60 * 60 * 12);
+		if (e.target.value === 'Light') {
+			setTheme('light');
+			localStorage.setItem('darkTheme', 'light');
+		} else {
+			setTheme('dark');
+			localStorage.setItem('darkTheme', 'dark');
+		}
 	};
-
-	useEffect(() => {
-		if (isCookie('darkTheme')) setTheme(document.cookie.split('darkTheme=')[1].split(';')[0]);
-	}, [isCookie, setTheme]);
 
 	return (
 		<footer className='Footer'>

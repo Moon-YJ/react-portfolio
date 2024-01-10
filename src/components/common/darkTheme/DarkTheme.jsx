@@ -6,7 +6,7 @@ import { useEffect } from 'react';
 
 export default function DarkTheme() {
 	const { Theme, setTheme } = useCommonData();
-	const DarkTheme = localStorage.getItem('darkTheme') || 'light';
+	const DarkTheme = localStorage.getItem('darkTheme') || 'dark';
 
 	const handleClick = () => {
 		if (Theme === 'light') {

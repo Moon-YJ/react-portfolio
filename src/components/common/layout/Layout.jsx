@@ -10,8 +10,8 @@ export default function Layout({ index, title, children }) {
 	const titBox = useRef(null);
 	const btn = useRef(null);
 	const splitTitle = useSplitText();
-	const { setTheme } = useCommonData();
 	const { moveScroll, getScrollPos, Frame, refTarget } = useScroll();
+	const { Open } = useCommonData();
 
 	const handleScroll = useCallback(
 		num => {
@@ -21,14 +21,9 @@ export default function Layout({ index, title, children }) {
 	);
 
 	useEffect(() => {
-		setTheme('light');
-		localStorage.setItem('darkTheme', 'light');
-	}, [setTheme]);
-
-	useEffect(() => {
-		moveScroll(0);
+		!Open && Open && moveScroll(0);
 		Frame?.addEventListener('scroll', () => handleScroll(200));
-	}, [moveScroll, handleScroll, Frame]);
+	}, [moveScroll, handleScroll, Frame, Open]);
 
 	useEffect(() => {
 		splitTitle(numBox.current, index, 1, 0.3);

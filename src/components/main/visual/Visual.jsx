@@ -5,7 +5,6 @@ import 'swiper/css/pagination';
 import './Visual.scss';
 import { Link } from 'react-router-dom/cjs/react-router-dom.min';
 import { useRef, useState } from 'react';
-import { customText } from '../../../hooks/useText';
 import { useFlickrQuery } from '../../../hooks/useFlickrQuery';
 
 export default function Visual() {
@@ -19,26 +18,22 @@ export default function Visual() {
 		autoplay: { delay: 3000 },
 		loop: true,
 		slidesPerView: 1,
+		initialSlide: 1,
 		loopedSlides: slidesNum.current,
 		spaceBetween: 120,
 		centeredSlides: true,
 		allowTouchMove: false,
 		breakpoints: {
-			640: { slidesPerView: 2 },
-			1400: { slidesPerView: 3 }
+			640: { slidesPerView: 3 }
 		},
-		onSwiper: swiper => {
-			swiperRef.current = swiper;
-			swiper.slideNext(300);
-		},
+		onSwiper: swiper => (swiperRef.current = swiper),
 		onSlideChange: swiper => setIndex(swiper.realIndex)
 	});
-	const shortenTit = customText('shorten');
 
 	return (
 		<section className='Visual scrolling'>
 			<Swiper {...swiperOpt.current}>
-				<p className='num'>{'0' + Index}</p>
+				<p className='num'>{'0' + (Index + 1)}</p>
 				{isSuccess &&
 					data.map((pic, idx) => {
 						if (idx >= slidesNum.current) return null;
@@ -58,18 +53,6 @@ export default function Visual() {
 												alt={pic.title}
 											/>
 										</div>
-										{/* <div className='pic'>
-											<img
-												src={vid.snippet.thumbnails.standard.url}
-												alt={vid.snippet.title}
-											/>
-										</div> */}
-										{/* <div className='pic'>
-											<img
-												src={vid.snippet.thumbnails.standard.url}
-												alt={vid.snippet.title}
-											/>
-										</div> */}
 									</div>
 									<Link
 										to='/gallery'
@@ -79,7 +62,6 @@ export default function Visual() {
 									</Link>
 									<div className='txt'>
 										<h2>{pic.title}</h2>
-										{/* <h2>{shortenTit(vid.snippet.title, 13, '')}</h2> */}
 									</div>
 								</div>
 							</SwiperSlide>

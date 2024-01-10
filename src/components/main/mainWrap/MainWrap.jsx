@@ -5,17 +5,9 @@ import Pics from '../pics/Pics';
 import Vid from '../vid/Vid';
 import Visual from '../visual/Visual';
 import './MainWrap.scss';
-import { useCommonData } from '../../../hooks/useCommonData';
 import Product from '../product/Product';
 
 export default function MainWrap() {
-	const { setTheme } = useCommonData();
-
-	useEffect(() => {
-		setTheme('dark');
-		localStorage.setItem('darkTheme', 'dark');
-	}, [setTheme]);
-
 	return (
 		<div className='MainWrap'>
 			<Vid />

@@ -4,7 +4,7 @@ import './Vid.scss';
 export default function Vid() {
 	const path = useRef(process.env.PUBLIC_URL);
 	return (
-		<div className='Vid scrolling'>
+		<section className='Vid scrolling'>
 			<div className='wrapper'>
 				<video
 					src={`${path.current}/img/main/henge.mp4`}
@@ -18,6 +18,6 @@ export default function Vid() {
 				<br />
 				<span>of Beauty</span>
 			</h1>
-		</div>
+		</section>
 	);
 }

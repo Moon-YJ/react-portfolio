@@ -153,7 +153,7 @@ export default function Community() {
 									const strDate = customDate(date.split('T')[0].slice(1), '.');
 									const strTime = date.split('T')[1].split('Z')[0].split('.')[0];
 									return { strDate, strTime };
-								} else return;
+								} else return null;
 							};
 							if (idx >= postPerPage.current * CurNum && idx < postPerPage.current * (CurNum + 1)) {
 								return (
@@ -161,7 +161,7 @@ export default function Community() {
 										{list.editMode ? (
 											// 수정
 											<>
-												<span className='num'>{idx < 10 ? '0' + (idx + 1) : idx + 1}</span>
+												<span className='num'>{idx < 9 ? '0' + (idx + 1) : idx + 1}</span>
 												<h2>
 													<input
 														ref={refEditInput}
@@ -201,7 +201,7 @@ export default function Community() {
 										) : (
 											// 출력
 											<>
-												<span className='num'>{idx < 10 ? '0' + (idx + 1) : idx + 1}</span>
+												<span className='num'>{idx < 9 ? '0' + (idx + 1) : idx + 1}</span>
 												<h2>{list.subject}</h2>
 												<p className='txt'>{list.content}</p>
 												<div className='con-btm'>
@@ -233,7 +233,8 @@ export default function Community() {
 							<div className='pagination'>
 								<button
 									className='prev'
-									disabled={CurNum === 0}>
+									disabled={CurNum === 0}
+									onClick={() => setCurNum(0)}>
 									<MdKeyboardDoubleArrowLeft />
 								</button>
 								<span className='numbers'>
@@ -252,6 +253,7 @@ export default function Community() {
 								</span>
 								<button
 									className='next'
+									onClick={() => setCurNum(CurNum + 1)}
 									disabled={CurNum + 1 === totalPageNum.current}>
 									<MdKeyboardDoubleArrowRight />
 								</button>

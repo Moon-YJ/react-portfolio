@@ -9,10 +9,8 @@ import DarkTheme from '../darkTheme/DarkTheme';
 
 export default function Menu() {
 	const path = useRef(process.env.PUBLIC_URL);
-	const menuEl = ['department', 'youtube', 'gallery', 'community', 'member', 'contact'];
 	const customMenu = customText('combine');
-
-	const { MenuToggle, setMenuToggle } = useCommonData();
+	const { MenuToggle, setMenuToggle, menuEl } = useCommonData();
 
 	const closeMenu = useCallback(() => {
 		window.innerWidth >= 1000 && setMenuToggle(false);
@@ -46,7 +44,7 @@ export default function Menu() {
 						</Link>
 					</h1>
 					<ul className='gnb'>
-						{menuEl.map((el, idx) => {
+						{menuEl.current.map((el, idx) => {
 							return (
 								<li key={el + idx}>
 									<NavLink

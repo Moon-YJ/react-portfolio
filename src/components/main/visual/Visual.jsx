@@ -36,7 +36,7 @@ export default function Visual() {
 	const shortenTit = customText('shorten');
 
 	return (
-		<div className='Visual scrolling'>
+		<section className='Visual scrolling'>
 			<Swiper {...swiperOpt.current}>
 				<p className='num'>{'0' + Index}</p>
 				{isSuccess &&
@@ -73,6 +73,6 @@ export default function Visual() {
 						);
 					})}
 			</Swiper>
-		</div>
+		</section>
 	);
 }

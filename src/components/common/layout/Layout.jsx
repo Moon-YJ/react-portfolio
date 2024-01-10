@@ -23,10 +23,9 @@ export default function Layout({ index, title, children }) {
 	useEffect(() => {
 		setTheme('light');
 		localStorage.setItem('darkTheme', 'light');
-	}, []);
+	}, [setTheme]);
 
 	useEffect(() => {
-		moveScroll(0);
 		Frame?.addEventListener('scroll', () => handleScroll(200));
 	}, [moveScroll, handleScroll, Frame]);
 

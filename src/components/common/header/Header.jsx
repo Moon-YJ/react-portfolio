@@ -8,8 +8,7 @@ import { useScroll } from '../../../hooks/useScroll';
 
 export default function Header({ type }) {
 	const path = useRef(process.env.PUBLIC_URL);
-	const menuEl = ['department', 'youtube', 'gallery', 'community', 'member', 'contact'];
-	const { MenuToggle, setMenuToggle } = useCommonData();
+	const { MenuToggle, setMenuToggle, menuEl } = useCommonData();
 	const { getScrollPos, Frame, refTarget } = useScroll();
 
 	const handleScroll = useCallback(
@@ -55,7 +54,7 @@ export default function Header({ type }) {
 				</Link>
 			</h1>
 			<ul className='gnb'>
-				{menuEl.map((el, idx) => {
+				{menuEl.current.map((el, idx) => {
 					return (
 						<li key={el + idx}>
 							<NavLink

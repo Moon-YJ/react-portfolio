@@ -50,13 +50,15 @@ export default function Layout({ index, title, children }) {
 				</h1>
 			</div>
 			{children}
-			<button
-				className='top'
-				ref={btn}
-				onClick={() => moveScroll(0)}>
-				<span className='line'></span>
-				<MdArrowUpward />
-			</button>
+			{!Open && (
+				<button
+					className='top'
+					ref={btn}
+					onClick={() => moveScroll(0)}>
+					<span className='line'></span>
+					<MdArrowUpward />
+				</button>
+			)}
 		</main>
 	);
 }

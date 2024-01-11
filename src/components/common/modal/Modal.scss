@@ -1,4 +1,5 @@
 .Modal {
+	z-index: 5;
 	position: fixed;
 	top: 0;
 	left: 0;
@@ -35,20 +36,22 @@
 	}
 }
 
-// tablet
-.tablet,
-.mobile {
-	.Modal {
-		.pic {
-			width: 70%;
+/*
+	// tablet
+	.tablet,
+	.mobile {
+		.Modal {
+			.pic {
+				width: 70%;
+			}
 		}
 	}
-}
-// mobile
-.mobile {
-	.Modal {
-		.pic {
-			width: 85%;
+	// mobile
+	.mobile {
+		.Modal {
+			.pic {
+				width: 85%;
+			}
 		}
 	}
-}
+*/

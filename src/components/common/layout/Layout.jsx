@@ -21,9 +21,12 @@ export default function Layout({ index, title, children }) {
 	);
 
 	useEffect(() => {
-		!Open && Open && moveScroll(0);
+		moveScroll(0);
+	}, []);
+
+	useEffect(() => {
 		Frame?.addEventListener('scroll', () => handleScroll(200));
-	}, [moveScroll, handleScroll, Frame, Open]);
+	}, [handleScroll, Frame]);
 
 	useEffect(() => {
 		splitTitle(numBox.current, index, 1, 0.3);

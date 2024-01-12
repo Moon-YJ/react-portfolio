@@ -1,6 +1,8 @@
 .Info {
 	position: relative;
 	width: 100%;
-	height: 100vh;
-	background-color: skyblue;
+	.tit {
+		font-size: var(--titSize1);
+		font-weight: var(--lightWeight);
+	}
 }

@@ -8,15 +8,13 @@ import { CgCloseR } from 'react-icons/cg';
 import { MdKeyboardDoubleArrowLeft } from 'react-icons/md';
 import { MdKeyboardDoubleArrowRight } from 'react-icons/md';
 import { customText } from '../../../hooks/useText';
-import PostData from './postDummy.json';
 
 export default function Community() {
 	const customDate = customText('combine');
 	const korTime = new Date().getTime() + 1000 * 60 * 60 * 9;
 	const getData = () => {
 		const data = localStorage.getItem('post');
-		if (data) return JSON.parse(data);
-		else return PostData.dummyPosts;
+		return JSON.parse(data);
 	};
 
 	const [Post, setPost] = useState(getData);

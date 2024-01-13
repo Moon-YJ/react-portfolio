@@ -21,7 +21,7 @@ export default function Info() {
 	return (
 		<section className='Info scrolling'>
 			<div className='tit-set'>
-				<h1 className='tit'>Latest Contents</h1>
+				<h1 className='tit'>Latest Comments</h1>
 				<div className='detail'>
 					<Link to='/community'>Discover</Link>
 				</div>

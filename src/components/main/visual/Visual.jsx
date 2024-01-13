@@ -81,10 +81,12 @@ export default function Visual() {
 			</section>
 			<Modal>
 				{isSuccess && data.length !== 0 && (
-					<img
-						src={`https://live.staticflickr.com/${data[PicIndex].server}/${data[PicIndex].id}_${data[PicIndex].secret}_b.jpg`}
-						alt={data[PicIndex].id}
-					/>
+					<div className='pic'>
+						<img
+							src={`https://live.staticflickr.com/${data[PicIndex].server}/${data[PicIndex].id}_${data[PicIndex].secret}_b.jpg`}
+							alt={data[PicIndex].id}
+						/>
+					</div>
 				)}
 			</Modal>
 		</>

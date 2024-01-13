@@ -15,7 +15,7 @@ export default function Modal({ children }) {
 					transition={{ duration: 0.2 }}
 					className='Modal'>
 					<motion.div
-						className='pic'
+						className='content'
 						initial={{ opacity: 0 }}
 						animate={{ opacity: 1, transition: { delay: 0.7 } }}
 						exit={{ opacity: 0 }}

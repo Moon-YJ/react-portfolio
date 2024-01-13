@@ -183,90 +183,6 @@
 			}
 		}
 	}
-	.mail {
-		display: flex;
-		align-items: center;
-		gap: 50px;
-		padding: 200px 120px;
-		margin-top: 100px;
-		color: var(--invertColor);
-		background-color: rgba(var(--baseColor-code), 0.95);
-		&-txt {
-			width: 58%;
-			h3 {
-				font-family: var(--gFont);
-				font-weight: var(--lightWeight);
-				font-size: var(--titSize1);
-				line-height: 1;
-			}
-			p {
-				margin-top: 15px;
-				font-weight: var(--lightWeight);
-				opacity: 0.7;
-			}
-		}
-		form {
-			width: 38%;
-			.mail-box {
-				position: relative;
-				input {
-					width: 100%;
-					padding: 19px 25px;
-					border: none;
-					border-radius: 50px;
-					&::placeholder {
-						color: #111;
-						font-size: var(--medSize);
-						font-weight: var(--lightWeight);
-						opacity: 0.5;
-					}
-				}
-				button {
-					position: absolute;
-					top: 50%;
-					right: 5px;
-					transform: translateY(-50%);
-					display: flex;
-					justify-content: center;
-					align-items: center;
-					width: 55px;
-					height: 55px;
-					text-align: center;
-					margin: 0 auto;
-					background-color: #111;
-					border-radius: 100%;
-					transition: opacity 0.4s;
-					svg {
-						font-size: var(--lgSize);
-						color: #fff;
-						transition: transform 0.3s;
-					}
-					&:hover {
-						opacity: 0.8;
-						svg {
-							transform: translateX(4px);
-						}
-					}
-				}
-			}
-			label {
-				display: inline-block;
-				width: 100%;
-				padding-left: 10px;
-				margin-top: 20px;
-				input {
-					margin-right: 10px;
-				}
-				span {
-					font-size: var(--smSize);
-					font-weight: var(--lightWeight);
-					.line {
-						border-bottom: 1px solid var(--invertColor);
-					}
-				}
-			}
-		}
-	}
 }
 
 // laptop
@@ -394,24 +310,6 @@
 				}
 			}
 		}
-		.mail {
-			flex-wrap: wrap;
-			gap: 40px;
-			padding: 150px 100px;
-			&-txt {
-				width: 100%;
-				h3 {
-					font-size: var(--titSize1s);
-				}
-				p {
-					margin-top: 10px;
-					font-size: var(--mSize);
-				}
-			}
-			form {
-				width: 100%;
-			}
-		}
 	}
 }
 
@@ -496,29 +394,6 @@
 									}
 								}
 							}
-						}
-					}
-				}
-			}
-		}
-		.mail {
-			gap: 35px;
-			padding: 110px 35px;
-			&-txt {
-				width: 100%;
-				h3 {
-					font-size: var(--titSize2);
-				}
-				p {
-					margin-top: 10px;
-					font-size: var(--mSize);
-				}
-			}
-			form {
-				.mail-box {
-					input {
-						&::placeholder {
-							font-size: var(--bodySize);
 						}
 					}
 				}

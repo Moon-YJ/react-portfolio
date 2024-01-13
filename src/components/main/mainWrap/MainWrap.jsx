@@ -7,6 +7,7 @@ import Visual from '../visual/Visual';
 import './MainWrap.scss';
 import Product from '../product/Product';
 import Text from '../text/Text';
+import Email from '../../common/email/Email';
 
 export default function MainWrap() {
 	return (
@@ -17,6 +18,7 @@ export default function MainWrap() {
 			<Text />
 			<Pics />
 			<Visual />
+			<Email isMain={true} />
 			<Btns />
 		</div>
 	);

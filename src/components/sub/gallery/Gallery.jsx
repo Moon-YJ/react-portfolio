@@ -217,10 +217,12 @@ export default function Gallery() {
 
 			<Modal>
 				{isSuccess && Pics.length !== 0 && (
-					<img
-						src={`https://live.staticflickr.com/${Pics[Index].server}/${Pics[Index].id}_${Pics[Index].secret}_b.jpg`}
-						alt={Pics[Index].id}
-					/>
+					<div className='pic'>
+						<img
+							src={`https://live.staticflickr.com/${Pics[Index].server}/${Pics[Index].id}_${Pics[Index].secret}_b.jpg`}
+							alt={Pics[Index].id}
+						/>
+					</div>
 				)}
 			</Modal>
 		</>

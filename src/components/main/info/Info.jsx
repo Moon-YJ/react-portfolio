@@ -30,10 +30,9 @@ export default function Info() {
 							return { strDate, strTime };
 						} else return null;
 					};
-					if (idx >= 4) return null;
+					if (idx >= 3) return null;
 					return (
 						<article key={list + idx}>
-							<span className='num'>{idx < 9 ? '0' + (idx + 1) : idx + 1}</span>
 							<h2>{list.subject}</h2>
 							<p className='txt'>{list.content}</p>
 							<div className='con-btm'>
@@ -43,6 +42,7 @@ export default function Info() {
 									<p>{getDate().strTime}</p>
 								</div>
 							</div>
+							<span className='num'>{idx < 9 ? '0' + (idx + 1) : idx + 1}</span>
 						</article>
 					);
 				})}

@@ -1,8 +1,61 @@
 .Info {
 	position: relative;
-	width: 100%;
+	width: 80vw;
+	padding: 120px 0;
+	margin: 0 auto;
 	.tit {
+		margin-bottom: 10px;
 		font-size: var(--titSize1);
 		font-weight: var(--lightWeight);
+	}
+	.show-box {
+		display: flex;
+		justify-content: space-between;
+		border-top: 1px solid var(--baseColor);
+		article {
+			width: calc(100% / 3);
+			padding: 15px 30px;
+			border-left: 1px solid var(--baseColor);
+			font-weight: var(--lightWeight);
+			&:first-child {
+				padding-left: 0;
+				border-left: none;
+			}
+			h2 {
+				margin-bottom: 10px;
+				font-size: var(--xlgSize);
+				font-weight: inherit;
+			}
+			.txt {
+				min-height: 200px;
+			}
+			.con-btm {
+				display: flex;
+				align-items: center;
+				justify-content: space-between;
+				width: 90%;
+				margin-bottom: 10px;
+				.date {
+					display: flex;
+					align-items: center;
+					margin-top: -3px;
+					font-size: var(--smSize);
+					font-weight: var(--lightWeight);
+					p {
+						line-height: 1;
+					}
+					.line {
+						display: inline-block;
+						width: 25px;
+						height: 1px;
+						margin: 0 7px;
+						background-color: var(--baseColor);
+					}
+				}
+			}
+			.num {
+				font-size: var(--lgSize);
+			}
+		}
 	}
 }

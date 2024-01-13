@@ -1,0 +1,17 @@
+.Text {
+	position: relative;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
+	width: 80vw;
+	height: 100vh;
+	margin: 0 auto;
+	overflow: hidden;
+	.txt {
+		font-family: var(--gFont);
+		font-size: var(--titSize0);
+		font-weight: var(--lightWeight);
+		opacity: 0.4;
+	}
+}

@@ -7,11 +7,11 @@
 	width: 80vw;
 	height: 100vh;
 	margin: 0 auto;
-	overflow: hidden;
+	//overflow: hidden;
 	.txt {
 		font-family: var(--gFont);
 		font-size: var(--titSize0);
 		font-weight: var(--lightWeight);
-		opacity: 0.4;
+		opacity: 0.1;
 	}
 }

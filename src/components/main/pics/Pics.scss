@@ -7,13 +7,13 @@
 	height: 100vh;
 	margin: 0 auto;
 	font-weight: var(--lightWeight);
-	> .tit-set {
+	.tit-set {
 		display: flex;
 		justify-content: space-between;
 		align-items: flex-end;
 		padding-bottom: 20px;
 		margin-bottom: 50px;
-		border-bottom: 1px solid var(--baseColor);
+		//border-bottom: 1px solid var(--baseColor);
 		.tit {
 			font-size: var(--titSize1);
 			font-weight: inherit;
@@ -43,6 +43,7 @@
 	.content {
 		display: flex;
 		gap: 30px;
+		overflow: hidden;
 		article {
 			position: relative;
 			width: 25%;
@@ -69,6 +70,20 @@
 				transition: 0.5s;
 				.tit {
 					font-weight: inherit;
+				}
+				.date {
+					width: 100%;
+					margin-top: 10px;
+					line-height: 1;
+					span {
+						&:first-child {
+							margin-right: 10px;
+							font-weight: var(--medWeight);
+						}
+						&:nth-child(2) {
+							opacity: 0.8;
+						}
+					}
 				}
 			}
 			.play {
@@ -98,6 +113,11 @@
 					opacity: 1;
 				}
 			}
+		}
+	}
+	&.on {
+		.tit-set {
+			border-bottom: 1px solid var(--baseColor);
 		}
 	}
 }

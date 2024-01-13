@@ -9,12 +9,19 @@ import DarkTheme from '../darkTheme/DarkTheme';
 
 export default function Menu() {
 	const path = useRef(process.env.PUBLIC_URL);
+	const menuRef = useRef(null);
 	const customMenu = customText('combine');
 	const { MenuToggle, setMenuToggle, menuEl } = useCommonData();
 
 	const closeMenu = useCallback(() => {
 		window.innerWidth >= 1000 && setMenuToggle(false);
 	}, [setMenuToggle]);
+
+	const handleOutside = e => {
+		if (menuRef.current && !menuRef.current.contains(e.target)) {
+			setMenuToggle(false);
+		}
+	};
 
 	useEffect(() => {
 		closeMenu();
@@ -24,11 +31,19 @@ export default function Menu() {
 		};
 	}, [closeMenu]);
 
+	useEffect(() => {
+		document.addEventListener('mousedown', handleOutside);
+		return () => {
+			document.removeEventListener('mousedown', handleOutside);
+		};
+	}, []);
+
 	return (
 		<AnimatePresence>
 			{MenuToggle && (
 				<motion.aside
 					className='Menu'
+					ref={menuRef}
 					initial={{ opacity: 0, x: -150 }}
 					animate={{ opacity: 1, x: 0 }}
 					exit={{ opacity: 0, x: -150 }}

@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { customText } from '../../../hooks/useText';
 import './Info.scss';
 import postData from './postDummy.json';

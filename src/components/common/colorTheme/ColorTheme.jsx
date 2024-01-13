@@ -28,8 +28,8 @@ export default function ColorTheme() {
 		setChart(false);
 	};
 
-	const handleOutside = event => {
-		if (colorTheme.current && !colorTheme.current.contains(event.target)) {
+	const handleOutside = e => {
+		if (colorTheme.current && !colorTheme.current.contains(e.target)) {
 			setChart(false);
 		}
 	};

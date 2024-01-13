@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from 'react';
 import { customText } from '../../../hooks/useText';
 import './Info.scss';
 import postData from './postDummy.json';
+import { Link } from 'react-router-dom';
 
 export default function Info() {
 	const customDate = customText('combine');
@@ -19,7 +20,12 @@ export default function Info() {
 
 	return (
 		<section className='Info scrolling'>
-			<h1 className='tit'>Latest Contents</h1>
+			<div className='tit-set'>
+				<h1 className='tit'>Latest Contents</h1>
+				<div className='detail'>
+					<Link to='/community'>Discover</Link>
+				</div>
+			</div>
 			<div className='show-box'>
 				{Post.map((list, idx) => {
 					const getDate = () => {

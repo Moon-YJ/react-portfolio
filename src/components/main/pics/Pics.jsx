@@ -22,11 +22,11 @@ export default function Pics() {
 	};
 
 	const handleScroll = useCallback(() => {
-		const scroll = getScrollPos(-window.innerHeight / 3);
+		const scroll = getScrollPos(-window.innerHeight / 2);
 		if (scroll >= 0) {
-			refTarget.current.classList.add('on');
+			refTarget.current?.classList.add('on');
 		} else {
-			refTarget.current.classList.remove('on');
+			refTarget.current?.classList.remove('on');
 		}
 	}, [getScrollPos, refTarget]);
 
@@ -40,8 +40,8 @@ export default function Pics() {
 			<section
 				className='Pics scrolling'
 				ref={refTarget}>
-				<div className='tit-set'>
-					<h1 className='tit'>Latest Contents</h1>
+				<div className='stit-set'>
+					<h1 className='tit'>Latest Videos</h1>
 					<div className='detail'>
 						<Link to='/youtube'>Discover</Link>
 					</div>

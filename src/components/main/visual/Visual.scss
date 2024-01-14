@@ -2,7 +2,7 @@
 	position: relative;
 	width: 100%;
 	height: 100vh;
-	padding-top: 10%;
+	padding-top: 5%;
 	.swiper {
 		width: 100%;
 		height: 100%;
@@ -149,6 +149,13 @@
 					background-color: var(--baseColor);
 					opacity: 0.7;
 				}
+			}
+		}
+	}
+	&.on {
+		.stit-set {
+			&::after {
+				width: 100%;
 			}
 		}
 	}

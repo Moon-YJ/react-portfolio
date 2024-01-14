@@ -10,7 +10,7 @@ export default function Text() {
 		const scroll = getScrollPos(50);
 		if (txtRef.current && txtRef2.current) {
 			if (scroll >= 0) {
-				txtRef.current.style.transform = `translateX(${-scroll / 3}px) scale(${1 + scroll / 1500})`;
+				txtRef.current.style.transform = `translateX(${-scroll / 3}px) translateY(${scroll / 4}px)`;
 				txtRef2.current.style.transform = `translateX(${scroll / 3}px) translateY(${scroll / 3}px) scale(${
 					1 + scroll / 1500
 				})`;

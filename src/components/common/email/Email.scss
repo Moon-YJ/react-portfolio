@@ -1,4 +1,4 @@
-.mail {
+section.mail {
 	display: flex;
 	align-items: center;
 	gap: 50px;
@@ -6,7 +6,7 @@
 	margin-top: 100px;
 	color: var(--invertColor);
 	background-color: rgba(var(--baseColor-code), 0.95);
-	&-txt {
+	.mail-txt {
 		width: 58%;
 		h3 {
 			font-family: var(--gFont);
@@ -86,11 +86,11 @@
 // tablet
 .tablet,
 .mobile {
-	.mail {
+	section.mail {
 		flex-wrap: wrap;
 		gap: 40px;
 		padding: 150px 100px;
-		&-txt {
+		.mail-txt {
 			width: 100%;
 			h3 {
 				font-size: var(--titSize1s);
@@ -108,10 +108,10 @@
 
 // mobile
 .mobile {
-	.mail {
+	section.mail {
 		gap: 35px;
 		padding: 110px 35px;
-		&-txt {
+		.mail-txt {
 			width: 100%;
 			h3 {
 				font-size: var(--titSize2);

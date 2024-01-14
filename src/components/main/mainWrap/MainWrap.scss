@@ -1,3 +1,53 @@
 .MainWrap {
 	overflow: hidden;
+	.stit-set {
+		position: relative;
+		display: flex;
+		justify-content: space-between;
+		align-items: flex-end;
+		padding-bottom: 20px;
+		margin-bottom: 50px;
+		&::after {
+			content: '';
+			position: absolute;
+			bottom: 0;
+			left: 0;
+			width: 0%;
+			height: 1px;
+			background-color: var(--baseColor);
+			transition: width 0.7s;
+		}
+		.tit {
+			font-size: var(--titSize1);
+			font-weight: var(--lightWeight);
+			line-height: 1;
+		}
+		.detail {
+			cursor: pointer;
+			transition: opacity 0.5s, transform 0.5s;
+			&::before {
+				display: inline-block;
+				content: '+';
+				margin-right: 8px;
+				font-weight: var(--medWeight);
+				font-size: var(--bodySize);
+				transform: rotate(0);
+				transition: 0.3s;
+			}
+			&:hover {
+				transform: translateX(-5px);
+				&::before {
+					transform: rotate(90deg);
+					margin-right: 2px;
+				}
+			}
+		}
+		&.info {
+			margin-bottom: 0;
+		}
+		&.visual {
+			width: 80vw;
+			margin: 0 auto 50px;
+		}
+	}
 }

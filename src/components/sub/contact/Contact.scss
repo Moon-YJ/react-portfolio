@@ -216,11 +216,12 @@
 					cursor: pointer;
 					&::after {
 						content: '';
-						display: inline-block;
-						width: 0.1%;
-						height: 1px;
-						background-color: var(--baseColor);
-						transition: 0.3s;
+						display: block;
+						margin-top: 10px;
+						border-bottom: 1px solid var(--baseColor);
+						transform: scaleX(0);
+						transform-origin: 0% 50%;
+						transition: transform 0.4s;
 					}
 				}
 				.info {
@@ -266,8 +267,8 @@
 					background-color: rgba(var(--baseColor-code), 0.95);
 					h3 {
 						&::after {
-							width: 100%;
-							background-color: var(--invertColor);
+							transform: scaleX(1);
+							border-color: var(--invertColor);
 						}
 					}
 					.arrow {
@@ -283,7 +284,7 @@
 				&:hover {
 					h3 {
 						&::after {
-							width: 100%;
+							transform: scaleX(1);
 						}
 					}
 					.arrow {

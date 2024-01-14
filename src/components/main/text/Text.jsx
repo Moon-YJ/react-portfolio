@@ -15,7 +15,7 @@ export default function Text() {
 					1 + scroll / 1500
 				})`;
 				txtRef.current.style.opacity = 0.4 - scroll / 1500;
-				txtRef2.current.style.opacity = 0.4 - scroll / 1500;
+				txtRef2.current.style.opacity = 0.4 - scroll / 1750;
 			} else {
 				txtRef.current.style.transform = `translateX(0)`;
 				txtRef2.current.style.transform = `translateX(0)`;

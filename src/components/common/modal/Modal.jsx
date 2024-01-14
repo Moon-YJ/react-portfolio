@@ -3,8 +3,9 @@ import { IoMdClose } from 'react-icons/io';
 import { AnimatePresence, motion } from 'framer-motion';
 import { useCommonData } from '../../../hooks/useCommonData';
 
-export default function Modal({ children }) {
+export default function Modal({ children, type }) {
 	const { Open, setOpen } = useCommonData();
+
 	return (
 		<AnimatePresence>
 			{Open && (
@@ -19,7 +20,7 @@ export default function Modal({ children }) {
 						initial={{ opacity: 0 }}
 						animate={{ opacity: 1, transition: { delay: 0.7 } }}
 						exit={{ opacity: 0 }}
-						transition={{ duration: 0.4 }}>
+						transition={{ duration: 0.5 }}>
 						{children}
 					</motion.div>
 					<motion.button

@@ -10,7 +10,7 @@ import { useScroll } from '../../../hooks/useScroll';
 
 export default function Pics() {
 	const { data: Vids, isSuccess } = useYoutubeQuery();
-	const { setOpen } = useCommonData();
+	const { setOpen, modalType } = useCommonData();
 	const [Index, setIndex] = useState(0);
 	const { getScrollPos, refTarget, Frame } = useScroll();
 	const shortenTit = customText('shorten');
@@ -19,6 +19,7 @@ export default function Pics() {
 	const handleModal = idx => {
 		setIndex(idx);
 		setOpen(true);
+		modalType.current = 'mainPics';
 	};
 
 	const handleScroll = useCallback(() => {
@@ -76,16 +77,18 @@ export default function Pics() {
 						})}
 				</div>
 			</section>
-			<Modal>
-				{isSuccess && Vids.length !== 0 && (
-					<div className='video'>
-						<iframe
-							title={Vids[Index].snippet.title}
-							src={`https://www.youtube.com/embed/${Vids[Index].snippet.resourceId.videoId}`}
-							frameBorder={0}></iframe>
-					</div>
-				)}
-			</Modal>
+			{modalType.current === 'mainPics' && (
+				<Modal type='mainPics'>
+					{isSuccess && Vids.length !== 0 && (
+						<div className='video'>
+							<iframe
+								title={Vids[Index].snippet.title}
+								src={`https://www.youtube.com/embed/${Vids[Index].snippet.resourceId.videoId}`}
+								frameBorder={0}></iframe>
+						</div>
+					)}
+				</Modal>
+			)}
 		</>
 	);
 }

@@ -25,7 +25,7 @@ export default function Gallery() {
 	const [Opt, setOpt] = useState({ type: 'user', id: id.current });
 
 	const { data: Pics, isSuccess } = useFlickrQuery(Opt);
-	const { setOpen } = useCommonData();
+	const { setOpen, modalType } = useCommonData();
 
 	const endLoading = useCallback(() => {
 		setTimeout(() => {
@@ -108,6 +108,7 @@ export default function Gallery() {
 	const handleModal = idx => {
 		setOpen(true);
 		setIndex(idx);
+		modalType.current = 'subGallery';
 	};
 
 	useEffect(() => {
@@ -215,16 +216,18 @@ export default function Gallery() {
 				</section>
 			</Layout>
 
-			<Modal>
-				{isSuccess && Pics.length !== 0 && (
-					<div className='pic'>
-						<img
-							src={`https://live.staticflickr.com/${Pics[Index].server}/${Pics[Index].id}_${Pics[Index].secret}_b.jpg`}
-							alt={Pics[Index].id}
-						/>
-					</div>
-				)}
-			</Modal>
+			{modalType.current === 'subGallery' && (
+				<Modal>
+					{isSuccess && Pics.length !== 0 && (
+						<div className='pic'>
+							<img
+								src={`https://live.staticflickr.com/${Pics[Index].server}/${Pics[Index].id}_${Pics[Index].secret}_b.jpg`}
+								alt={Pics[Index].id}
+							/>
+						</div>
+					)}
+				</Modal>
+			)}
 		</>
 	);
 }

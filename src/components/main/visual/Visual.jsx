@@ -12,7 +12,7 @@ import { useScroll } from '../../../hooks/useScroll';
 
 export default function Visual() {
 	const { data, isSuccess } = useFlickrQuery({ type: 'user', id: '195472166@N07' });
-	const { setOpen } = useCommonData();
+	const { setOpen, modalType } = useCommonData();
 	const [Index, setIndex] = useState(0);
 	const [PicIndex, setPicIndex] = useState(0);
 	const slidesNum = useRef(5);
@@ -39,6 +39,7 @@ export default function Visual() {
 	const handleModal = idx => {
 		setOpen(true);
 		setPicIndex(idx);
+		modalType.current = 'mainVisual';
 	};
 
 	const handleScroll = useCallback(() => {
@@ -104,16 +105,18 @@ export default function Visual() {
 						})}
 				</Swiper>
 			</section>
-			<Modal>
-				{isSuccess && data.length !== 0 && (
-					<div className='pic'>
-						<img
-							src={`https://live.staticflickr.com/${data[PicIndex].server}/${data[PicIndex].id}_${data[PicIndex].secret}_b.jpg`}
-							alt={data[PicIndex].id}
-						/>
-					</div>
-				)}
-			</Modal>
+			{modalType.current === 'mainVisual' && (
+				<Modal>
+					{isSuccess && data.length !== 0 && (
+						<div className='pic'>
+							<img
+								src={`https://live.staticflickr.com/${data[PicIndex].server}/${data[PicIndex].id}_${data[PicIndex].secret}_b.jpg`}
+								alt={data[PicIndex].id}
+							/>
+						</div>
+					)}
+				</Modal>
+			)}
 		</>
 	);
 }

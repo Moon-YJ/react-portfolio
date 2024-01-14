@@ -5,8 +5,8 @@ import { AiOutlineDelete } from 'react-icons/ai';
 import { FaRegEdit } from 'react-icons/fa';
 import { CgCheckR } from 'react-icons/cg';
 import { CgCloseR } from 'react-icons/cg';
-import { MdKeyboardDoubleArrowLeft } from 'react-icons/md';
-import { MdKeyboardDoubleArrowRight } from 'react-icons/md';
+import { MdOutlineKeyboardArrowLeft } from 'react-icons/md';
+import { MdOutlineKeyboardArrowRight } from 'react-icons/md';
 import { customText } from '../../../hooks/useText';
 
 export default function Community() {
@@ -232,8 +232,8 @@ export default function Community() {
 								<button
 									className='prev'
 									disabled={CurNum === 0}
-									onClick={() => setCurNum(0)}>
-									<MdKeyboardDoubleArrowLeft />
+									onClick={() => setCurNum(CurNum - 1)}>
+									<MdOutlineKeyboardArrowLeft />
 								</button>
 								<span className='numbers'>
 									{Array(PageNum)
@@ -253,7 +253,7 @@ export default function Community() {
 									className='next'
 									onClick={() => setCurNum(CurNum + 1)}
 									disabled={CurNum + 1 === totalPageNum.current}>
-									<MdKeyboardDoubleArrowRight />
+									<MdOutlineKeyboardArrowRight />
 								</button>
 							</div>
 						)}

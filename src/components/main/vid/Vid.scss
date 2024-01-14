@@ -28,3 +28,23 @@
 		line-height: 1.2;
 	}
 }
+
+// tablet
+.tablet,
+.mobile {
+	.Vid {
+		h1 {
+			left: 7.5vw;
+		}
+	}
+}
+
+// mobile
+.mobile {
+	.Vid {
+		h1 {
+			left: 5vw;
+			font-size: var(--titSize2);
+		}
+	}
+}

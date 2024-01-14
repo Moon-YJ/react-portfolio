@@ -301,26 +301,28 @@
 .laptop,
 .tablet,
 .mobile {
-	.email {
-		.txt {
-			h2 {
-				font-size: var(--titSize2);
+	.Contact {
+		.email {
+			.txt {
+				h2 {
+					font-size: var(--titSize2);
+				}
 			}
-		}
-		form {
-			table {
-				tr {
-					th {
-						font-size: var(--mSize);
-						&:nth-of-type(2) {
-							width: 20%;
-							padding-left: 10px;
-						}
-					}
-					td {
-						input[type='text'] {
-							&#lastname {
+			form {
+				table {
+					tr {
+						th {
+							font-size: var(--mSize);
+							&:nth-of-type(2) {
+								width: 20%;
 								padding-left: 10px;
+							}
+						}
+						td {
+							input[type='text'] {
+								&#lastname {
+									padding-left: 10px;
+								}
 							}
 						}
 					}
@@ -333,83 +335,85 @@
 // tablet
 .tablet,
 .mobile {
-	.email {
-		.txt {
-			margin-top: -10px;
-			font-size: var(--xlgSize);
-			h2 {
-				margin-bottom: 10px;
-				line-height: 1.1;
-			}
-			.arrow {
-				font-size: var(--titSize1s);
-			}
-		}
-		form {
-			table {
-				tr {
-					th {
-						display: none;
-						&:last-child {
-							display: block;
-						}
-						input[type='submit'] {
-							margin-top: 10px;
-						}
-					}
-					td {
-						padding: 21px 0;
-						&::placeholder {
-							color: var(--baseColor);
-						}
-						input[type='text'] {
-							&#lastname {
-								display: none;
-							}
-						}
-						#comments {
-							padding-top: 0;
-						}
-					}
-				}
-			}
-		}
-	}
-	.map {
-		.tag {
-			font-size: var(--mSize);
+	.Contact {
+		.email {
 			.txt {
-				margin-right: 10px;
-			}
-			.btn-set {
-				button {
-					padding: 5px 18px;
-					margin-left: 8px;
-					font-size: var(--smSize);
-					&:first-child {
-						min-width: 105px;
-					}
-					&:nth-of-type(2) {
-						min-width: 133px;
-					}
-				}
-			}
-		}
-		.branch-set {
-			.branch {
-				width: calc((100% - 25px) / 2);
-				padding: 30px 20px;
-				h3 {
-					font-size: var(--bodySize);
-				}
-				.info {
-					.txt {
-						font-size: var(--mSize);
-					}
+				margin-top: -10px;
+				font-size: var(--xlgSize);
+				h2 {
+					margin-bottom: 10px;
+					line-height: 1.1;
 				}
 				.arrow {
-					top: 20px;
-					font-size: var(--lgSize);
+					font-size: var(--titSize1s);
+				}
+			}
+			form {
+				table {
+					tr {
+						th {
+							display: none;
+							&:last-child {
+								display: block;
+							}
+							input[type='submit'] {
+								margin-top: 10px;
+							}
+						}
+						td {
+							padding: 21px 0;
+							&::placeholder {
+								color: var(--baseColor);
+							}
+							input[type='text'] {
+								&#lastname {
+									display: none;
+								}
+							}
+							#comments {
+								padding-top: 0;
+							}
+						}
+					}
+				}
+			}
+		}
+		.map {
+			.tag {
+				font-size: var(--mSize);
+				.txt {
+					margin-right: 10px;
+				}
+				.btn-set {
+					button {
+						padding: 5px 18px;
+						margin-left: 8px;
+						font-size: var(--smSize);
+						&:first-child {
+							min-width: 105px;
+						}
+						&:nth-of-type(2) {
+							min-width: 133px;
+						}
+					}
+				}
+			}
+			.branch-set {
+				.branch {
+					width: calc((100% - 25px) / 2);
+					padding: 30px 20px;
+					h3 {
+						font-size: var(--bodySize);
+					}
+					.info {
+						.txt {
+							font-size: var(--mSize);
+						}
+					}
+					.arrow {
+						top: 20px;
+						font-size: var(--lgSize);
+					}
 				}
 			}
 		}

@@ -4,11 +4,13 @@
 	justify-content: center;
 	flex-direction: column;
 	width: 80vw;
-	height: 100vh;
+	min-height: 100vh;
+	padding: 80px 0;
 	margin: 0 auto;
 	font-weight: var(--lightWeight);
 	.content {
 		display: flex;
+		justify-content: space-between;
 		gap: 30px;
 		overflow: hidden;
 		article {
@@ -58,10 +60,11 @@
 				top: 50%;
 				left: 50%;
 				transform: translate(-50%, -40%);
-				//opacity: 0;
+				opacity: 0.7;
 				transition: opacity 0.5s;
 				svg {
-					font-size: var(--titSize1s);
+					font-size: var(--titSize2);
+					transition: font-size 0.5s;
 				}
 			}
 			&:hover {
@@ -78,6 +81,9 @@
 				}
 				.play {
 					opacity: 1;
+					svg {
+						font-size: var(--titSize1s);
+					}
 				}
 			}
 		}
@@ -86,6 +92,59 @@
 		.stit-set {
 			&::after {
 				width: 100%;
+			}
+		}
+	}
+}
+
+// laptop
+.laptop,
+.tablet,
+.mobile {
+	.Pics {
+		.content {
+			gap: 20px;
+			article {
+				height: 300px;
+				.con {
+					left: 10px;
+					.tit {
+						font-size: var(--medSize);
+					}
+				}
+			}
+		}
+	}
+}
+
+// tablet
+.tablet,
+.mobile {
+	.Pics {
+		width: 85vw;
+		.content {
+			flex-wrap: wrap;
+			gap: 35px;
+			article {
+				width: 46%;
+				height: 350px;
+				.con {
+					left: 20px;
+				}
+			}
+		}
+	}
+}
+
+// mobile
+.mobile {
+	.Pics {
+		width: 90vw;
+		.content {
+			gap: 30px;
+			article {
+				width: 100%;
+				height: 250px;
 			}
 		}
 	}

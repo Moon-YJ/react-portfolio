@@ -51,3 +51,39 @@
 		}
 	}
 }
+
+// tablet
+.tablet,
+.mobile {
+	.MainWrap {
+		.stit-set {
+			.tit {
+				font-size: var(--titSize2);
+			}
+			.detail {
+				font-size: var(--mSize);
+				&::before {
+					font-size: var(--mSize);
+				}
+			}
+		}
+	}
+}
+
+// mobile
+.mobile {
+	.MainWrap {
+		.stit-set {
+			.tit {
+				font-size: var(--lgSize);
+			}
+			.detail {
+				font-size: var(--smSize);
+				&::before {
+					margin-right: 3px;
+					font-size: var(--smSize);
+				}
+			}
+		}
+	}
+}

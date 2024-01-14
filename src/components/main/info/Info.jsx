@@ -54,7 +54,7 @@ export default function Info() {
 							return { strDate, strTime };
 						} else return null;
 					};
-					if (idx >= 3) return null;
+					if (idx >= 4) return null;
 					return (
 						<article key={list + idx}>
 							<h2>{list.subject}</h2>

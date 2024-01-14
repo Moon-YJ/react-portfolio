@@ -15,3 +15,35 @@
 		opacity: 0.1;
 	}
 }
+
+// laptop
+.laptop,
+.tablet,
+.mobile {
+	.Text {
+		.txt {
+			font-size: var(--titSize1);
+		}
+	}
+}
+
+// tablet
+.tablet,
+.mobile {
+	.Text {
+		width: 85vw;
+		.txt {
+			font-size: var(--titSize1);
+		}
+	}
+}
+
+// mobile
+.mobile {
+	.Text {
+		width: 90vw;
+		.txt {
+			font-size: var(--titSize1s);
+		}
+	}
+}

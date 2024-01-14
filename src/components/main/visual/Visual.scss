@@ -161,12 +161,95 @@
 	}
 }
 
+// laptop
 .laptop,
 .tablet,
 .mobile {
-	.swiper {
-		.num {
-			left: 28%;
+	.Visual {
+		padding-top: 10%;
+		.swiper {
+			.num {
+				left: 28%;
+			}
+			&-wrapper {
+				.swiper-slide {
+					> .inner {
+						.txt {
+							font-size: var(--lgSize);
+						}
+					}
+				}
+			}
+		}
+	}
+}
+
+// tablet
+.tablet,
+.mobile {
+	.Visual {
+		.swiper {
+			.num {
+				left: 27%;
+				font-size: var(--medSize);
+				&:after {
+					top: 13px;
+					right: -4px;
+					height: 25px;
+				}
+			}
+			&-wrapper {
+				.swiper-slide {
+					> .inner {
+						.txt {
+							font-size: var(--medSize);
+						}
+					}
+				}
+			}
+		}
+	}
+}
+
+// mobile
+.mobile {
+	.Visual {
+		width: 85vw;
+		padding-top: 20%;
+		margin: 0 auto;
+		.swiper {
+			.num {
+				top: 53%;
+				left: 5%;
+			}
+			&-wrapper {
+				.swiper-slide {
+					> .inner {
+						.pic-box {
+							> div {
+								&:nth-of-type(1) {
+									filter: blur(5px) saturate(1.4);
+									transform: translate(5px, 5px);
+								}
+							}
+						}
+						.detail {
+							margin: 15px 12% 20px 0;
+							font-size: var(--xsmSize);
+							&::before {
+								margin-right: 5px;
+								font-size: var(--smSize);
+							}
+						}
+						.txt {
+							font-size: var(--medSize);
+						}
+					}
+				}
+			}
+			&-pagination {
+				display: none;
+			}
 		}
 	}
 }

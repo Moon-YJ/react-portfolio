@@ -10,7 +10,7 @@
 	//overflow: hidden;
 	.txt {
 		font-family: var(--gFont);
-		font-size: var(--titSize0);
+		font-size: 5.8rem;
 		font-weight: var(--lightWeight);
 		opacity: 0.1;
 	}
@@ -41,7 +41,6 @@
 // mobile
 .mobile {
 	.Text {
-		width: 90vw;
 		.txt {
 			font-size: var(--titSize1s);
 		}

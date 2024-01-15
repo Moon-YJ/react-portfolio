@@ -6,7 +6,7 @@
 	margin: 100px auto 150px;
 	opacity: 0;
 	transition: opacity 0.7s, top 0.7s;
-	.tit-set {
+	> .tit-set {
 		display: flex;
 		justify-content: space-between;
 		flex-wrap: wrap;
@@ -83,7 +83,7 @@
 	&.on {
 		opacity: 1;
 		top: 0;
-		.tit-set {
+		> .tit-set {
 			.num {
 				span {
 					opacity: 1;
@@ -110,7 +110,7 @@
 .mobile {
 	.Layout {
 		width: 85vw;
-		.tit-set {
+		> .tit-set {
 			margin-bottom: 100px;
 			.num {
 				font-size: var(--lgSize);
@@ -120,12 +120,14 @@
 			}
 		}
 		button {
-			bottom: 15px;
-			right: 1.5%;
-			width: 35px;
-			height: 35px;
-			.line {
-				top: 8px;
+			&.top {
+				bottom: 15px;
+				right: 1.5%;
+				width: 35px;
+				height: 35px;
+				.line {
+					top: 8px;
+				}
 			}
 		}
 	}
@@ -134,7 +136,7 @@
 .mobile {
 	.Layout {
 		margin: 70px auto 100px;
-		.tit-set {
+		> .tit-set {
 			margin-bottom: 70px;
 			.num {
 				font-size: var(--medSize);
@@ -144,7 +146,9 @@
 			}
 		}
 		button {
-			display: none;
+			&.top {
+				display: none;
+			}
 		}
 	}
 }

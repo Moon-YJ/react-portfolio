@@ -8,8 +8,14 @@ import './MainWrap.scss';
 import Product from '../product/Product';
 import Text from '../text/Text';
 import Email from '../../common/email/Email';
+import { useScroll } from '../../../hooks/useScroll';
 
 export default function MainWrap() {
+	const { moveScroll } = useScroll();
+	useEffect(() => {
+		moveScroll(0);
+	}, [moveScroll]);
+
 	return (
 		<div className='MainWrap'>
 			<Vid />

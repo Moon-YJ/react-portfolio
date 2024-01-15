@@ -22,7 +22,7 @@ export default function Layout({ index, title, children }) {
 
 	useEffect(() => {
 		moveScroll(0);
-	}, []);
+	}, [moveScroll]);
 
 	useEffect(() => {
 		Frame?.addEventListener('scroll', () => handleScroll(200));

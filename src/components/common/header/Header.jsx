@@ -15,8 +15,10 @@ export default function Header({ type }) {
 		base => {
 			if (refTarget.current.classList.contains('sub')) return;
 			const scroll = getScrollPos();
-			scroll <= base && refTarget.current.classList.remove('visible');
-			scroll >= base ? refTarget.current.classList.add('scrolled') : refTarget.current.classList.remove('scrolled');
+			if (refTarget.current) {
+				scroll <= base && refTarget.current.classList.remove('visible');
+				scroll >= base ? refTarget.current.classList.add('scrolled') : refTarget.current.classList.remove('scrolled');
+			}
 			return scroll;
 		},
 		[getScrollPos, refTarget]

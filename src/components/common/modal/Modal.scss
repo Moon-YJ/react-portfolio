@@ -52,22 +52,20 @@
 	}
 }
 
-/*
-	// tablet
-	.tablet,
-	.mobile {
-		.Modal {
-			.pic {
-				width: 70%;
-			}
+// tablet
+.tablet,
+.mobile {
+	.Modal {
+		.pic {
+			width: 50%;
 		}
 	}
-	// mobile
-	.mobile {
-		.Modal {
-			.pic {
-				width: 85%;
-			}
+}
+// mobile
+.mobile {
+	.Modal {
+		.pic {
+			width: 75%;
 		}
 	}
-*/
+}
